@@ -1,5 +1,5 @@
 {
-  "name": "drive-components",
+  "name": "@espress-org/drive-components",
   "version": "0.0.1",
   "repository": "https://github.com/espresso-org/drive-components.git",
   "dependencies": {
