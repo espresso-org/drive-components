@@ -1,5 +1,7 @@
 {
-  "name": "@espress-org/drive-components",
+  "name": "@espresso-org/drive-components",
+  "main": "./index.js",
+  "module": "./index.js",
   "version": "0.0.1",
   "repository": "https://github.com/espresso-org/drive-components.git",
   "dependencies": {
@@ -13,8 +15,7 @@
     "lint": "eslint .",
     "jest": "jest --env=jsdom",
     "test": "run-s lint jest",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "@storybook/react": "^3.2.10",
@@ -24,17 +25,12 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
-    "enzyme": "^3.0.0",
     "eslint": "^4.7.2",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.3.0",
-    "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.1",
     "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.1",
-    "prettier": "^1.7.0",
     "react-test-renderer": "^16.0.0",
     "style-loader": "^0.19.0"
   },
