@@ -1,0 +1,19 @@
+import React from "react"
+import { storiesOf } from "@storybook/react"
+import { AragonApp } from '@aragon/ui'
+
+
+export function aragonStoriesOf(componentName, moduleRef) {
+    let aragonStories = storiesOf(componentName, moduleRef)
+
+    aragonStories._add = aragonStories.add
+    aragonStories.add = function(storyName, fn) {
+        return aragonStories._add(storyName, () => (
+            <AragonApp>
+                {fn()}
+            </AragonApp>
+        ))
+    }
+
+    return aragonStories
+}
