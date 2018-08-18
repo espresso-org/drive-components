@@ -25,21 +25,25 @@ const Name = styled.div`
 const NameCell = styled(TableCell)`
   min-width: 140px;
   width: 100%;
+  box-sizing: initial;
 `
 
 const OwnerCell = styled(TableCell)`
   min-width: 90px;
   width: 90px;
+  box-sizing: initial;
 `
 
 const PermissionsCell = styled(TableCell)`
   min-width: 77px;
   width: 77px;
+  box-sizing: initial;
 `
 
 const LastModifCell = styled(TableCell)`
   min-width: 95px;
   width: 95px;
+  box-sizing: initial;
 `
 
 const DownloadIco = styled.i`
