@@ -14,16 +14,32 @@ const Container = styled(TableRow)`
   cursor: pointer;
   > * {
     background: ${ props => props.selected ? '#e3f7f5' : '#FFF' };
-  }
+  } 
 `
 
 const Name = styled.div`
-  min-width: 440px;
+  min-width: 200px;
+  
+`
+
+const NameCell = styled(TableCell)`
+  min-width: 140px;
+  width: 100%;
 `
 
 const OwnerCell = styled(TableCell)`
-  max-width: 200px;
-  width: 200px;
+  min-width: 90px;
+  width: 90px;
+`
+
+const PermissionsCell = styled(TableCell)`
+  min-width: 77px;
+  width: 77px;
+`
+
+const LastModifCell = styled(TableCell)`
+  min-width: 95px;
+  width: 95px;
 `
 
 const DownloadIco = styled.i`
@@ -33,22 +49,22 @@ const DownloadIco = styled.i`
 
 export const FileRow = ({ file, onClick, onDownloadClick, selected }) => 
   <Container {...{ onClick, selected }}>
-    <TableCell>
+    <NameCell>
       <Name>
         <i className={`fa ${getClassNameForFilename(file.name)}`} /> {file.name}
       </Name>
-    </TableCell>
+    </NameCell>
     <OwnerCell>
       <EthAddress ethAddress={file.owner} />
     </OwnerCell>
-    <TableCell>
+    <PermissionsCell>
       {file.permissions.read && 'Read'}
       {file.permissions.read && file.permissions.write && ', '}
       {file.permissions.write && 'Write'}
-    </TableCell>            
-    <TableCell>
+    </PermissionsCell>            
+    <LastModifCell>
       {moment.unix(file.lastModification.toNumber()).format('YYYY-MM-DD')}
-    </TableCell> 
+    </LastModifCell> 
     <TableCell onClick={onDownloadClick}>
       <DownloadIco className="fa fa-download" />    
     </TableCell>

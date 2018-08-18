@@ -1,6 +1,7 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
+import { Table, TableHeader, TableRow } from '@aragon/ui'
 import { FileRow } from "../src/components/file-row"
 import { BigNumber } from 'bignumber.js'
 
@@ -16,10 +17,24 @@ storiesOf("FileRow", module).add("Read Write Jpg", () => {
     }
   }
 
-  return <FileRow
-    file={file}
-    selected={false}
-    onClick={console.log}
-    onDownloadClick={console.log}
-  />
+  return (
+    <Table
+      header={
+        <TableRow>
+          <TableHeader title="Name" />
+          <TableHeader title="Owner" />
+          <TableHeader title="Permissions" />
+          <TableHeader title="Last Modified" />
+          <TableHeader title="" />
+        </TableRow>
+      }
+    >
+      <FileRow
+        file={file}
+        selected={false}
+        onClick={console.log}
+        onDownloadClick={console.log}
+      />
+    </Table>
+  )
 })
