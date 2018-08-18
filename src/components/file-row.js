@@ -18,32 +18,28 @@ const Container = styled(TableRow)`
 `
 
 const Name = styled.div`
-  min-width: 200px;
+  min-width: 240px;
   
 `
 
 const NameCell = styled(TableCell)`
-  min-width: 140px;
+  min-width: 180px;
   width: 100%;
-  box-sizing: initial;
 `
 
 const OwnerCell = styled(TableCell)`
-  min-width: 90px;
-  width: 90px;
-  box-sizing: initial;
+  min-width: 130px;
+  width: 130px;
 `
 
 const PermissionsCell = styled(TableCell)`
-  min-width: 77px;
-  width: 77px;
-  box-sizing: initial;
+  min-width: 117px;
+  width: 117px;
 `
 
 const LastModifCell = styled(TableCell)`
-  min-width: 95px;
-  width: 95px;
-  box-sizing: initial;
+  min-width: 135px;
+  width: 135px;
 `
 
 const DownloadIco = styled.i`
