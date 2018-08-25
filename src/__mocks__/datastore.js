@@ -5,7 +5,12 @@ import * as async from 'async'
 
 
 export class Datastore {
-    _settings
+    _settings = {
+        storageProvider: 0,
+        encryptionType: 0,
+
+        ipfs: undefined
+    }
     _fileInfo = []
     _fileContent = []
 
@@ -80,19 +85,18 @@ export class Datastore {
         return this.getFileInfo(fileId)._permissionList
     }
 
-    /**
-     * Fetch the datastore settings
-     */
     async getSettings() {
         return this._settings
     }
 
 
-    async setIpfsStorageSettings(host: string, port: number, protocol: string) {
-        await this._initialize()
-
-        await this._contract.setIpfsStorageSettings(host, port, protocol)
-        await this._refreshSettings()
+    async setIpfsStorageSettings(host, port, protocol) {
+        this._settings.storageProvider = 1
+        this._settings.ipfs = {
+            host,
+            port,
+            protocol
+        }
     }
 
     async listFiles() {
