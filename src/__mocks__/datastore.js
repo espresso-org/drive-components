@@ -1,8 +1,3 @@
-import * as async from 'async'
-
-//import { DatastoreSettings } from './datastore-settings';
-//import { RpcProvider } from './rpc-providers/rpc-provider';
-
 
 export class Datastore {
     _settings = {
@@ -73,15 +68,6 @@ export class Datastore {
 
 
     async getFilePermissions(fileId) {
-        /*
-        const entitiesAddress = await this._contract.getPermissionAddresses(fileId)
-
-        return Promise.all(
-            entitiesAddress.map(async entity => ({
-                entity,
-                ...createPermissionFromTuple(await this._contract.getPermission(fileId, entity))
-            })) 
-        )*/
         return this.getFileInfo(fileId)._permissionList
     }
 
@@ -104,16 +90,9 @@ export class Datastore {
                    .map((file, i) => this.getFileInfo(i + 1))
     }
 
-    /**
-     * Replace content for a specific file
-     * @param {number} fileId File Id
-     * @param {ArrayBuffer} file File content
-     */
-    async setFileContent(fileId: number, file: ArrayBuffer) {
-        await this._initialize()
 
-        const storageId = await this._storage.addFile(file)
-        await this._contract.setFileContent(fileId, storageId, file.byteLength)
+    async setFileContent(fileId, file) {
+        this.fileContent[fileId - 1] = file
     }
 
     /**
@@ -124,10 +103,22 @@ export class Datastore {
      * @param {string} entity Entity address
      * @param {boolean} hasPermission Write permission
      */
-    async setReadPermission(fileId: number, entity: string, hasPermission: boolean) {
-        await this._initialize()
+    async setReadPermission(fileId, entity, hasPermission) {
+        const fileInfo = this._fileInfo[fileId - 1]
+        const filePermissions = fileInfo._permissionList
+        const entityPermissions = filePermissions.find(permission => permission.entity === entity)
 
-        await this._contract.setReadPermission(fileId, entity, hasPermission)
+        if (entityPermissions)
+            entityPermissions.read = hasPermission
+        else {
+            filePermissions.push({
+                entity,
+                read: hasPermission,
+                write: false
+            })
+            fileInfo.permissionAddresses.push(entity)
+        }
+
     }
 
     /**
@@ -138,10 +129,21 @@ export class Datastore {
      * @param {string} entity Entity address
      * @param {boolean} hasPermission Write permission
      */
-    async setWritePermission(fileId: number, entity: string, hasPermission: boolean) {
-        await this._initialize()
+    async setWritePermission(fileId, entity, hasPermission) {
+        const fileInfo = this._fileInfo[fileId - 1]
+        const filePermissions = fileInfo._permissionList
+        const entityPermissions = filePermissions.find(permission => permission.entity === entity)
 
-        await this._contract.setWritePermission(fileId, entity, hasPermission)
+        if (entityPermissions)
+            entityPermissions.write = hasPermission
+        else {
+            filePermissions.push({
+                entity,
+                write: hasPermission,
+                read: true
+            })
+            fileInfo.permissionAddresses.push(entity)
+        }
     }
 
     /**
@@ -149,10 +151,10 @@ export class Datastore {
      * @param {number} fileId File Id
      * @param {string} newName New file name
      */
-    async setFilename(fileId: number, newName: string) {
-        await this._initialize()
+    async setFilename(fileId, newName) {
+        const fileInfo = this.getFileInfo(fileId)
 
-        await this._contract.setFilename(fileId, newName)
+        fileInfo.name = newName
     }
 
     /**
@@ -160,10 +162,7 @@ export class Datastore {
      * 
      */
     async events(...args) {
-        // TODO: Return an Observable without async
-        await this._initialize()
         
-        return this._contract.events(...args)
     }
 
 }
