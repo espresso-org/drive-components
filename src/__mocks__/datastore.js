@@ -23,6 +23,7 @@ export class Datastore {
 
     async addFile(name, file) {
         this._fileInfo.push({
+            id: this._fileInfo.length + 1,
             name,
             storageRef: '',
             fileSize: file.byteLength,
@@ -45,7 +46,10 @@ export class Datastore {
     }
 
     async addMockFile(fileInfo, fileContent) {
-        this._fileInfo.push(fileInfo)
+        this._fileInfo.push({ 
+            id: this._fileInfo.length + 1,
+            ...fileInfo 
+        })
         this._fileContent.push(fileContent)
         return this._fileInfo.length
     }
@@ -74,7 +78,7 @@ export class Datastore {
 
 
     async getFilePermissions(fileId) {
-        return this.getFileInfo(fileId)._permissionList
+        return (await this.getFileInfo(fileId))._permissionList
     }
 
     async getSettings() {
@@ -92,8 +96,10 @@ export class Datastore {
     }
 
     async listFiles() {
-        return this._fileInfo
+        return Promise.all(
+                this._fileInfo
                    .map((file, i) => this.getFileInfo(i + 1))
+                )
     }
 
 
@@ -146,7 +152,7 @@ export class Datastore {
             filePermissions.push({
                 entity,
                 write: hasPermission,
-                read: true
+                read: false
             })
             fileInfo.permissionAddresses.push(entity)
         }
@@ -168,7 +174,7 @@ export class Datastore {
      * 
      */
     async events(...args) {
-        return this._events
+        return this._events.events
     }
 
 }

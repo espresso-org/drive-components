@@ -16,7 +16,13 @@ const file = {
   }
 }
 
+setTimeout(async () => {
+  await mainStore._datastore.addFile('test.jpeg', new ArrayBuffer(60))
+  await mainStore._refreshFiles()
+  await mainStore.selectFile(1)
+}, 2500)
 
+window.mainStore = mainStore
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
   <EditPermissions file={file} mainStore={mainStore}></EditPermissions>
