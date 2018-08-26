@@ -1,3 +1,7 @@
+import { Observable } from 'rxjs'
+
+
+
 
 export class Datastore {
     _settings = {
@@ -9,8 +13,10 @@ export class Datastore {
     _fileInfo = []
     _fileContent = []
 
+    _events
+
     constructor(opts) {
-        
+        this._events = new EventEmitter()
 
     }
 
@@ -162,7 +168,23 @@ export class Datastore {
      * 
      */
     async events(...args) {
-        
+        return this._events
     }
 
+}
+
+
+class EventEmitter {
+    _observer    
+    events
+
+    constructor() {
+        this.events = Observable.create(observer => this._observer = observer)
+    }
+
+    emit(event) {
+        this._observer.next({
+            event
+        })
+    }
 }
