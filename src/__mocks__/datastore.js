@@ -17,7 +17,7 @@ export class Datastore {
 
     constructor(opts) {
         this._events = new EventEmitter()
-
+        console.log("Mock!!!!!!!!!")
     }
 
 
