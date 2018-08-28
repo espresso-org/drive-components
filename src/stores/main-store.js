@@ -105,11 +105,9 @@ export class MainStore {
   }
 
   _datastore
-  _configStore
 
-  constructor(datastore, configStore) {
+  constructor(datastore) {
     this._datastore = datastore
-    this._configStore = configStore
     setTimeout(() => this.initialize(), 1)
     window.mainStore = this
   }
@@ -129,18 +127,7 @@ export class MainStore {
           break
         }
       });
-
-      const datastoreSettings = await this._datastore.getSettings()
-      
-      if (datastoreSettings.storageProvider === 0) 
-        this._configStore.isConfigSectionOpen = true
-      else {
-        this._configStore.initialize()
-        this.host = datastoreSettings.ipfs.host
-        this.port = datastoreSettings.ipfs.port
-        this.protocol = datastoreSettings.ipfs.protocol
-      }
-      
+    
       this._refreshFiles()
       res()
     })
