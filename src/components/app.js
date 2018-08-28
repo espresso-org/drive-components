@@ -9,7 +9,7 @@ import { FileInput } from './file-input'
 import { FileRow } from './file-row'
 import { EditPanel } from './edit-panel'
 import { SideBar } from './side-bar'
-//import { ConfigurationModal } from './components/configuration-modal'
+import { ConfigurationModal } from './configuration-modal'
 
 import '../css/styles.css'
 
@@ -56,7 +56,7 @@ observer(({ mainStore, configStore }) =>
             </Main>
             <SideBar file={mainStore.selectedFile} />
           </TwoPanels>
-          {/*<ConfigurationModal></ConfigurationModal>*/}
+          <ConfigurationModal></ConfigurationModal>
         </AppLayout.Content>
       </AppLayout.ScrollWrapper>
       <EditPanel/>
