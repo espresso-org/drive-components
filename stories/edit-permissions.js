@@ -3,10 +3,10 @@ import { action } from "@storybook/addon-actions"
 import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
 import { EditPermissions } from '../src/components/edit-permissions'
 import { BigNumber } from 'bignumber.js'
-import * as AragonDatastore from 'aragon-datastore'
+//import * as AragonDatastore from 'aragon-datastore'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
 
-AragonDatastore.Datastore = MockedDatastore
+//AragonDatastore.Datastore = MockedDatastore
 
 import { mainStore } from '../src/stores/main-store'
 

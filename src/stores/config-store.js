@@ -1,7 +1,8 @@
-import { observable } from 'mobx'
-import { mainStore } from './main-store'
+import { observable, configure } from 'mobx'
 
-class ConfigStore {
+configure({ isolateGlobalState: true })
+
+export class ConfigStore {
     @observable isConfigSectionOpen = false
     @observable isAdvancedConfigOpen = false
     @observable radioGrpSelectedIndex = 0
@@ -17,14 +18,14 @@ class ConfigStore {
     }
 
     async initialize() { 
+      /*
       setTimeout(async () => {        
         if(mainStore.host && mainStore.port && mainStore.protocol) {
           this.host = mainStore.host
           this.port = mainStore.port
           this.protocolIndex = this.protocolArray.indexOf(mainStore.protocol)
         }
-      }, 1000)
+      }, 1000)*/
     }
 }
 
-export const configStore = new ConfigStore()

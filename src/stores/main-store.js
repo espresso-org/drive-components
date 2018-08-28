@@ -1,10 +1,15 @@
-import { observable, computed, action, decorate } from 'mobx'
-import Aragon, { providers as aragonProviders } from '@aragon/client'
+import { observable, computed, action, decorate, configure } from 'mobx'
+//import Aragon, { providers as aragonProviders } from '@aragon/client'
 import { asyncComputed } from 'computed-async-mobx'
 
 import { downloadFile, convertFileToArrayBuffer } from '../utils/files'
-import { Datastore, providers } from 'aragon-datastore'
+//import { Datastore, providers } from 'aragon-datastore'
+import { Datastore } from '../__mocks__/datastore'
 import { configStore } from './config-store'
+
+configure({ isolateGlobalState: true })
+//console.log('extras:', extras)
+
 
 export const EditMode = {
   None: "None",
@@ -13,7 +18,7 @@ export const EditMode = {
   Permissions: "Permissions"
 }
 
-class MainStore {
+export class MainStore {
   @observable files = []
   @observable selectedFile
   @observable editMode = EditMode.None
@@ -109,11 +114,11 @@ class MainStore {
   async initialize() {
     return new Promise(async (res, rej) => {
 
-      this._araApp = new Aragon(new aragonProviders.WindowMessage(window.parent))
+      //this._araApp = new Aragon(new aragonProviders.WindowMessage(window.parent))
 
       setTimeout(async () => {        
         this._datastore = new Datastore({
-          rpcProvider: new providers.rpc.Aragon(this._araApp)
+          //rpcProvider: new providers.rpc.Aragon(this._araApp)
         });
         
         (await this._datastore.events()).subscribe(event => {  
@@ -130,6 +135,7 @@ class MainStore {
         });
 
         const datastoreSettings = await this._datastore.getSettings()
+        /*
         if (datastoreSettings.storageProvider === 0) 
           configStore.isConfigSectionOpen = true
         else {
@@ -137,7 +143,7 @@ class MainStore {
           this.host = datastoreSettings.ipfs.host
           this.port = datastoreSettings.ipfs.port
           this.protocol = datastoreSettings.ipfs.protocol
-        }
+        }*/
         
         this._refreshFiles()
         res()
