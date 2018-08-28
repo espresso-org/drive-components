@@ -5,6 +5,7 @@ function loadStories() {
   require('../stories/file-input.js')
   require('../stories/file-row.js')
   require('../stories/edit-permissions.js')
+  require('../stories/edit-panel.js')
 }
 
 configure(loadStories, module)
