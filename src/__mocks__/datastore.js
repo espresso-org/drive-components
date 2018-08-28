@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-
+import { BigNumber } from 'bignumber.js'
 
 
 
@@ -26,12 +26,12 @@ export class Datastore {
             id: this._fileInfo.length + 1,
             name,
             storageRef: '',
-            fileSize: file.byteLength,
+            fileSize: new BigNumber(file.byteLength),
             isPublic: true,
             isDeleted: false,
             owner: '',
             isOwner: true,
-            lastModification: new Date(),
+            lastModification: new BigNumber(Math.round((new Date()).getTime() / 1000)),
             permissionAddresses: [],
             permissions: {
                 write: true,
