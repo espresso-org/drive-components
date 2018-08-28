@@ -17,7 +17,6 @@ export class Datastore {
 
     constructor(opts) {
         this._events = new EventEmitter()
-        console.log("Mock!!!!!!!!!")
     }
 
 
@@ -41,6 +40,7 @@ export class Datastore {
         })
 
         this._fileContent.push(file)
+        this._events.emit('NewFile')
         
         return this._fileInfo.length
     }
@@ -51,6 +51,7 @@ export class Datastore {
             ...fileInfo 
         })
         this._fileContent.push(fileContent)
+        this._events.emit('NewFile')
         return this._fileInfo.length
     }
 
@@ -74,6 +75,7 @@ export class Datastore {
     async deleteFile(fileId) {
         let fileInfo = this.getFileInfo(fileId)
         fileInfo.isDeleted = true
+        this._events.emit('DeleteFile')
     }
 
 
@@ -105,6 +107,7 @@ export class Datastore {
 
     async setFileContent(fileId, file) {
         this.fileContent[fileId - 1] = file
+        this._events.emit('FileContentUpdate')
     }
 
     /**
@@ -130,7 +133,7 @@ export class Datastore {
             })
             fileInfo.permissionAddresses.push(entity)
         }
-
+        this._events.emit('NewReadPermission')
     }
 
     /**
@@ -156,6 +159,7 @@ export class Datastore {
             })
             fileInfo.permissionAddresses.push(entity)
         }
+        this._events.emit('NewWritePermission')
     }
 
     /**
@@ -167,6 +171,8 @@ export class Datastore {
         const fileInfo = this.getFileInfo(fileId)
 
         fileInfo.name = newName
+
+        this._events.emit('FileRename')
     }
 
     /**

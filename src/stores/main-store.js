@@ -116,6 +116,7 @@ export class MainStore {
     return new Promise(async (res, rej) => {
        
       (await this._datastore.events()).subscribe(event => {  
+        console.log('New event: ', event)
         switch (event.event) {
           case 'FileRename':
           case 'FileContentUpdate':

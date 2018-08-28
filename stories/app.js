@@ -13,12 +13,12 @@ import { ConfigStore } from '../src/stores/config-store'
 
 const datastore = new MockedDatastore({
 })
-const configStore = new ConfigStore()
-const mainStore = new MainStore(datastore, configStore)
+const configStore = new ConfigStore(datastore)
+const mainStore = new MainStore(datastore)
 
 
 aragonStoriesOf("Main App", module).add("Basic", () => (
-  <Provider mainStore={mainStore} configStore={configStore}>
+  <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>
     <App></App>
   </Provider>
 ))
