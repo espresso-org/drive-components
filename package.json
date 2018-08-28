@@ -12,7 +12,7 @@
     "npm": ">=5"
   },
   "scripts": {
-    "start": "run-p start-rollup start-story",
+    "start": "start-storybook -p 9001 -c .storybook",
     "start-rollup": "rollup -c -w",
     "start-story": "start-storybook -p 9001 -c .storybook",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
