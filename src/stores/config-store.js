@@ -17,15 +17,5 @@ export class ConfigStore {
       window.configStore = this
     }
 
-    async initialize() { 
-      /*
-      setTimeout(async () => {        
-        if(mainStore.host && mainStore.port && mainStore.protocol) {
-          this.host = mainStore.host
-          this.port = mainStore.port
-          this.protocolIndex = this.protocolArray.indexOf(mainStore.protocol)
-        }
-      }, 1000)*/
-    }
 }
 

@@ -9,6 +9,6 @@ export * from './components/configuration-modal'
 export * from './components/app'
 
 
-//export * from './stores'
+export * from './stores'
 
 export * from './utils'
