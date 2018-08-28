@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
+import json from 'rollup-plugin-json'
 import url from 'rollup-plugin-url'
 
 import pkg from './package.json'
@@ -28,14 +29,19 @@ export default {
     }),
     url(),
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      runtimeHelpers: true
+      
     }),
-    resolve(),
+    resolve({ preferBuiltins: true }),
     commonjs({
       include: 'node_modules/**',
       namedExports: {
-        'node_modules/react-is/index.js': ['isValidElementType']
+        'node_modules/react-is/index.js': ['isValidElementType'],
+        'node_modules/computed-async-mobx/built/src/index.js': ['asyncComputed'],
+        'node_modules/aragon-datastore/dist/index.js': ['Datastore', 'providers']
       }
-    })
+    }),
+    json()
   ]
 }
