@@ -17,20 +17,21 @@ import '../css/styles.css'
 export const App = 
 inject("mainStore", "configStore")(
 observer(({ mainStore, configStore }) =>
-    <AragonApp publicUrl="./aragon-ui/">    
-      <AppBar
-        title="Drive"
-        endContent={
-          <div>
-            <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = true}><ConfigurationSectionBtn /></span>
-            <FileInput onChange={e => { mainStore.uploadFiles(e.target.files);e.target.value = '' }}>New File</FileInput>
-          </div>
-        }
-      />
+    <AragonApp publicUrl="./aragon-ui/">
 
-      <Screen position={0} animate={false}>
+      <Screen position={0} animate={true}>
         {!configStore.isConfigSectionOpen && (
         <span>
+          <AppBar
+            title="Drive"
+            endContent={
+              <div>
+                <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = true}><ConfigurationSectionBtn /></span>
+                <FileInput onChange={e => { mainStore.uploadFiles(e.target.files);e.target.value = '' }}>New File</FileInput>
+              </div>
+            }
+          />
+
           <AppLayout.ScrollWrapper>
             <AppLayout.Content>
               <Breadcrumb>/</Breadcrumb>
@@ -68,11 +69,18 @@ observer(({ mainStore, configStore }) =>
         )}
       </Screen>
 
-      <Screen position={1} animate={false}>
+      <Screen position={1} animate={true}>
         {configStore.isConfigSectionOpen && (
           <span>
+            <AppBar
+              title="Drive - Configuration"
+              endContent={
+                <div>
+                  <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = false}><ConfigurationSectionBtn /></span>
+                </div>
+              }
+            />
             <h1>TEST CONFIG SCREEN</h1>
-            <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = false}><ConfigurationSectionBtn /></span>
           </span>
         )}
       </Screen>
