@@ -27,7 +27,7 @@ export class ConfigStore {
         const datastoreSettings = await this._datastore.getSettings()
         
         if(datastoreSettings.storageProvider === 0) 
-          this.isConfigSectionOpen = true
+          this.isConfigSectionOpen = false
         else {
           // TODO: Handle every possible storage providers
           this.host = datastoreSettings.ipfs.host
