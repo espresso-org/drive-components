@@ -38,7 +38,6 @@ const Main = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  padding: 30px;
 `
 
 export default Screen

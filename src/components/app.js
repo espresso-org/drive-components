@@ -11,6 +11,7 @@ import { EditPanel } from './edit-panel'
 import { SideBar } from './side-bar'
 import { ConfigurationModal } from './configuration-modal'
 import Screen from './screen'
+import LeftIcon from './left-icon'
 
 import '../css/styles.css'
 
@@ -61,7 +62,6 @@ observer(({ mainStore, configStore }) =>
                 </Main>
                 <SideBar file={mainStore.selectedFile} />
               </TwoPanels>
-              {/**<ConfigurationModal></ConfigurationModal>**/}
             </AppLayout.Content>
           </AppLayout.ScrollWrapper>
           <EditPanel/>
@@ -72,15 +72,13 @@ observer(({ mainStore, configStore }) =>
       <Screen position={1} animate={true}>
         {configStore.isConfigSectionOpen && (
           <span>
-            <AppBar
-              title="Drive - Configuration"
-              endContent={
-                <div>
-                  <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = false}><ConfigurationSectionBtn /></span>
-                </div>
-              }
-            />
-            <h1>TEST CONFIG SCREEN</h1>
+            <AppBar>
+              <BackButton onClick={() => configStore.isConfigSectionOpen = false} style={{"display": configStore.showBackButton ? 'flex' : 'none'}}>
+                <LeftIcon />
+              </BackButton>        
+              <h1 style={{"line-height": 1.5, "font-size": "22px"}}>Drive - Configuration</h1>
+            </AppBar>
+            <ConfigurationModal />
           </span>
         )}
       </Screen>
@@ -105,4 +103,17 @@ const ConfigurationSectionBtn = styled(IconSettings).attrs({
 })`
   vertical-align: middle;
   margin-right: 15px;
+`
+const BackButton = styled.span`
+  display: flex;
+  align-items: center;
+  height: 63px;
+  margin: 0 30px 0 -30px;
+  cursor: pointer;
+  svg path {
+    stroke: hsl(179, 76%, 48%);
+  }
+  :active svg path {
+    stroke: hsl(179, 76%, 63%);
+  }
 `
