@@ -28,7 +28,6 @@ const Container = styled.label`
     position: relative;
     overflow: hidden;
     box-shadow: 0 1px 1px rgba(0,0,0,0);
-    line-height: 1.5;
     color: #FFFFFF;
     vertical-align: middle;
     background-color: transparent;

@@ -23,6 +23,7 @@ const Screen = ({ position, children, animate }) => (
               transform: left.interpolate(
                 t => `translate3d(${t * 100}%, 0, 0)`
               ),
+              height: '100%'
             }}
           >
             {children}
@@ -38,7 +39,7 @@ const Main = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  bottom: -100px;
+  bottom: 0;
 `
 
 export default Screen
