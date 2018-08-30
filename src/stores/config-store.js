@@ -24,7 +24,19 @@ export class ConfigStore {
     }
 
     async initialize() { 
-      setTimeout(async () => {  
+      setTimeout(async () => {
+        (await this._datastore.events()).subscribe(event => {  
+          console.log('New event: ', event)
+          switch (event.event) {
+            case 'SettingsChanged': {
+              this.isConfigSectionOpen = false
+              this.configSelected= true
+              this.isAdvancedConfigOpen = false
+            }
+            break
+          }
+        });
+
         const datastoreSettings = await this._datastore.getSettings()
         
         if(datastoreSettings.storageProvider === 0) {

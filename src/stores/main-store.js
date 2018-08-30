@@ -55,12 +55,8 @@ export class MainStore {
   }
 
   @action async setIpfsStorageSettings(host, port, protocol) {
-    if(host && port && protocol) {
+    if(host && port && protocol) 
       await this._datastore.setIpfsStorageSettings(host, port, protocol)
-      configStore.isConfigSectionOpen = false
-      configStore.configSelected= true
-      configStore.isAdvancedConfigOpen = false
-    }
   }
 
   async uploadFiles(files) {
