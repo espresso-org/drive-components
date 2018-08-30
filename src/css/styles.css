@@ -65,12 +65,9 @@
 
 /* ConfigurationSection */
 .advancedOptionsContainer {
-    opacity: 1;
-    transition: opacity 1s;
+    display: block;
 }
 
 .advancedOptionsContainer--hidden {
-    opacity: 0;
-    width: 0px;
-    height: 0px;
+    display: none;
 }

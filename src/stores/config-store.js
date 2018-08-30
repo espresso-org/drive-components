@@ -7,7 +7,7 @@ export class ConfigStore {
     @observable isAdvancedConfigOpen = false
     @observable radioGrpSelectedIndex = 0
     @observable radioGrpSelectedValue = 'ipfs'
-    @observable showBackButton = true
+    @observable configSelected = true
     
     @observable host = 'localhost'
     @observable port = '5001'
@@ -29,10 +29,11 @@ export class ConfigStore {
         
         if(datastoreSettings.storageProvider === 0) {
           this.isConfigSectionOpen = true
-          this.showBackButton = false
+          this.configSelected = false
         }
         else {
           // TODO: Handle every possible storage providers
+          this.radioGrpSelectedValue = 'ipfs'
           this.host = datastoreSettings.ipfs.host
           this.port = datastoreSettings.ipfs.port
           this.protocolIndex = this.protocolArray.indexOf(datastoreSettings.ipfs.protocol)

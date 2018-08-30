@@ -8,13 +8,13 @@ import { ConfigurationRadioGrp } from './configuration-radio-grp'
 
 export const ConfigurationModal = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) => 
     <div>
-      <ConfigurationRadioGrp options={["ipfs","filecoin","swarm"]} store={configStore}/>
+      <ConfigurationRadioGrp options={configStore.configSelected ? [configStore.radioGrpSelectedValue] : ["ipfs","filecoin","swarm"]} store={configStore}/>
 
       <ConfigurationSectionAdvancedBtn href="#" onClick={(e) => {configStore.isAdvancedConfigOpen = !configStore.isAdvancedConfigOpen;e.nativeEvent.stopImmediatePropagation();}}>
         {configStore.isAdvancedConfigOpen ? '-' : '+'}Advanced options
       </ConfigurationSectionAdvancedBtn>
 
-      <div className={configStore.isAdvancedConfigOpen ? 'advancedOptionsContainer' : 'advancedOptionsContainer--hidden'} style={{'margin-left': '40px'}}>
+      <div className={configStore.isAdvancedConfigOpen ? 'advancedOptionsContainer' : 'advancedOptionsContainer--hidden'} style={{'margin-left': '50px'}}>
         <div className="ipfsAdvancedOptions" style={{display: configStore.radioGrpSelectedValue == "ipfs" ? 'block' : 'none'}}>
           <Field label="IPFS host:">
             <TextInput value={configStore.host} onChange={e => configStore.host = e.target.value} />
@@ -31,8 +31,8 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
       </div>
 
       <div style={{'margin-top': '35px', 'margin-left': '40px'}}>
-        <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={()=> {mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]);configStore.isConfigSectionOpen = false;configStore.showBackButton= true;}}>OK</ActionButton>
-        <ActionButton mode="outline" onClick={() => {configStore.isConfigSectionOpen = false;configStore.isAdvancedConfigOpen = false;}} emphasis="negative">Cancel</ActionButton>
+        <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={()=> {mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]);configStore.isConfigSectionOpen = false;configStore.configSelected= true;configStore.isAdvancedConfigOpen = false;}}>OK</ActionButton>
+        <ActionButton mode="outline" disabled={!configStore.configSelected} onClick={() => {configStore.isConfigSectionOpen = false;configStore.isAdvancedConfigOpen = false;}} emphasis="negative">Cancel</ActionButton>
       </div>
     </div>
 ))
@@ -46,5 +46,5 @@ const ConfigurationSectionAdvancedBtn = styled.a`
     &:hover ${ConfigurationSectionAdvancedBtn} {
         color: #50B6E1;
     }
-    margin-left: 40px;
+    margin-left: 50px;
 `

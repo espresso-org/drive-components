@@ -73,7 +73,7 @@ observer(({ mainStore, configStore }) =>
         {configStore.isConfigSectionOpen && (
           <span>
             <AppBar>
-              <BackButton onClick={() => configStore.isConfigSectionOpen = false} style={{"display": configStore.showBackButton ? 'flex' : 'none'}}>
+              <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false }} style={{"display": configStore.configSelected ? 'flex' : 'none'}}>
                 <LeftIcon />
               </BackButton>        
               <h1 style={{"line-height": 1.5, "font-size": "22px"}}>Drive - Configuration</h1>
