@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
-import '../../css/styles.css'
 
 import { Field, TextInput, DropDown, Button } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
@@ -14,7 +13,7 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
         {configStore.isAdvancedConfigOpen ? '-' : '+'}Advanced options
       </ConfigurationSectionAdvancedBtn>
 
-      <div className={configStore.isAdvancedConfigOpen ? 'advancedOptionsContainer' : 'advancedOptionsContainer--hidden'} style={{'marginLeft': '50px'}}>
+      <AdvancedOptionsContainer open={configStore.isAdvancedConfigOpen}>
         <div className="ipfsAdvancedOptions" style={{display: configStore.radioGrpSelectedValue == "ipfs" ? 'block' : 'none'}}>
           <Field label="IPFS host:">
             <TextInput value={configStore.host} onChange={e => configStore.host = e.target.value} />
@@ -28,7 +27,7 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
         </div>
         <div className='filecoinAdvancedOptions' style={{display: configStore.radioGrpSelectedValue == "filecoin" ? 'block' : 'none'}}>Coming soon</div>
         <div className='swarmAdvancedOptions' style={{display: configStore.radioGrpSelectedValue == "swarm" ? 'block' : 'none'}}>Coming soon</div>
-      </div>
+      </AdvancedOptionsContainer>
 
       <div style={{'marginTop': '35px', 'marginLeft': '40px'}}>
         <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={()=> {mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]);}}>OK</ActionButton>
@@ -43,6 +42,11 @@ const ActionButton = styled(Button)`
   display: inline-block;
   margin: 8px 10px;
 `
+const AdvancedOptionsContainer = styled.div`
+  display: ${ ({open}) => open ? 'block' : 'none' };
+  margin-left: 50px;
+`
+
 const ConfigurationSectionAdvancedBtn = styled.a`
     font-size: small;
     &:hover ${ConfigurationSectionAdvancedBtn} {

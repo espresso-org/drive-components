@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react'
-import '../css/styles.css'
 
 const ConfigurationRadioBtn = observer(({ isChecked, value, index, handler}) =>
     <RadioBtn checked={isChecked} onClick={() => handler(index)}>

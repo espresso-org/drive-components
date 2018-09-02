@@ -13,7 +13,6 @@ import { ConfigurationModal } from './configuration-modal/configuration-modal'
 import Screen from './screen'
 import LeftIcon from './left-icon'
 
-import '../css/styles.css'
 
 export const App = 
 inject("mainStore", "configStore")(
