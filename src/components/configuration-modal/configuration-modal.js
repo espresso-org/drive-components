@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
-import { Field, TextInput, DropDown, Button } from '@aragon/ui'
+import { Field, TextInput, DropDown, Button, Text } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
 
 export const ConfigurationModal = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) => 
-    <div>
+    <Main>
+      <Title>Storage</Title>
+
       <ConfigurationRadioGrp options={configStore.configSelected ? [configStore.radioGrpSelectedValue] : ["ipfs","filecoin","swarm"]} store={configStore}/>
 
       <ConfigurationSectionAdvancedBtn href="#" onClick={(e) => {configStore.isAdvancedConfigOpen = !configStore.isAdvancedConfigOpen;e.nativeEvent.stopImmediatePropagation();}}>
@@ -29,14 +31,29 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
         <div className='swarmAdvancedOptions' style={{display: configStore.radioGrpSelectedValue == "swarm" ? 'block' : 'none'}}>Coming soon</div>
       </AdvancedOptionsContainer>
 
+
+      <Title style={{ marginTop: '50px' }}>Encryption</Title>
+
+      <ComingSoon>
+        Coming soon
+      </ComingSoon>
+
       <div style={{'marginTop': '35px', 'marginLeft': '40px'}}>
         <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={()=> {mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]);}}>OK</ActionButton>
         <ActionButton mode="outline" disabled={!configStore.configSelected} onClick={() => {configStore.isConfigSectionOpen = false;configStore.isAdvancedConfigOpen = false;}} emphasis="negative">Cancel</ActionButton>
       </div>
-    </div>
+    </Main>
 ))
 
+const Main = styled.div`
+  padding-top: 30px;
+  padding-left: 50px;
+`
 
+const Title = styled(Text).attrs({ size: 'xlarge' })`
+  margin-left: 16px;
+  display: block;
+`
 
 const ActionButton = styled(Button)`
   display: inline-block;
@@ -44,7 +61,16 @@ const ActionButton = styled(Button)`
 `
 const AdvancedOptionsContainer = styled.div`
   display: ${ ({open}) => open ? 'block' : 'none' };
-  margin-left: 50px;
+  margin-left: 0px;
+`
+
+const ComingSoon = styled.div`
+  width: 380px;
+  text-align: center;
+  color: #bbb;
+  font-size: 20px;
+  padding: 20px 0;
+  margin-left: 30px;
 `
 
 const ConfigurationSectionAdvancedBtn = styled.a`
