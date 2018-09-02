@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
-import '../css/styles.css'
+import '../../css/styles.css'
 
 import { Field, TextInput, DropDown, Button } from '@aragon/ui'
-import { ConfigurationRadioGrp } from './configuration-radio-grp'
+import { ConfigurationRadioGrp } from '../configuration-radio-grp'
 
 export const ConfigurationModal = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) => 
     <div>
@@ -36,6 +36,8 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
       </div>
     </div>
 ))
+
+
 
 const ActionButton = styled(Button)`
   display: inline-block;

@@ -8,13 +8,18 @@ const ConfigurationRadioBtn = observer(({ isChecked, value, index, handler}) =>
     </span>
 )
 
-function allOptions(options, store)  
-{    
-    return options.map((option, i) => {
-        return <ConfigurationRadioBtn key={i} isChecked={(store.radioGrpSelectedIndex == i)} index={i} value={option} handler={() => { store.radioGrpSelectedIndex = i; store.radioGrpSelectedValue = options[i];}} />
-    });
-}
+
 
 export const ConfigurationRadioGrp = observer(({ options, store }) => 
-    <div>{allOptions(options, store)}</div>
+    <div>
+        {options.map((option, i) => 
+            <ConfigurationRadioBtn 
+                key={i} 
+                isChecked={(store.radioGrpSelectedIndex == i)} 
+                index={i} 
+                value={option} 
+                handler={() => { store.radioGrpSelectedIndex = i; store.radioGrpSelectedValue = options[i];}} 
+            />
+        )
+    }</div>
 )

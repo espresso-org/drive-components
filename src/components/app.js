@@ -9,7 +9,7 @@ import { FileInput } from './file-input'
 import { FileRow } from './file-row'
 import { EditPanel } from './edit-panel'
 import { SideBar } from './side-bar'
-import { ConfigurationModal } from './configuration-modal'
+import { ConfigurationModal } from './configuration-modal/configuration-modal'
 import Screen from './screen'
 import LeftIcon from './left-icon'
 
