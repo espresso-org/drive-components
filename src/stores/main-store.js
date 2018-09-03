@@ -8,15 +8,10 @@ import { Datastore } from '../__mocks__/datastore'
 //import { configStore } from './config-store'
 
 configure({ isolateGlobalState: true })
-//console.log('extras:', extras)
 
 
-export const EditMode = {
-  None: "None",
-  Name: "Name",
-  Content: "Content",
-  Permissions: "Permissions"
-}
+
+
 
 export class MainStore {
   @observable files = []
