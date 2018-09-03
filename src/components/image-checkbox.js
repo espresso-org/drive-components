@@ -30,6 +30,7 @@ export class ImageCheckbox extends React.Component {
 
 const Main = styled.button`
   position: relative;
+  margin: 0 10px;
   width: 140px;
   height: 170px;
   padding: 0;

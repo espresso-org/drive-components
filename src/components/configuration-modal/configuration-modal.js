@@ -64,11 +64,11 @@ const ActionButton = styled(Button)`
 `
 const AdvancedOptionsContainer = styled.div`
   display: ${ ({open}) => open ? 'block' : 'none' };
-  margin-left: 0px;
+  margin-left: 50px;
 `
 
 const ComingSoon = styled.div`
-  width: 380px;
+  width: 552px;
   text-align: center;
   color: #bbb;
   font-size: 20px;

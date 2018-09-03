@@ -3,21 +3,13 @@ import styled from 'styled-components'
 import { observer } from 'mobx-react'
 import { ImageCheckbox } from './image-checkbox'
 
-const ConfigurationRadioBtn = observer(({ isChecked, value, index, handler}) =>
-    <RadioBtn checked={isChecked} onClick={() => handler(index)}>
-        <img 
-            data-value={value} 
-            src={require(`./configuration-modal/img/${value}-logo.png`)}    
-        />
-    </RadioBtn>
-)
 
 
 export const ConfigurationRadioGrp = observer(({ options, store }) => 
-    <div>
+    <Main>
         {options.map((option, i) => 
 
-            <ImgCheckbox
+            <ImageCheckbox
                 key={i}
                 active={store.radioGrpSelectedIndex == i}
                 template={option}
@@ -25,30 +17,10 @@ export const ConfigurationRadioGrp = observer(({ options, store }) =>
                 label={option}
                 onSelect={() => { store.radioGrpSelectedIndex = i; store.radioGrpSelectedValue = options[i];}}
             />
-        )
-    }</div>
+        )}
+    </Main>
 )
 
-
-const RadioBtn = styled.div`
-    display: inline-block;
-    width: auto;
-    height: auto;
-    transition: opacity 0.3s;
-    opacity: ${({ checked }) => checked ? 1 : 0.5};
-    margin: 20px 20px 20px 40px;
-    cursor: pointer;
-
-    &:hover {
-        opacity: 1;
-    }
-
-    > img {
-        width: 80px;
-    }
-`
-
-const ImgCheckbox = styled(ImageCheckbox)`
-    margin: 0 20px;
-
+const Main = styled.div`
+    padding-left: 32px;
 `
