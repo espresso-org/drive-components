@@ -6,6 +6,7 @@ import { downloadFile, convertFileToArrayBuffer } from '../utils/files'
 //import { Datastore, providers } from 'aragon-datastore'
 import { Datastore } from '../__mocks__/datastore'
 //import { configStore } from './config-store'
+import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
 

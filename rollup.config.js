@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
 import url from 'rollup-plugin-url'
+import image from 'rollup-plugin-img'
 
 import pkg from './package.json'
 
@@ -42,6 +43,7 @@ export default {
         'node_modules/aragon-datastore/dist/index.js': ['Datastore', 'providers']
       }
     }),
-    json()
+    json(),
+    image({ limit: 20000 })
   ]
 }

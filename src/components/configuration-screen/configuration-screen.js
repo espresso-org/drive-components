@@ -10,6 +10,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
       <Title>Storage</Title>
 
       <ConfigurationRadioGrp 
+        style={{ marginTop: '20px' }}
         options={configStore.configSelected ? [configStore.radioGrpSelectedValue] : ["ipfs","filecoin","swarm"]} 
         store={configStore}
       />
@@ -41,16 +42,21 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
         Coming soon
       </ComingSoon>
 
-      <div style={{'marginTop': '35px', 'marginLeft': '40px'}}>
+      <ButtonContainer>
         <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={()=> {mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]);}}>OK</ActionButton>
         <ActionButton mode="outline" disabled={!configStore.configSelected} onClick={() => {configStore.isConfigSectionOpen = false;configStore.isAdvancedConfigOpen = false;}} emphasis="negative">Cancel</ActionButton>
-      </div>
+      </ButtonContainer>
     </Main>
 ))
 
 const Main = styled.div`
   padding-top: 30px;
   padding-left: 50px;
+`
+
+const ButtonContainer = styled.div`
+  margin-top: 35px;
+  margin-left: 8px;
 `
 
 const Title = styled(Text).attrs({ size: 'xlarge' })`
