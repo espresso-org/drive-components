@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
-import filesize from 'filesize'
+import filesize from 'filesize/lib/filesize'
 import { inject } from 'mobx-react'
 
 import { EthAddress } from './eth-address'

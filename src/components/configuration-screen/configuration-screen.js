@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { Field, TextInput, DropDown, Button, Text } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
 
-export const ConfigurationModal = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) => 
+export const ConfigurationScreen = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) => 
     <Main>
       <Title>Storage</Title>
 

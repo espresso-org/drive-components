@@ -9,7 +9,7 @@ import { FileInput } from './file-input'
 import { FileRow } from './file-row'
 import { EditPanel } from './edit-panel'
 import { SideBar } from './side-bar'
-import { ConfigurationModal } from './configuration-modal/configuration-modal'
+import { ConfigurationScreen } from './configuration-screen/configuration-screen'
 import Screen from './screen'
 import LeftIcon from './left-icon'
 
@@ -77,7 +77,7 @@ observer(({ mainStore, configStore }) =>
               </BackButton>        
               <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Drive - Configuration</h1>
             </AppBar>
-            <ConfigurationModal />
+            <ConfigurationScreen />
           </span>
         )}
       </Screen>
