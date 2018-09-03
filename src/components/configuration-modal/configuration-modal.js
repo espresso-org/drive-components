@@ -9,7 +9,10 @@ export const ConfigurationModal = inject("configStore", "mainStore")(observer(({
     <Main>
       <Title>Storage</Title>
 
-      <ConfigurationRadioGrp options={configStore.configSelected ? [configStore.radioGrpSelectedValue] : ["ipfs","filecoin","swarm"]} store={configStore}/>
+      <ConfigurationRadioGrp 
+        options={configStore.configSelected ? [configStore.radioGrpSelectedValue] : ["ipfs","filecoin","swarm"]} 
+        store={configStore}
+      />
 
       <ConfigurationSectionAdvancedBtn href="#" onClick={(e) => {configStore.isAdvancedConfigOpen = !configStore.isAdvancedConfigOpen;e.nativeEvent.stopImmediatePropagation();}}>
         {configStore.isAdvancedConfigOpen ? '-' : '+'}Advanced options

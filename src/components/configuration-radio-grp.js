@@ -12,24 +12,18 @@ const ConfigurationRadioBtn = observer(({ isChecked, value, index, handler}) =>
     </RadioBtn>
 )
 
-            /*}
-            <ConfigurationRadioBtn 
-                key={i} 
-                isChecked={(store.radioGrpSelectedIndex == i)} 
-                index={i} 
-                value={option} 
-                handler={() => { store.radioGrpSelectedIndex = i; store.radioGrpSelectedValue = options[i];}} 
-            />*/
 
 export const ConfigurationRadioGrp = observer(({ options, store }) => 
     <div>
         {options.map((option, i) => 
 
-            <ImageCheckbox
+            <ImgCheckbox
                 key={i}
                 active={store.radioGrpSelectedIndex == i}
                 template={option}
                 icon={require(`./configuration-modal/img/${option}-logo.svg`)}
+                label={option}
+                onSelect={() => { store.radioGrpSelectedIndex = i; store.radioGrpSelectedValue = options[i];}}
             />
         )
     }</div>
@@ -52,4 +46,9 @@ const RadioBtn = styled.div`
     > img {
         width: 80px;
     }
+`
+
+const ImgCheckbox = styled(ImageCheckbox)`
+    margin: 0 20px;
+
 `

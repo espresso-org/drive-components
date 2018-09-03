@@ -80,6 +80,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
+  align-items: center;
   padding-top: 20px;
   ${font({ size: 'small' })};
 
