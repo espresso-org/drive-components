@@ -95,6 +95,7 @@ export class Datastore {
             port,
             protocol
         }
+        this._events.emit('SettingsChanged')
     }
 
     async listFiles() {

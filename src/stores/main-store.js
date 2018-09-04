@@ -6,17 +6,13 @@ import { downloadFile, convertFileToArrayBuffer } from '../utils/files'
 //import { Datastore, providers } from 'aragon-datastore'
 import { Datastore } from '../__mocks__/datastore'
 //import { configStore } from './config-store'
+import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
-//console.log('extras:', extras)
 
 
-export const EditMode = {
-  None: "None",
-  Name: "Name",
-  Content: "Content",
-  Permissions: "Permissions"
-}
+
+
 
 export class MainStore {
   @observable files = []
@@ -55,7 +51,7 @@ export class MainStore {
   }
 
   @action async setIpfsStorageSettings(host, port, protocol) {
-    if(host && port && protocol)
+    if(host && port && protocol) 
       await this._datastore.setIpfsStorageSettings(host, port, protocol)
   }
 
