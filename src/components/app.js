@@ -21,7 +21,7 @@ observer(({ mainStore, configStore }) =>
 
       <Screen position={0} animate={true}>
         {!configStore.isConfigSectionOpen && (
-        <span>
+        <div>
           <AppBar
             title="Drive"
             endContent={
@@ -64,7 +64,7 @@ observer(({ mainStore, configStore }) =>
             </AppLayout.Content>
           </AppLayout.ScrollWrapper>
           <EditPanel/>
-        </span>
+        </div>
         )}
       </Screen>
 
