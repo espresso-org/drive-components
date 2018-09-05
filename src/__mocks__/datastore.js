@@ -176,6 +176,42 @@ export class Datastore {
         this._events.emit('FileRename')
     }
 
+
+
+    /**
+     * Groups related methods
+     */
+
+    async createGroup(groupName, entities) {
+
+    }
+
+    async deleteGroup(groupName) {
+        
+    }
+
+    async renameGroup(groupName, newGroupName) {
+        
+    }
+
+    async addEntityToGroup(groupName, entity) {
+        
+    }
+
+    async removeEntityFromGroup(groupName, entities) {
+        
+    }
+
+    async addGroupToFile(fileId, groupName) {
+        
+    }
+
+    async removeGroupFromFile(fileId, groupName) {
+        
+    }
+
+
+
     /**
      * Datastore events
      * 
