@@ -12,6 +12,7 @@ export class Datastore {
     }
     _fileInfo = []
     _fileContent = []
+    _groups = {}
 
     _events
 
@@ -32,11 +33,14 @@ export class Datastore {
             isOwner: true,
             lastModification: new BigNumber(Math.round((new Date()).getTime() / 1000)),
             permissionAddresses: [],
+            permissionGroups: [],
             permissions: {
                 write: true,
                 read: true // TODO
             },
-            _permissionList: []
+            _groupPermissionList: [],
+            _permissionList: [],
+            
         })
 
         this._fileContent.push(file)
@@ -147,13 +151,12 @@ export class Datastore {
      */
     async setWritePermission(fileId, entity, hasPermission) {
         const fileInfo = this._fileInfo[fileId - 1]
-        const filePermissions = fileInfo._permissionList
-        const entityPermissions = filePermissions.find(permission => permission.entity === entity)
+        const entityPermissions = fileInfo._permissionList.find(permission => permission.entity === entity)
 
         if (entityPermissions)
             entityPermissions.write = hasPermission
         else {
-            filePermissions.push({
+            fileInfo._permissionList.push({
                 entity,
                 write: hasPermission,
                 read: false
@@ -182,32 +185,52 @@ export class Datastore {
      * Groups related methods
      */
 
-    async createGroup(groupName, entities) {
 
+    async createGroup(groupName, entities) {
+        this._groups[groupName] = entities || []
     }
 
     async deleteGroup(groupName) {
-        
+        delete this._groups[groupName]
     }
 
     async renameGroup(groupName, newGroupName) {
-        
+        this._groups[newGroupName] = this._groups[groupName]
+        delete this._groups[groupName]
     }
 
     async addEntityToGroup(groupName, entity) {
-        
+        this._groups[groupName].push(entity)
     }
 
-    async removeEntityFromGroup(groupName, entities) {
-        
+    async removeEntityFromGroup(groupName, entity) {
+        this._groups[groupName] = this._groups[groupName].filter(ent => ent !== entity)
     }
 
-    async addGroupToFile(fileId, groupName) {
-        
+    async setGroupPermissions(fileId, groupName, read, write) {
+        const fileInfo = this._fileInfo[fileId - 1]
+        const groupPermissions = fileInfo._groupPermissionList.find(permission => permission.groupName === groupName)
+
+        if (groupPermissions) {
+            groupPermissions.read = read
+            groupPermissions.write = write
+        }
+        else {
+            fileInfo._groupPermissionList.push({
+                entity,
+                read: read,
+                write: write
+            })
+            fileInfo.permissionGroups.push(groupName)
+        }
+        this._events.emit('NewGroupPermissions')
     }
 
     async removeGroupFromFile(fileId, groupName) {
-        
+        const fileInfo = this._fileInfo[fileId - 1]
+
+        fileInfo._groupPermissionList = fileInfo._groupPermissionList.filer(permission => permission.groupName !== groupName)
+
     }
 
 
