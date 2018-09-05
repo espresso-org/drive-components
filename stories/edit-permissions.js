@@ -3,12 +3,10 @@ import { action } from "@storybook/addon-actions"
 import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
 import { EditPermissions } from '../src/components/edit-permissions'
 import { BigNumber } from 'bignumber.js'
-//import * as AragonDatastore from 'aragon-datastore'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
-
-//AragonDatastore.Datastore = MockedDatastore
-
-import { mainStore } from '../src/stores/main-store'
+import { Provider } from 'mobx-react'
+import { MainStore } from '../src/stores/main-store'
+import { ConfigStore } from '../src/stores/config-store'
 
 const file = {
   name: 'file-name.jpg',
@@ -20,14 +18,13 @@ const file = {
   }
 }
 
-setTimeout(async () => {
-  await mainStore._datastore.addFile('test.jpeg', new ArrayBuffer(60))
-  await mainStore._refreshFiles()
-  await mainStore.selectFile(1)
-}, 500)
+const datastore = new MockedDatastore({})
+const configStore = new ConfigStore(datastore)
+const mainStore = new MainStore(datastore)
 
-window.mainStore = mainStore
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
-  <EditPermissions file={file} mainStore={mainStore}></EditPermissions>
+  <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>
+    <EditPermissions file={file} mainStore={mainStore}></EditPermissions>
+  </Provider>
 ))
