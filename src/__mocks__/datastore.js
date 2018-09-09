@@ -195,6 +195,10 @@ export class Datastore {
         })
     }
 
+    async getGroup(groupId) {
+        return this._groups[groupId - 1]
+    }
+
     async deleteGroup(groupName) {
         delete this._groups[groupName]
     }
