@@ -1,7 +1,7 @@
 import React from "react"
 import { action } from "@storybook/addon-actions"
 import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
-import { EditPermissions } from '../src/components/edit-permissions'
+import { EditPermissions } from '../src/components/edit-permissions/edit-permissions'
 import { BigNumber } from 'bignumber.js'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
 import { Provider } from 'mobx-react'
