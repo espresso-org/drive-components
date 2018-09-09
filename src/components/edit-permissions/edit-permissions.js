@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
 import { Field, Button, TextInput, Text } from '@aragon/ui'
 
 import { EditMode } from '../../stores/edit-mode'
+import * as s from './edit-permissions.styles'
 
-const Main = styled.div`
-    
-`
 
 @inject("mainStore")
 @observer
@@ -58,84 +55,39 @@ export class EditPermissions extends Component {
 
   render() {
     return (
-      <Main>
-        <Title>Write permissions</Title>
+      <s.Main>
+        <s.Title>Write permissions</s.Title>
         <Field label="Entity address:">
           <TextInput value={this.state.newAddressWrite} onChange={e => this.setState({ newAddressWrite: e.target.value })} />
-          <AddButton onClick={this.addWritePermission}>Add</AddButton>
-          <RemoveButton onClick={this.removeWritePermission}>Remove</RemoveButton>
+          <s.AddButton onClick={this.addWritePermission}>Add</s.AddButton>
+          <s.RemoveButton onClick={this.removeWritePermission}>Remove</s.RemoveButton>
         </Field>
-        <AddressList>
+        <s.AddressList>
           {this.writePermissions()
             .map(permission => 
-              <Address key={permission.entity} onClick={this.selectAddressWrite.bind(this, permission.entity)}>{permission.entity}</Address>
+              <s.Address key={permission.entity} onClick={this.selectAddressWrite.bind(this, permission.entity)}>{permission.entity}</s.Address>
           )}
-        </AddressList>
+        </s.AddressList>
 
-        <Title style={{marginTop: '60px'}}>Read permissions</Title>
+        <s.Title style={{marginTop: '60px'}}>Read permissions</s.Title>
         <Field label="Entity address:">
           <TextInput value={this.state.newAddressRead} onChange={e => this.setState({ newAddressRead: e.target.value })} />
-          <AddButton onClick={this.addReadPermission}>Add</AddButton>
-          <RemoveButton onClick={this.removeReadPermission}>Remove</RemoveButton>
+          <s.AddButton onClick={this.addReadPermission}>Add</s.AddButton>
+          <s.RemoveButton onClick={this.removeReadPermission}>Remove</s.RemoveButton>
         </Field>
-        <AddressList>
+        <s.AddressList>
           {this.readPermissions()
             .map(permission => 
-              <Address key={permission.entity} onClick={this.selectAddressRead.bind(this, permission.entity)}>{permission.entity}</Address>
+              <s.Address key={permission.entity} onClick={this.selectAddressRead.bind(this, permission.entity)}>{permission.entity}</s.Address>
           )}
-        </AddressList>
+        </s.AddressList>
 
-        <Actions>            
-          <ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="positive">OK</ActionButton>
-          <ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</ActionButton>
-        </Actions>
-      </Main>
+        <s.Actions>            
+          <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="positive">OK</s.ActionButton>
+          <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</s.ActionButton>
+        </s.Actions>
+      </s.Main>
     )
   }
 }
 
-const Title = styled(Text).attrs({ size: 'xlarge'})`
-  display: block;
-  margin: 8px 0;
-`
-
-const AddButton = styled(Button).attrs({ 
-    compact: true, 
-    mode: 'outline', 
-    emphasis: 'positive' 
-  })`
-  display: inline-block;
-  margin: 0px 4px;
-`
-
-const RemoveButton = styled(Button).attrs({ 
-  compact: true, 
-  mode: 'outline', 
-  emphasis: 'negative' 
-})`
-display: inline-block;
-margin: 0px;
-`
-
-const AddressList = styled.div`
-  margin-top: 12px;
-  overflow-y: scroll;
-  max-height: 150px;
-`
-
-const Address = styled(Button)`
-  margin-bottom: 2px;
-  margin-left: 1px;
-  width: 349px;
-  font-size: small;
-`
-
-const Actions = styled.div`
-  margin-top: 40px;
-  margin-bottom: 20px;
-`
-
-const ActionButton = styled(Button)`
-  display: inline-block;
-  margin: 8px 10px;
-`
