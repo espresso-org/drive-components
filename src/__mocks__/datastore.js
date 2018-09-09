@@ -215,9 +215,9 @@ export class Datastore {
         this._groups[groupId - 1] = this._groups[groupId - 1].filter(ent => ent !== entity)
     }
 
-    async setGroupPermissions(fileId, groupName, read, write) {
+    async setGroupPermissions(fileId, groupId, read, write) {
         const fileInfo = this._fileInfo[fileId - 1]
-        const groupPermissions = fileInfo._groupPermissionList.find(permission => permission.groupName === groupName)
+        const groupPermissions = fileInfo._groupPermissionList.find(permission => permission.groupId === groupId)
 
         if (groupPermissions) {
             groupPermissions.read = read
@@ -225,20 +225,20 @@ export class Datastore {
         }
         else {
             fileInfo._groupPermissionList.push({
-                entity,
+                groupId,
                 read: read,
                 write: write
             })
-            fileInfo.permissionGroups.push(groupName)
+            fileInfo.permissionGroups.push(groupId)
         }
         this._events.emit('NewGroupPermissions')
     }
 
-    async removeGroupFromFile(fileId, groupName) {
+    async removeGroupFromFile(fileId, groupId) {
         const fileInfo = this._fileInfo[fileId - 1]
 
-        fileInfo._groupPermissionList = fileInfo._groupPermissionList.filer(permission => permission.groupName !== groupName)
-
+        fileInfo._groupPermissionList = fileInfo._groupPermissionList.filer(permission => permission.groupId !== groupId)
+        fileInfo.permissionGroups = fileInfo.permissionGroups.filter(group => group !== groupId)
     }
 
 
