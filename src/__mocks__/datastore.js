@@ -207,12 +207,12 @@ export class Datastore {
         this._groups[groupId - 1].name = newGroupName
     }
 
-    async addEntityToGroup(groupName, entity) {
-        this._groups[groupName].push(entity)
+    async addEntityToGroup(groupId, entity) {
+        this._groups[groupId - 1].push(entity)
     }
 
-    async removeEntityFromGroup(groupName, entity) {
-        this._groups[groupName] = this._groups[groupName].filter(ent => ent !== entity)
+    async removeEntityFromGroup(groupId, entity) {
+        this._groups[groupId - 1] = this._groups[groupId - 1].filter(ent => ent !== entity)
     }
 
     async setGroupPermissions(fileId, groupName, read, write) {
