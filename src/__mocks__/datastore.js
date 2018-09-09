@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import { Subject } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
 
 
@@ -255,15 +255,14 @@ export class Datastore {
 
 
 class EventEmitter {
-    _observer    
     events
 
     constructor() {
-        this.events = Observable.create(observer => this._observer = observer)
+        this.events = new Subject()
     }
 
     emit(event) {
-        this._observer.next({
+        this.events.next({
             event
         })
     }
