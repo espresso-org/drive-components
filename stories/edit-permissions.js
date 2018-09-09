@@ -22,6 +22,12 @@ const datastore = new MockedDatastore({})
 const configStore = new ConfigStore(datastore)
 const mainStore = new MainStore(datastore)
 
+setTimeout(async () => {
+  await datastore.addFile('test.jpeg', new ArrayBuffer(60))
+  await mainStore._refreshFiles()
+  await mainStore.selectFile(1)
+}, 0)
+
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
   <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>

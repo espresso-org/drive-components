@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Field, Button, TextInput, Text } from '@aragon/ui'
 
 import { EditMode } from '../../stores/edit-mode'
-import * as s from './edit-permissions.styles'
+import { s } from './edit-permissions.styles'
 
 
 @inject("mainStore")
