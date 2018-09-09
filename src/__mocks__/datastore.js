@@ -12,7 +12,8 @@ export class Datastore {
     }
     _fileInfo = []
     _fileContent = []
-    _groups = {}
+    _groups = []
+
 
     _events
 
@@ -187,7 +188,11 @@ export class Datastore {
 
 
     async createGroup(groupName, entities) {
-        this._groups[groupName] = entities || []
+        this._groups.push({
+            id: this._groups.length + 1,
+            name: groupName,
+            entities: entities || []
+        })
     }
 
     async deleteGroup(groupName) {
