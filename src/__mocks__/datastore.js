@@ -199,8 +199,8 @@ export class Datastore {
         return this._groups[groupId - 1]
     }
 
-    async deleteGroup(groupName) {
-        delete this._groups[groupName]
+    async deleteGroup(groupId) {
+        delete this._groups[groupId]
     }
 
     async renameGroup(groupName, newGroupName) {
