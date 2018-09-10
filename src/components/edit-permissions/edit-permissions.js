@@ -5,6 +5,7 @@ import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@
 import { CheckButton } from '../check-button'
 
 import { EditMode } from '../../stores/edit-mode'
+import { AddPermissions } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 
@@ -89,9 +90,7 @@ export class EditPermissions extends Component {
         </s.Actions>        
 
         <SidePanel opened={this.state.sidePanel} onClose={() => this.setState({ sidePanel: false })}>
-          <Field label="Entity address:">
-            <TextInput value={this.state.newAddressWrite} onChange={e => this.setState({ newAddressWrite: e.target.value })} />
-          </Field>
+            <AddPermissions />
         </SidePanel>
       </s.Main>
     )
