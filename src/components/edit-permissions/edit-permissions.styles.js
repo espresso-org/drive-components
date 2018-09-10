@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Field, Button, TextInput, Text } from '@aragon/ui'
+import { Button, Text, Table } from '@aragon/ui'
 
 export const s = {
 
@@ -30,7 +30,7 @@ export const s = {
         margin: 0px;
     `,
 
-    AddressList: styled.div`
+    AddressList: styled(Table)`
     margin-top: 12px;
     overflow-y: scroll;
     max-height: 150px;

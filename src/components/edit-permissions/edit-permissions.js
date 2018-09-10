@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import { Field, Button, TextInput, Text } from '@aragon/ui'
+import { Field, Button, TextInput, Text, TableRow, TableHeader, TableCell, RadioButton } from '@aragon/ui'
 
 import { EditMode } from '../../stores/edit-mode'
 import { s } from './edit-permissions.styles'
@@ -24,6 +24,8 @@ export class EditPermissions extends Component {
 
   writePermissions = () => this.mainStore.selectedFilePermissions.get()
                             .filter(permission => permission.write === true)
+
+  entityPermissions = () => this.mainStore.selectedFilePermissions.get()
 
   addReadPermission = async () => {
     await this.mainStore.addReadPermission(this.file.id, this.state.newAddressRead)
@@ -62,23 +64,22 @@ export class EditPermissions extends Component {
           <s.AddButton onClick={this.addWritePermission}>Add</s.AddButton>
           <s.RemoveButton onClick={this.removeWritePermission}>Remove</s.RemoveButton>
         </Field>
-        <s.AddressList>
-          {this.writePermissions()
+        <s.AddressList 
+          header={
+            <TableRow>
+              <TableHeader title="Entity / Group" />
+              <TableHeader title="Read" />
+              <TableHeader title="Write" />
+            </TableRow>
+        }>
+          {this.entityPermissions()
             .map(permission => 
-              <s.Address key={permission.entity} onClick={this.selectAddressWrite.bind(this, permission.entity)}>{permission.entity}</s.Address>
-          )}
-        </s.AddressList>
-
-        <s.Title style={{marginTop: '60px'}}>Read permissions</s.Title>
-        <Field label="Entity address:">
-          <TextInput value={this.state.newAddressRead} onChange={e => this.setState({ newAddressRead: e.target.value })} />
-          <s.AddButton onClick={this.addReadPermission}>Add</s.AddButton>
-          <s.RemoveButton onClick={this.removeReadPermission}>Remove</s.RemoveButton>
-        </Field>
-        <s.AddressList>
-          {this.readPermissions()
-            .map(permission => 
-              <s.Address key={permission.entity} onClick={this.selectAddressRead.bind(this, permission.entity)}>{permission.entity}</s.Address>
+              <PermissionRow
+                key={permission.entity}
+                permission={permission} 
+                onClick={() => this.selectAddressWrite(permission.entity)}>
+                {permission.entity}
+              </PermissionRow>
           )}
         </s.AddressList>
 
@@ -91,3 +92,11 @@ export class EditPermissions extends Component {
   }
 }
 
+
+
+const PermissionRow = ({ permission }) => 
+  <TableRow>
+    <TableCell>{permission.entity}</TableCell>
+    <TableCell><RadioButton checked={permission.read}/></TableCell>
+    <TableCell><RadioButton checked={permission.write}/></TableCell>
+  </TableRow>
