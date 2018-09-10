@@ -60,12 +60,10 @@ export class EditPermissions extends Component {
   render() {
     return (
       <s.Main>
-        <s.Title>Write permissions</s.Title>
-        <Field label="Entity address:">
-          <TextInput value={this.state.newAddressWrite} onChange={e => this.setState({ newAddressWrite: e.target.value })} />
-          <s.AddButton onClick={this.addWritePermission}>Add</s.AddButton>
+        <s.TopButtons>
+          <s.AddButton onClick={() => this.setState({ sidePanel: true })}>Add</s.AddButton>
           <s.RemoveButton onClick={this.removeWritePermission}>Remove</s.RemoveButton>
-        </Field>
+        </s.TopButtons>
         <s.AddressList 
           header={
             <TableRow>
@@ -88,12 +86,13 @@ export class EditPermissions extends Component {
         <s.Actions>            
           <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="positive">OK</s.ActionButton>
           <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</s.ActionButton>
-        </s.Actions>
+        </s.Actions>        
 
-        <s.ActionButton mode="outline" onClick={() => this.setState({ sidePanel: true })}>Open</s.ActionButton>
-        
-
-        <SidePanel opened={this.state.sidePanel} onClose={() => this.setState({ sidePanel: false })}/>
+        <SidePanel opened={this.state.sidePanel} onClose={() => this.setState({ sidePanel: false })}>
+          <Field label="Entity address:">
+            <TextInput value={this.state.newAddressWrite} onChange={e => this.setState({ newAddressWrite: e.target.value })} />
+          </Field>
+        </SidePanel>
       </s.Main>
     )
   }

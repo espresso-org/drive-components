@@ -12,6 +12,10 @@ export const s = {
         margin: 8px 0;
     `,
 
+    TopButtons: styled.div`
+        margin: 10px;
+    `,
+
     AddButton: styled(Button).attrs({ 
         compact: true, 
         mode: 'outline', 
@@ -31,26 +35,27 @@ export const s = {
     `,
 
     AddressList: styled(Table)`
-    margin-top: 12px;
-    overflow-y: scroll;
-    max-height: 150px;
+        margin-top: 12px;
+        overflow-y: scroll;
+        max-height: 150px;
     `,
 
     Address: styled(Button)`
-    margin-bottom: 2px;
-    margin-left: 1px;
-    width: 349px;
-    font-size: small;
+        margin-bottom: 2px;
+        margin-left: 1px;
+        width: 349px;
+        font-size: small;
     `,
 
     Actions: styled.div`
-    margin-top: 40px;
-    margin-bottom: 20px;
+        margin-top: 40px;
+        margin-bottom: 20px;
     `,
 
     ActionButton: styled(Button)`
-    display: inline-block;
-    margin: 8px 10px;
+        display: inline-block;
+        margin: 8px 10px;
     `
+
 
 }
