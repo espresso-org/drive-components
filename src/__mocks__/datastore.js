@@ -117,6 +117,35 @@ export class Datastore {
     }
 
     /**
+     * Add/Remove permissions to an entity for
+     * a specific file
+     * 
+     * @param {number} fileId File Id
+     * @param {string} entity Entity address
+     * @param {boolean} read read permission
+     * @param {boolean} write write permission
+     */
+    async setEntityPermissions(fileId, entity, read, write) {
+        const fileInfo = this._fileInfo[fileId - 1]
+        const filePermissions = fileInfo._permissionList
+        const entityPermissions = filePermissions.find(permission => permission.entity === entity)
+
+        if (entityPermissions) {
+            entityPermissions.read = read
+            entityPermissions.write = write
+        }
+        else {
+            filePermissions.push({
+                entity,
+                read: read,
+                write: write
+            })
+            fileInfo.permissionAddresses.push(entity)
+        }
+        this._events.emit('NewReadPermission')
+    }
+
+    /**
      * Add/Remove read permission to an entity for
      * a specific file
      * 
