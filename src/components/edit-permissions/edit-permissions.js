@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import { Field, Button, TextInput, Text, TableRow, TableHeader, TableCell, RadioButton } from '@aragon/ui'
+import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
+import { CheckButton } from '../check-button'
 
 import { EditMode } from '../../stores/edit-mode'
 import { s } from './edit-permissions.styles'
@@ -13,7 +14,8 @@ export class EditPermissions extends Component {
 
   state = { 
     newAddressWrite: '',
-    newAddressRead: ''
+    newAddressRead: '',
+    sidePanel: false
   }
 
   get mainStore() { return this.props.mainStore }
@@ -87,6 +89,11 @@ export class EditPermissions extends Component {
           <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="positive">OK</s.ActionButton>
           <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</s.ActionButton>
         </s.Actions>
+
+        <s.ActionButton mode="outline" onClick={() => this.setState({ sidePanel: true })}>Open</s.ActionButton>
+        
+
+        <SidePanel opened={this.state.sidePanel} onClose={() => this.setState({ sidePanel: false })}/>
       </s.Main>
     )
   }
@@ -97,6 +104,6 @@ export class EditPermissions extends Component {
 const PermissionRow = ({ permission }) => 
   <TableRow>
     <TableCell>{permission.entity}</TableCell>
-    <TableCell><RadioButton checked={permission.read}/></TableCell>
-    <TableCell><RadioButton checked={permission.write}/></TableCell>
+    <TableCell><CheckButton checked={permission.read}/></TableCell>
+    <TableCell><CheckButton checked={permission.write}/></TableCell>
   </TableRow>
