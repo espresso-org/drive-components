@@ -89,7 +89,11 @@ export class EditPermissions extends Component {
           <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</s.ActionButton>
         </s.Actions>        
 
-        <SidePanel opened={this.state.sidePanel} onClose={() => this.setState({ sidePanel: false })}>
+        <SidePanel 
+          title="Add a permission"
+          opened={this.state.sidePanel} 
+          onClose={() => this.setState({ sidePanel: false })}
+        >
             <AddPermissions />
         </SidePanel>
       </s.Main>
