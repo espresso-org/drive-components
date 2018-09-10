@@ -142,7 +142,7 @@ export class Datastore {
             })
             fileInfo.permissionAddresses.push(entity)
         }
-        this._events.emit('NewReadPermission')
+        this._events.emit('NewEntityPermissions')
     }
 
     /**
