@@ -6,18 +6,21 @@ import { Field, TextInput, Button, RadioButton, TableHeader, TableCell, SidePane
 import { CheckButton } from '../../check-button'
 
 
+const PermissionType = {
+    Entity: 'Entity',
+    Group: 'Group'
+}
+
+
 export class AddPermissions extends Component {
     
     state = {
         entityAddress: '',
         isRead: false,
-        isWrite: false
+        isWrite: false,
+        permissionType: PermissionType.Entity
     }
     
-    handleChange = e => {
-        console.log('change')
-        this.setState({ isRead: !this.state.isRead})
-    }
 
     render() {
         return (
@@ -25,7 +28,10 @@ export class AddPermissions extends Component {
                 <RadioButton /> Add an entity
                 <RadioButton /> Add a group
                 <Field label="Entity address:">                   
-                    <TextInput value={this.state.entityAddress} onChange={e => this.setState({ entityAddress: e.target.value })} />
+                    <StyledTextInput 
+                        value={this.state.entityAddress} 
+                        onChange={e => this.setState({ entityAddress: e.target.value })} 
+                    />
                 </Field>
                 <CheckButton 
                     checked={this.state.isRead} 
@@ -44,7 +50,11 @@ export class AddPermissions extends Component {
 
 
 const Main = styled.div`
+    
+`
 
+const StyledTextInput = styled(TextInput)`
+    width: 100%;
 `
 
 const SaveButton = styled(Button)
