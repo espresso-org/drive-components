@@ -25,14 +25,31 @@ export class AddPermissions extends Component {
     render() {
         return (
             <Main>
-                <RadioButton /> Add an entity
-                <RadioButton /> Add a group
-                <Field label="Entity address:">                   
-                    <StyledTextInput 
-                        value={this.state.entityAddress} 
-                        onChange={e => this.setState({ entityAddress: e.target.value })} 
-                    />
-                </Field>
+                <RadioButton 
+                    checked={this.state.permissionType === PermissionType.Entity} 
+                    onClick={e => this.setState({ permissionType: PermissionType.Entity })}
+                /> Add an entity
+                <RadioButton 
+                    style={{ marginLeft: '16px'}}
+                    checked={this.state.permissionType === PermissionType.Group} 
+                    onClick={e => this.setState({ permissionType: PermissionType.Group })}
+                /> Add a group
+
+                { this.state.permissionType === PermissionType.Entity ?
+                    <Field label="Entity address:">                   
+                        <StyledTextInput 
+                            value={this.state.entityAddress} 
+                            onChange={e => this.setState({ entityAddress: e.target.value })} 
+                        />
+                    </Field>
+                    :
+                    <Field label="Group:">                   
+                        <StyledTextInput 
+                            value={this.state.entityAddress} 
+                            onChange={e => this.setState({ entityAddress: e.target.value })} 
+                        />
+                    </Field>                    
+                }
                 <CheckButton 
                     checked={this.state.isRead} 
                     onClick={() => this.setState({ isRead: !this.state.isRead })} 
