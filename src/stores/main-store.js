@@ -32,6 +32,13 @@ export class MainStore {
       []
   )
 
+  selectedFileGroupPermissions = asyncComputed([], 100, async () => 
+    this.selectedFile ?
+      this._datastore.getFileGroupPermissions(this.selectedFile.id)
+      :
+      []
+)
+
   isFileSelected(file) {
     return this.selectedFile && this.selectedFile.id === file.id
   }

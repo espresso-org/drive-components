@@ -27,6 +27,19 @@ setTimeout(async () => {
   datastore.createGroup("Lggkiwfj aef")
   datastore.createGroup("Group #32")
   await datastore.addFile('test.jpeg', new ArrayBuffer(60))
+  await datastore.setEntityPermissions(
+    1, 
+    '0x8401eb5ff34cc943f096a32ef3d5113febe8d4eb', 
+    true, 
+    false
+  )
+
+  await datastore.setGroupPermissions(
+    1, 
+    1, 
+    true, 
+    true
+  )
   await mainStore._refreshFiles()
   await mainStore.selectFile(1)
 }, 0)

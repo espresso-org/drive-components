@@ -30,6 +30,8 @@ export class EditPermissions extends Component {
 
   entityPermissions = () => this.mainStore.selectedFilePermissions.get()
 
+  groupPermissions = () => this.mainStore.selectedFileGroupPermissions.get()
+
   addReadPermission = async () => {
     await this.mainStore.addReadPermission(this.file.id, this.state.newAddressRead)
     this.setState({ newAddressRead: '' })
@@ -50,7 +52,7 @@ export class EditPermissions extends Component {
     else if (permission.permissionType === PermissionType.Group) {
       await this.props.datastore.setGroupPermissions(
         this.file.id, 
-        permission.group, 
+        permission.group.id, 
         permission.read, 
         permission.write
       )
@@ -107,6 +109,16 @@ export class EditPermissions extends Component {
                 {permission.entity}
               </PermissionRow>
           )}
+
+          {this.groupPermissions()
+            .map((permission, i) => 
+              <PermissionRow
+                key={i}
+                permission={permission} 
+                onClick={() => this.selectAddressWrite(permission.entity)}>
+                {permission.entity}
+              </PermissionRow>
+          )}          
         </s.AddressList>
 
         <s.Actions>            
@@ -133,7 +145,7 @@ export class EditPermissions extends Component {
 
 const PermissionRow = ({ permission }) => 
   <TableRow>
-    <TableCell>{permission.entity}</TableCell>
+    <TableCell>{permission.entity || permission.group.name}</TableCell>
     <TableCell><CheckButton checked={permission.read}/></TableCell>
     <TableCell><CheckButton checked={permission.write}/></TableCell>
   </TableRow>

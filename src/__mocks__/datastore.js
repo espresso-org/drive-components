@@ -233,6 +233,10 @@ export class Datastore {
         return this._groups
     }
 
+    async getFileGroupPermissions(fileId) {
+        return this._fileInfo[fileId - 1]._groupPermissionList
+    }
+
     async deleteGroup(groupId) {
         delete this._groups[groupId - 1]
         this._events.emit('GroupChange')
