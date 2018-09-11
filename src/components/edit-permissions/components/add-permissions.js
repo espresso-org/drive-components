@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import styled from 'styled-components'
 
-import { Field, TextInput, Button, RadioButton, TableHeader, TableCell, SidePanel } from '@aragon/ui'
+import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
 import { CheckButton } from '../../check-button'
 
 
@@ -11,9 +11,13 @@ const PermissionType = {
     Group: 'Group'
 }
 
-
+@observer
 export class AddPermissions extends Component {
     
+    static defaultProps = {
+        groups: []
+    }
+
     state = {
         entityAddress: '',
         isRead: false,
@@ -25,6 +29,7 @@ export class AddPermissions extends Component {
     render() {
         return (
             <Main>
+                {this.props.groups.length}
                 <RadioButton 
                     checked={this.state.permissionType === PermissionType.Entity} 
                     onClick={e => this.setState({ permissionType: PermissionType.Entity })}

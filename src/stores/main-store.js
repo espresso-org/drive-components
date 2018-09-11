@@ -22,6 +22,8 @@ export class MainStore {
   @observable host
   @observable port
   @observable protocol
+
+  @observable availableGroups = []
   
   selectedFilePermissions = asyncComputed([], 100, async () => 
     this.selectedFile ?
@@ -127,6 +129,7 @@ export class MainStore {
       });
     
       this._refreshFiles()
+      this._refreshAvailableGroups()
       res()
     })
   }
@@ -137,6 +140,10 @@ export class MainStore {
     // Update selected file
     if (this.selectedFile) 
       this.selectedFile = this.files.find(file => file && file.id === this.selectedFile.id)
+  }
+
+  async _refreshAvailableGroups() {
+    this.availableGroups = await this._datastore.getGroups() 
   }
 }
 
