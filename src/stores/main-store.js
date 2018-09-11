@@ -121,7 +121,6 @@ export class MainStore {
     return new Promise(async (res, rej) => {
        
       (await this._datastore.events()).subscribe(event => {  
-        console.log('New event: ', event)
         switch (event.event) {
           case 'FileRename':
           case 'FileContentUpdate':
@@ -130,6 +129,7 @@ export class MainStore {
           case 'NewReadPermission':
           case 'NewEntityPermissions':
           case 'DeleteFile':
+          case 'NewGroupPermissions':
           this._refreshFiles()
           break
           

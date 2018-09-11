@@ -46,10 +46,11 @@ export class EditPermissions extends Component {
         permission.read, 
         permission.write
       )
-
+      
       this.setState( { sidePanel: false })
     }
     else if (permission.permissionType === PermissionType.Group) {
+      console.log('add-permission ', permission, this.file.id)
       await this.props.datastore.setGroupPermissions(
         this.file.id, 
         permission.group.id, 
@@ -145,7 +146,7 @@ export class EditPermissions extends Component {
 
 const PermissionRow = ({ permission }) => 
   <TableRow>
-    <TableCell>{permission.entity || permission.group.name}</TableCell>
+    <TableCell>{permission.entity || permission.groupName}</TableCell>
     <TableCell><CheckButton checked={permission.read}/></TableCell>
     <TableCell><CheckButton checked={permission.write}/></TableCell>
   </TableRow>

@@ -237,7 +237,7 @@ export class Datastore {
         return Promise.all(this._fileInfo[fileId - 1]._groupPermissionList
             .map(async permission => ({
                 ...permission,
-                name: (await this.getGroup(permission.groupId)).name
+                groupName: (await this.getGroup(permission.groupId)).name
             }))
         )
     }
