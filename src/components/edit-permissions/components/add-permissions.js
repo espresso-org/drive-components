@@ -36,19 +36,19 @@ export class AddPermissions extends Component {
                 /> Add a group
 
                 { this.state.permissionType === PermissionType.Entity ?
-                    <Field label="Entity address:">                   
+                    <PermissionField label="Entity address:">                   
                         <StyledTextInput 
                             value={this.state.entityAddress} 
                             onChange={e => this.setState({ entityAddress: e.target.value })} 
                         />
-                    </Field>
+                    </PermissionField>
                     :
-                    <Field label="Group:">                   
+                    <PermissionField label="Group:">                   
                         <StyledTextInput 
                             value={this.state.entityAddress} 
                             onChange={e => this.setState({ entityAddress: e.target.value })} 
                         />
-                    </Field>                    
+                    </PermissionField>                    
                 }
                 <CheckButton 
                     checked={this.state.isRead} 
@@ -68,6 +68,10 @@ export class AddPermissions extends Component {
 
 const Main = styled.div`
     
+`
+
+const PermissionField = styled(Field)`
+    margin-top: 10px;
 `
 
 const StyledTextInput = styled(TextInput)`
