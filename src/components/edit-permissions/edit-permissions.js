@@ -5,7 +5,7 @@ import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@
 import { CheckButton } from '../check-button'
 
 import { EditMode } from '../../stores/edit-mode'
-import { AddPermissions } from './components/add-permissions'
+import { AddPermissions, PermissionType } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 
@@ -33,6 +33,15 @@ export class EditPermissions extends Component {
   addReadPermission = async () => {
     await this.mainStore.addReadPermission(this.file.id, this.state.newAddressRead)
     this.setState({ newAddressRead: '' })
+  }
+
+  addPermission = async permission => {
+    if (permission.permissionType === PermissionType.Entity) {
+
+    }
+    else if (permission.permissionType === PermissionType.Group) {
+
+    }
   }
 
   removeReadPermission = async () => {
@@ -96,7 +105,7 @@ export class EditPermissions extends Component {
         >
             <AddPermissions 
               groups={this.mainStore.availableGroups} 
-              onChange={e => console.log('change: ', e)}
+              onChange={e => this.addPermission(e)}
             />
         </SidePanel>
       </s.Main>

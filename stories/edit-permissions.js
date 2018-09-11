@@ -23,6 +23,9 @@ const configStore = new ConfigStore(datastore)
 const mainStore = new MainStore(datastore)
 
 setTimeout(async () => {
+  datastore.createGroup("Group #1")
+  datastore.createGroup("Lggkiwfj aef")
+  datastore.createGroup("Group #32")
   await datastore.addFile('test.jpeg', new ArrayBuffer(60))
   await mainStore._refreshFiles()
   await mainStore.selectFile(1)

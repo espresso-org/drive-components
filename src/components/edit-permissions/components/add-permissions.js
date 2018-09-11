@@ -6,7 +6,7 @@ import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
 import { CheckButton } from '../../check-button'
 
 
-const PermissionType = {
+export const PermissionType = {
     Entity: 'Entity',
     Group: 'Group'
 }
