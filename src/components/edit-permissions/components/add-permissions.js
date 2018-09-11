@@ -22,14 +22,15 @@ export class AddPermissions extends Component {
         entityAddress: '',
         isRead: false,
         isWrite: false,
-        permissionType: PermissionType.Entity
+        permissionType: PermissionType.Entity,
+        selectedGroupIndex: 0
     }
     
 
     render() {
         return (
             <Main>
-                {this.props.groups.length}
+                
                 <RadioButton 
                     checked={this.state.permissionType === PermissionType.Entity} 
                     onClick={e => this.setState({ permissionType: PermissionType.Entity })}
@@ -49,9 +50,10 @@ export class AddPermissions extends Component {
                     </PermissionField>
                     :
                     <PermissionField label="Group:">                   
-                        <StyledTextInput 
-                            value={this.state.entityAddress} 
-                            onChange={e => this.setState({ entityAddress: e.target.value })} 
+                        <DropDown
+                            items={this.props.groups.map(group => group.name)}
+                            active={this.state.selectedGroupIndex}
+                            onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
                         />
                     </PermissionField>                    
                 }
