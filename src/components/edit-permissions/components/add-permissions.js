@@ -27,13 +27,15 @@ export class AddPermissions extends Component {
         selectedGroupIndex: 0
     }
 
-    onSaveClick = () => this.props.onChange({
-        permissionType: this.state.permissionType,
-        read: this.state.isRead,
-        write: this.state.isWrite,
-        entity: this.state.entityAddress,
-        group: this.props.groups[this.state.selectedGroupIndex]
-    })
+    onSaveClick = () => {
+        this.props.onChange({
+            permissionType: this.state.permissionType,
+            read: this.state.isRead,
+            write: this.state.isWrite,
+            entity: this.state.entityAddress,
+            group: this.props.groups[this.state.selectedGroupIndex]
+        })
+    }
     
 
     render() {
@@ -98,3 +100,5 @@ const SaveButton = styled(Button)
     .attrs({ mode: 'strong', wide: true })`
     margin-top: 40px;    
 `
+
+

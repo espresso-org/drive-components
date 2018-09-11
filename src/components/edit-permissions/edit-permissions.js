@@ -9,7 +9,7 @@ import { AddPermissions, PermissionType } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 
-@inject("mainStore")
+@inject("mainStore", "datastore")
 @observer
 export class EditPermissions extends Component {
 
@@ -40,7 +40,12 @@ export class EditPermissions extends Component {
 
     }
     else if (permission.permissionType === PermissionType.Group) {
-
+      await this.props.datastore.setGroupPermissions(
+        this.file.id, 
+        permission.group, 
+        permission.read, 
+        permission.write
+      )
     }
   }
 
