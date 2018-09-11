@@ -37,7 +37,15 @@ export class EditPermissions extends Component {
 
   addPermission = async permission => {
     if (permission.permissionType === PermissionType.Entity) {
+      
+      await this.props.datastore.setEntityPermissions(
+        this.file.id, 
+        permission.entity, 
+        permission.read, 
+        permission.write
+      )
 
+      this.setState( { sidePanel: false })
     }
     else if (permission.permissionType === PermissionType.Group) {
       await this.props.datastore.setGroupPermissions(
@@ -46,8 +54,11 @@ export class EditPermissions extends Component {
         permission.read, 
         permission.write
       )
+
+      this.setState( { sidePanel: false })
     }
   }
+
 
   removeReadPermission = async () => {
     await this.mainStore.removeReadPermission(this.file.id, this.state.newAddressRead)
