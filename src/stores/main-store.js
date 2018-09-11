@@ -125,6 +125,9 @@ export class MainStore {
           case 'DeleteFile':
           this._refreshFiles()
           break
+          
+          case 'GroupChange':
+          this._refreshAvailableGroups()
         }
       });
     

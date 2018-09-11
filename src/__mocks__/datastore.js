@@ -222,6 +222,7 @@ export class Datastore {
             name: groupName,
             entities: entities || []
         })
+        this._events.emit('GroupChange')
     }
 
     async getGroup(groupId) {
@@ -234,18 +235,22 @@ export class Datastore {
 
     async deleteGroup(groupId) {
         delete this._groups[groupId - 1]
+        this._events.emit('GroupChange')
     }
 
     async renameGroup(groupId, newGroupName) {
         this._groups[groupId - 1].name = newGroupName
+        this._events.emit('GroupChange')
     }
 
     async addEntityToGroup(groupId, entity) {
         this._groups[groupId - 1].push(entity)
+        this._events.emit('GroupChange')
     }
 
     async removeEntityFromGroup(groupId, entity) {
         this._groups[groupId - 1] = this._groups[groupId - 1].filter(ent => ent !== entity)
+        this._events.emit('GroupChange')
     }
 
     async setGroupPermissions(fileId, groupId, read, write) {
