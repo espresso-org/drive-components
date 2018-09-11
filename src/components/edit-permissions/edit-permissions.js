@@ -94,7 +94,10 @@ export class EditPermissions extends Component {
           opened={this.state.sidePanel} 
           onClose={() => this.setState({ sidePanel: false })}
         >
-            <AddPermissions groups={this.mainStore.availableGroups}/>
+            <AddPermissions 
+              groups={this.mainStore.availableGroups} 
+              onChange={e => console.log('change: ', e)}
+            />
         </SidePanel>
       </s.Main>
     )

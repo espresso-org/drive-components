@@ -15,7 +15,8 @@ const PermissionType = {
 export class AddPermissions extends Component {
     
     static defaultProps = {
-        groups: []
+        groups: [],
+        onChange: e => null
     }
 
     state = {
@@ -25,6 +26,14 @@ export class AddPermissions extends Component {
         permissionType: PermissionType.Entity,
         selectedGroupIndex: 0
     }
+
+    onSaveClick = () => this.props.onChange({
+        permissionType: this.state.permissionType,
+        read: this.state.isRead,
+        write: this.state.isWrite,
+        entity: this.state.entityAddress,
+        group: this.props.groups[this.state.selectedGroupIndex]
+    })
     
 
     render() {
@@ -66,7 +75,7 @@ export class AddPermissions extends Component {
                     onClick={() => this.setState({ isWrite: !this.state.isWrite })} 
                 /> Write
 
-                <SaveButton>Save</SaveButton>
+                <SaveButton onClick={this.onSaveClick}>Save</SaveButton>
             </Main>
         )
     }
