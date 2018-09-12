@@ -22,12 +22,6 @@ export class EditPermissions extends Component {
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
-  readPermissions = () => this.mainStore.selectedFilePermissions.get()
-                            .filter(permission => permission.read === true)
-
-  writePermissions = () => this.mainStore.selectedFilePermissions.get()
-                            .filter(permission => permission.write === true)
-
   entityPermissions = () => this.mainStore.selectedFilePermissions.get()
 
   groupPermissions = () => this.mainStore.selectedFileGroupPermissions.get()
@@ -62,21 +56,6 @@ export class EditPermissions extends Component {
     }
   }
 
-
-  removeReadPermission = async () => {
-    await this.mainStore.removeReadPermission(this.file.id, this.state.newAddressRead)
-    this.setState({ newAddressRead: '' })
-  }
-
-  addWritePermission = async () => {
-    await this.mainStore.addWritePermission(this.file.id, this.state.newAddressWrite)
-    this.setState({ newAddressWrite: '' })
-  }
-
-  removeWritePermission = async () => {
-    await this.mainStore.removeWritePermission(this.file.id, this.state.newAddressWrite)
-    this.setState({ newAddressWrite: '' })
-  }
 
   selectAddressRead(entity) {
     this.setState({ newAddressRead: entity })
