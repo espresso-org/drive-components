@@ -29,7 +29,7 @@ setTimeout(async () => {
   await datastore.addFile('test.jpeg', new ArrayBuffer(60))
   await datastore.setEntityPermissions(
     1, 
-    '0x8401eb5ff34cc943f096a32ef3d5113febe8d4eb', 
+    '0x8401eb5ff34cc943f096a32ef3d5113febe8d4fb', 
     true, 
     false
   )

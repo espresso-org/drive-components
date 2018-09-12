@@ -38,6 +38,7 @@ export class EditPermissions extends Component {
   }
 
   addPermission = async permission => {
+    //console.log('add-permission ', permission)
     if (permission.permissionType === PermissionType.Entity) {
       
       await this.props.datastore.setEntityPermissions(
@@ -50,7 +51,6 @@ export class EditPermissions extends Component {
       this.setState( { sidePanel: false })
     }
     else if (permission.permissionType === PermissionType.Group) {
-      console.log('add-permission ', permission, this.file.id)
       await this.props.datastore.setGroupPermissions(
         this.file.id, 
         permission.group.id, 
@@ -123,8 +123,7 @@ export class EditPermissions extends Component {
         </s.AddressList>
 
         <s.Actions>            
-          <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="positive">OK</s.ActionButton>
-          <s.ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</s.ActionButton>
+          <s.SaveButton onClick={() => this.mainStore.setEditMode(EditMode.None)}>Save</s.SaveButton>
         </s.Actions>        
 
         <SidePanel 

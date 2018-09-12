@@ -55,7 +55,13 @@ export const s = {
     ActionButton: styled(Button)`
         display: inline-block;
         margin: 8px 10px;
-    `
+    `,
+
+    SaveButton: styled(Button)
+        .attrs({ mode: 'strong', wide: true })`
+        margin-top: 40px;    
+        text-transform: uppercase;
+    `    
 
 
 }
