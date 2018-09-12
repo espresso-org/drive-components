@@ -1,8 +1,6 @@
 import { Subject } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
 
-
-
 export class Datastore {
     _settings = {
         storageProvider: 0,
@@ -14,13 +12,11 @@ export class Datastore {
     _fileContent = []
     _groups = []
 
-
     _events
 
     constructor(opts) {
         this._events = new EventEmitter()
     }
-
 
     async addFile(name, file) {
         this._fileInfo.push({
@@ -109,7 +105,6 @@ export class Datastore {
                    .map((file, i) => this.getFileInfo(i + 1))
                 )
     }
-
 
     async setFileContent(fileId, file) {
         this.fileContent[fileId - 1] = file
@@ -209,18 +204,14 @@ export class Datastore {
         this._events.emit('FileRename')
     }
 
-
-
     /**
      * Groups related methods
      */
-
-
-    async createGroup(groupName, entities) {
+    async createGroup(groupName) {
         this._groups.push({
             id: this._groups.length + 1,
             name: groupName,
-            entities: entities || []
+            entities: []
         })
         this._events.emit('GroupChange')
     }
@@ -244,7 +235,7 @@ export class Datastore {
     }
 
     async addEntityToGroup(groupId, entity) {
-        this._groups[groupId - 1].push(entity)
+        this._groups[groupId - 1].entities.push(entity)
         this._events.emit('GroupChange')
     }
 
@@ -279,8 +270,6 @@ export class Datastore {
         fileInfo.permissionGroups = fileInfo.permissionGroups.filter(group => group !== groupId)
     }
 
-
-
     /**
      * Datastore events
      * 
@@ -288,7 +277,6 @@ export class Datastore {
     async events(...args) {
         return this._events.events
     }
-
 }
 
 

@@ -7,6 +7,9 @@ import { SidePanel } from '@aragon/ui'
 import { EditName } from './edit-name'
 import { EditContent } from './edit-content'
 import { EditPermissions } from './edit-permissions/edit-permissions'
+import { EditGroupCreate } from './edit-group-create'
+import { EditGroupName } from './edit-group-name'
+import { EditGroupMember } from './edit-group-member'
 
 
 import { EditMode } from '../stores/edit-mode'
@@ -23,12 +26,15 @@ export const EditPanel =
       opened={mainStore.editMode !== EditMode.None}
       onClose={() => mainStore.editMode = EditMode.None}>
       <Content>
-        {mainStore.selectedFile && 
+        {(mainStore.selectedFile  || mainStore.isGroupsSectionOpen) && 
         Switch({
           [EditMode.None]: null,
           [EditMode.Name]: () => <EditName file={mainStore.selectedFile}/>,
           [EditMode.Content]: () => <EditContent file={mainStore.selectedFile}/>,
-          [EditMode.Permissions]: () => <EditPermissions file={mainStore.selectedFile}/>
+          [EditMode.Permissions]: () => <EditPermissions file={mainStore.selectedFile}/>,
+          [EditMode.GroupCreate]: () => <EditGroupCreate/>,
+          [EditMode.GroupName]: () => <EditGroupName group={mainStore.selectedGroup}/>,
+          [EditMode.GroupMember]: () => <EditGroupMember group={mainStore.selectedGroup}/>
         }, mainStore.editMode)}
       </Content>
     </SidePanel>
@@ -40,5 +46,8 @@ function title(editMode) {
     case EditMode.Name: return 'Change file name'
     case EditMode.Content: return 'Change file content'
     case EditMode.Permissions: return 'Manage permissions'
+    case EditMode.GroupCreate: return 'Create group'
+    case EditMode.GroupName: return 'Rename group'
+    case EditMode.GroupMember: return 'Add a member'
   }
 }

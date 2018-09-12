@@ -2,17 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
-import { AragonApp, AppBar, Table, TableHeader, TableRow, IconSettings } from '@aragon/ui'
+import { AragonApp, AppBar, Button, Table, TableHeader, TableRow, IconSettings, IconGroups } from '@aragon/ui'
 
 import { AppLayout } from './app-layout'
 import { FileInput } from './file-input'
 import { FileRow } from './file-row'
 import { EditPanel } from './edit-panel'
+import { EditMode } from '../stores/edit-mode'
 import { SideBar } from './side-bar'
 import { ConfigurationScreen } from './configuration-screen/configuration-screen'
+import { GroupsScreen } from './groups-screen'
 import Screen from './screen'
 import LeftIcon from './left-icon'
-
 
 export const App = 
 inject("mainStore", "configStore")(
@@ -20,12 +21,13 @@ observer(({ mainStore, configStore }) =>
     <AragonApp publicUrl="./aragon-ui/">
 
       <Screen position={0} animate={true}>
-        {!configStore.isConfigSectionOpen && (
+        {!configStore.isConfigSectionOpen && !mainStore.isGroupsSectionOpen && (
         <div>
           <AppBar
             title="Drive"
             endContent={
               <div>
+                <span style={{cursor: 'pointer'}} onClick={() => mainStore.isGroupsSectionOpen = true}><GroupsSectionBtn /></span>
                 <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = true}><ConfigurationSectionBtn /></span>
                 <FileInput onChange={e => { mainStore.uploadFiles(e.target.files);e.target.value = '' }}>New File</FileInput>
               </div>
@@ -75,10 +77,25 @@ observer(({ mainStore, configStore }) =>
               <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false }} style={{"display": configStore.configSelected ? 'flex' : 'none'}}>
                 <LeftIcon />
               </BackButton>        
-              <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Drive - Configuration</h1>
+              <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Settings</h1>
             </AppBar>
             <ConfigurationScreen />
           </span>
+        )}
+      </Screen>
+
+      <Screen position={1} animate={true}>
+        {mainStore.isGroupsSectionOpen && (
+            <span>
+              <AppBar endContent={<Button mode="strong" onClick={() => mainStore.setEditMode(EditMode.GroupCreate)}>New Group</Button>}>
+                <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; }}>
+                  <LeftIcon />
+                </BackButton>
+                <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Group management</h1>
+              </AppBar>
+              <GroupsScreen />
+              <EditPanel/>
+            </span>
         )}
       </Screen>
     </AragonApp>
@@ -95,6 +112,13 @@ const TwoPanels = styled.div`
   display: flex;
   width: 100%;
   min-width: 800px;
+`
+const GroupsSectionBtn = styled(IconGroups).attrs({
+  width: "30px",
+  height: "30px"
+})`
+  vertical-align: middle;
+  margin-right: 15px;
 `
 const ConfigurationSectionBtn = styled(IconSettings).attrs({
   width: "30px",

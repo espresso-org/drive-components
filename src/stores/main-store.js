@@ -10,10 +10,6 @@ import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
 
-
-
-
-
 export class MainStore {
   @observable files = []
   @observable selectedFile
@@ -23,7 +19,10 @@ export class MainStore {
   @observable port
   @observable protocol
 
-  @observable availableGroups = []
+  
+  @observable isGroupsSectionOpen = false
+  @observable groups = []
+  @observable selectedGroup
   
   selectedFilePermissions = asyncComputed([], 100, async () => 
     this.selectedFile ?
@@ -102,6 +101,44 @@ export class MainStore {
       this.selectedFile = selectedFile
   }
 
+  // GROUPS SECTION
+  async createGroup(name) {
+    await this._datastore.createGroup(name)
+    this.setEditMode(EditMode.None)
+  }
+
+  async deleteGroup(groupId) {
+    if(this.selectedGroup != null) {
+      await this._datastore.deleteGroup(groupId)
+      this.setEditMode(EditMode.None)
+      this.selectedGroup = null
+    }
+  }
+
+  async renameGroup(groupId, newGroupName) {
+    await this._datastore.renameGroup(groupId, newGroupName)
+    this.setEditMode(EditMode.None)
+  }
+
+  async addEntityToGroup(groupId, entity) {
+    await this._datastore.addEntityToGroup(groupId, entity)
+    this.setEditMode(EditMode.None)
+  }
+
+  isGroupSelected(group) {
+    return this.selectedGroup && this.selectedGroup.id === group.id
+  }
+
+  selectGroup = async groupId => {
+    if (this.selectedGroup && this.selectedGroup.id === groupId) 
+      return this.selectedGroup = null    
+
+    const selectedGroup = this.groups.find(group => group && group.id === groupId)
+    
+    if (selectedGroup)
+      this.selectedGroup = selectedGroup
+  }
+
   _datastore
 
   constructor(datastore) {
@@ -146,7 +183,6 @@ export class MainStore {
   }
 
   async _refreshAvailableGroups() {
-    this.availableGroups = await this._datastore.getGroups() 
+    this.groups = await this._datastore.getGroups() 
   }
 }
-
