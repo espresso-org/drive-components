@@ -146,6 +146,16 @@ export class EditPermissions extends Component {
 const PermissionRow = ({ permission }) => 
   <TableRow>
     <TableCell>{permission.entity || permission.groupName}</TableCell>
-    <TableCell><CheckButton checked={permission.read}/></TableCell>
-    <TableCell><CheckButton checked={permission.write}/></TableCell>
+    <TableCell>
+      <CheckButton 
+        onClick={() => permission.read = !permission.read}
+        checked={permission.read}
+      />
+    </TableCell>
+    <TableCell>
+      <CheckButton 
+        checked={permission.write}
+        onClick={() => permission.write = !permission.write}
+    />
+    </TableCell>
   </TableRow>
