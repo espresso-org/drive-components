@@ -19,10 +19,10 @@ export class MainStore {
   @observable port
   @observable protocol
 
-  
   @observable isGroupsSectionOpen = false
   @observable groups = []
   @observable selectedGroup
+  @observable selectedGroupEntity
   
   selectedFilePermissions = asyncComputed([], 100, async () => 
     this.selectedFile ?
@@ -108,13 +108,12 @@ export class MainStore {
       this.selectedFile = selectedFile
   }
 
-  // GROUPS SECTION
-  async createGroup(name) {
+  @action async createGroup(name) {
     await this._datastore.createGroup(name)
     this.setEditMode(EditMode.None)
   }
 
-  async deleteGroup(groupId) {
+  @action async deleteGroup(groupId) {
     if(this.selectedGroup != null) {
       await this._datastore.deleteGroup(groupId)
       this.setEditMode(EditMode.None)
@@ -122,14 +121,19 @@ export class MainStore {
     }
   }
 
-  async renameGroup(groupId, newGroupName) {
+  @action async renameGroup(groupId, newGroupName) {
     await this._datastore.renameGroup(groupId, newGroupName)
     this.setEditMode(EditMode.None)
   }
 
-  async addEntityToGroup(groupId, entity) {
+  @action async addEntityToGroup(groupId, entity) {
     await this._datastore.addEntityToGroup(groupId, entity)
     this.setEditMode(EditMode.None)
+  }
+
+  @action async removeEntityFromGroup(groupId, entity) {
+    await this._datastore.removeEntityFromGroup(groupId, entity)
+    this.selectedGroupEntity = null
   }
 
   isGroupSelected(group) {
@@ -144,6 +148,17 @@ export class MainStore {
     
     if (selectedGroup)
       this.selectedGroup = selectedGroup
+  }
+
+  isGroupEntitySelected(entity) {
+    return this.selectedGroupEntity && this.selectedGroupEntity === entity
+  }
+
+  selectGroupEntity = async entity => {
+    if(entity !== this.selectedGroupEntity)
+      this.selectedGroupEntity = entity
+    else  
+      this.selectedGroupEntity = null;
   }
 
   _datastore

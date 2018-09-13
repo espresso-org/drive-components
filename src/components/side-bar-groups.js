@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { inject } from 'mobx-react'
-import { Text, Button, theme } from '@aragon/ui'
+import { TableCell, Text, Button, TableRow, theme } from '@aragon/ui'
 
 import { EditMode } from '../stores/edit-mode'
 import { EthAddress } from './eth-address'
@@ -17,13 +17,16 @@ export const SideBarGroups =
           <Text size="large">{group.name}</Text>
           <Info>
             <Label>Members</Label>
-            <EthAddressDetails><EthAddress ethAddress={'0xdeadbeef'} /></EthAddressDetails>
+
+            {group.entities.toJS().map(entity => 
+              entity && <GroupMemberRow entity={entity} onClick={() => mainStore.selectGroupEntity(entity)} selected={mainStore.isGroupEntitySelected(entity)} />
+            )}
           </Info>
           <Separator />
 
           <Actions>
             <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupMember)}}>Add member</ActionButton>
-            <ActionButton onClick={() => {}}>Remove a member</ActionButton>
+            <ActionButton onClick={() => {mainStore.removeEntityFromGroup(group.id, mainStore.selectedGroupEntity)}}>Remove a member</ActionButton>
             <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupName)}}>Rename group</ActionButton>
             <ActionButton emphasis="negative" mode="outline" onClick={() => {mainStore.deleteGroup(group.id)}}>Delete group</ActionButton>
           </Actions>
@@ -31,6 +34,11 @@ export const SideBarGroups =
       }
     </Main>
 )
+
+const GroupMemberRow = ({ entity, onClick, selected, ...props }) => 
+  <SelectableRow onClick={onClick} selected={selected} {...props}>
+    <TableCell><EthAddressDetails><EthAddress ethAddress={entity}/></EthAddressDetails></TableCell>
+  </SelectableRow>
 
 const Main = styled.aside`
   flex-shrink: 0;
@@ -74,4 +82,10 @@ const EthAddressDetails = styled.span`
 `
 const Separator = styled.div`  
   border-bottom: 1px solid ${theme.contentBorder};
+`
+const SelectableRow = styled(TableRow)`
+  cursor: pointer;
+  > * {
+      background: ${ props => props.selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
+  }
 `

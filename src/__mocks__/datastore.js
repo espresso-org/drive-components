@@ -249,7 +249,7 @@ export class Datastore {
     }
 
     async removeEntityFromGroup(groupId, entity) {
-        this._groups[groupId - 1] = this._groups[groupId - 1].filter(ent => ent !== entity)
+        this._groups[groupId - 1].entities = this._groups[groupId - 1].entities.filter(ent => ent !== entity)
         this._events.emit('GroupChange')
     }
 

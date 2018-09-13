@@ -137,7 +137,6 @@ export class EditPermissions extends Component {
     }))
   }
 
-
   render() {
     return (
       <s.Main>
@@ -194,8 +193,6 @@ export class EditPermissions extends Component {
     )
   }
 }
-
-
 
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
   <s.SelectableRow selected={selected} {...props}>
