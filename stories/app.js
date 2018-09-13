@@ -7,16 +7,18 @@ import { Provider } from 'mobx-react'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
 import { MainStore } from '../src/stores/main-store'
 import { ConfigStore } from '../src/stores/config-store'
+import { PermissionsStore } from '../src/stores/permissions-store'
 
 
 
 const datastore = new MockedDatastore({})
 const configStore = new ConfigStore(datastore)
+const permissionsStore = new PermissionsStore(datastore)
 const mainStore = new MainStore(datastore)
 
 
 aragonStoriesOf("Main App", module).add("Basic", () => (
-  <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>
+  <Provider permissionsStore={permissionsStore} datastore={datastore} mainStore={mainStore} configStore={configStore}>
     <App></App>
   </Provider>
 ))

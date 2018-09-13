@@ -11,7 +11,7 @@ import { AddPermissions, PermissionType } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 // TODO: Extract logic to a store
-@inject("mainStore", "datastore")
+@inject("mainStore", "datastore", "permissionsStore")
 @observer
 export class EditPermissions extends Component {
 
