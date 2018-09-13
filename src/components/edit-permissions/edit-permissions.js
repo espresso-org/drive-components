@@ -139,6 +139,7 @@ export class EditPermissions extends Component {
                 key={i}
                 permission={permission} 
                 onChange={this.onGroupPermissionChange}
+                selected={true}
                 onClick={() => this.selectAddressWrite(permission.entity)}>
                 {permission.entity}
               </PermissionRow>
@@ -166,8 +167,8 @@ export class EditPermissions extends Component {
 
 
 
-const PermissionRow = ({ permission, onChange }) => 
-  <TableRow>
+const PermissionRow = ({ permission, onChange, selected }) => 
+  <s.SelectableRow selected={selected}>
     <TableCell>{permission.entity || permission.groupName}</TableCell>
     <TableCell>
       <CheckButton 
@@ -181,4 +182,4 @@ const PermissionRow = ({ permission, onChange }) =>
         onClick={() => onChange({ ...permission, write: !permission.write })}
     />
     </TableCell>
-  </TableRow>
+  </s.SelectableRow>
