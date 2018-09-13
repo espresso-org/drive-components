@@ -6,6 +6,7 @@ import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@
 import { CheckButton } from '../check-button'
 
 import { EditMode } from '../../stores/edit-mode'
+import { EthAddress } from '../eth-address'
 import { AddPermissions, PermissionType } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
@@ -199,7 +200,14 @@ export class EditPermissions extends Component {
 
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
   <s.SelectableRow selected={selected} {...props}>
-    <TableCell>{permission.entity || permission.groupName}</TableCell>
+    <TableCell>
+      {console.log(permission)}
+      { permission.permissionType === PermissionType.Entity ?
+        <EthAddress ethAddress={permission.entity} />
+        :
+        permission.groupName
+      }
+    </TableCell>
     <TableCell>
       <CheckButton 
         onClick={() => onChange({ ...permission, read: !permission.read })}
