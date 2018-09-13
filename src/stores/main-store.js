@@ -131,6 +131,7 @@ export class MainStore {
           case 'DeleteFile':
           case 'NewGroupPermissions':
           case 'GroupPermissionsRemoved':
+          case 'EntityPermissionsRemoved':
           this._refreshFiles()
           break
           

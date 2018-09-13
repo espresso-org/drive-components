@@ -145,6 +145,12 @@ export class Datastore {
         this._events.emit('NewEntityPermissions')
     }
 
+    async removeEntityFromFile(fileId, entity) {
+        const fileInfo = this._fileInfo[fileId - 1]
+        fileInfo._permissionList = fileInfo._permissionList.filter(permission => permission.entity !== entity)
+        this._events.emit('EntityPermissionsRemoved')
+    }
+
     /**
      * Add/Remove read permission to an entity for
      * a specific file
