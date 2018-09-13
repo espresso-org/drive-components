@@ -30,13 +30,14 @@ export class EditPermissions extends Component {
   async initialize() {
 
     observe(mainStore, 'selectedFile', async () => {
+      this.originalEntityPermissions = await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id)
+      this.originalGroupPermissions = await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id)
+
       this.setState({
-        entityPermissions: await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id),
-        groupPermissions: await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id),
+        entityPermissions: [...this.originalEntityPermissions],
+        groupPermissions: [...this.originalGroupPermissions],
       })
     })
-
-
   }
 
   get mainStore() { return this.props.mainStore }
