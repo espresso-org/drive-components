@@ -86,19 +86,13 @@ export class EditPermissions extends Component {
   }
 
   onGroupPermissionChange = permission => {
-    
-    console.log('onGroupPermissionChange ', permission)
-    for (let i = 0; i < this.state.groupPermissions.length; i++) {
-      if (this.state.groupPermissions[i].groupId === permission.groupId) {
-        this.state.groupPermissions[i] = { 
-          ...this.state.groupPermissions[i],
-          ...permission
-        }
-        this.setState({
-          groupPermissions: this.state.groupPermissions
-        })
-      }
-    }
+    const newPermissions = this.state.groupPermissions.map(perm => 
+      perm.groupId === permission.groupId ? permission : perm      
+    )
+
+    this.setState({
+      groupPermissions: newPermissions
+    })
 
   } 
 
