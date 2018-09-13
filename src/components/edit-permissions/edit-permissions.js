@@ -31,8 +31,8 @@ export class EditPermissions extends Component {
 
     observe(mainStore, 'selectedFile', async () => {
       this.setState({
-        entityPermissions: await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id),
-        groupPermissions: await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id),
+        entityPermissions: await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id),
+        groupPermissions: await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id),
       })
     })
 
@@ -42,7 +42,7 @@ export class EditPermissions extends Component {
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
-  entityPermissions = () => this.mainStore.selectedFilePermissions.get()
+  //entityPermissions = () => this.mainStore.selectedFilePermissions.get()
 
   groupPermissions = () => this.mainStore.selectedFileGroupPermissions.get()
 
@@ -85,6 +85,23 @@ export class EditPermissions extends Component {
     this.setState({ newAddressWrite: entity })
   }
 
+  onGroupPermissionChange = permission => {
+    
+    console.log('onGroupPermissionChange ', permission)
+    for (let i = 0; i < this.state.groupPermissions.length; i++) {
+      if (this.state.groupPermissions[i].groupId === permission.groupId) {
+        this.state.groupPermissions[i] = { 
+          ...this.state.groupPermissions[i],
+          ...permission
+        }
+        this.setState({
+          groupPermissions: this.state.groupPermissions
+        })
+      }
+    }
+
+  } 
+
   render() {
     return (
       <s.Main>
@@ -100,11 +117,12 @@ export class EditPermissions extends Component {
               <TableHeader title="Write" />
             </TableRow>
         }>
-          {this.state.entityPermissions
+          {this.state.entityPermissions && this.state.entityPermissions
             .map(permission => 
               <PermissionRow
                 key={permission.entity}
                 permission={permission} 
+                onChange={this.onGroupPermissionChange}
                 onClick={() => this.selectAddressWrite(permission.entity)}>
                 {permission.entity}
               </PermissionRow>
@@ -115,6 +133,7 @@ export class EditPermissions extends Component {
               <PermissionRow
                 key={i}
                 permission={permission} 
+                onChange={this.onGroupPermissionChange}
                 onClick={() => this.selectAddressWrite(permission.entity)}>
                 {permission.entity}
               </PermissionRow>
@@ -142,19 +161,19 @@ export class EditPermissions extends Component {
 
 
 
-const PermissionRow = ({ permission }) => 
+const PermissionRow = ({ permission, onChange }) => 
   <TableRow>
     <TableCell>{permission.entity || permission.groupName}</TableCell>
     <TableCell>
       <CheckButton 
-        onClick={() => permission.read = !permission.read}
+        onClick={() => onChange({ ...permission, read: !permission.read })}
         checked={permission.read}
       />
     </TableCell>
     <TableCell>
       <CheckButton 
         checked={permission.write}
-        onClick={() => permission.write = !permission.write}
+        onClick={() => onChange({ ...permission, write: !permission.write })}
     />
     </TableCell>
   </TableRow>
