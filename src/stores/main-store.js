@@ -31,6 +31,13 @@ export class MainStore {
       []
   )
 
+  selectedFileGroupPermissions = asyncComputed([], 100, async () => 
+    this.selectedFile ?
+      this._datastore.getFileGroupPermissions(this.selectedFile.id)
+      :
+      []
+)
+
   isFileSelected(file) {
     return this.selectedFile && this.selectedFile.id === file.id
   }
@@ -151,7 +158,6 @@ export class MainStore {
     return new Promise(async (res, rej) => {
        
       (await this._datastore.events()).subscribe(event => {  
-        console.log('New event: ', event)
         switch (event.event) {
           case 'FileRename':
           case 'FileContentUpdate':
@@ -160,6 +166,8 @@ export class MainStore {
           case 'NewReadPermission':
           case 'NewEntityPermissions':
           case 'DeleteFile':
+          case 'NewGroupPermissions':
+          case 'GroupPermissionsRemoved':
           this._refreshFiles()
           break
           

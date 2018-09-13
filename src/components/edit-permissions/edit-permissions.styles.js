@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Text, Table } from '@aragon/ui'
+import { Button, Text, Table, TableRow } from '@aragon/ui'
 
 export const s = {
 
@@ -55,7 +55,23 @@ export const s = {
     ActionButton: styled(Button)`
         display: inline-block;
         margin: 8px 10px;
+    `,
+
+    SaveButton: styled(Button)
+        .attrs({ mode: 'strong', wide: true })`
+        margin-top: 40px;    
+        text-transform: uppercase;
+    `,
+    
+    SelectableRow: styled(TableRow)`
+        cursor: pointer;
+        > * {
+            background: ${({ selected }) => selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
+        }
     `
 
 
 }
+
+
+ 

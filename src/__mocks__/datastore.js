@@ -224,6 +224,15 @@ export class Datastore {
         return this._groups
     }
 
+    async getFileGroupPermissions(fileId) {
+        return Promise.all(this._fileInfo[fileId - 1]._groupPermissionList
+            .map(async permission => ({
+                ...permission,
+                groupName: (await this.getGroup(permission.groupId)).name
+            }))
+        )
+    }
+
     async deleteGroup(groupId) {
         delete this._groups[groupId - 1]
         this._events.emit('GroupChange')
@@ -266,8 +275,9 @@ export class Datastore {
     async removeGroupFromFile(fileId, groupId) {
         const fileInfo = this._fileInfo[fileId - 1]
 
-        fileInfo._groupPermissionList = fileInfo._groupPermissionList.filer(permission => permission.groupId !== groupId)
+        fileInfo._groupPermissionList = fileInfo._groupPermissionList.filter(permission => permission.groupId !== groupId)
         fileInfo.permissionGroups = fileInfo.permissionGroups.filter(group => group !== groupId)
+        this._events.emit('GroupPermissionsRemoved')
     }
 
     /**
