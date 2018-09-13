@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { observe } from 'mobx'
 
 import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
 import { CheckButton } from '../check-button'
@@ -16,7 +17,26 @@ export class EditPermissions extends Component {
   state = { 
     newAddressWrite: '',
     newAddressRead: '',
-    sidePanel: false
+    sidePanel: false,
+    groupPermissions: []
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.initialize()
+  }
+
+  async initialize() {
+
+    observe(mainStore, 'selectedFile', async () => {
+      this.setState({
+        entityPermissions: await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id),
+        groupPermissions: await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id),
+      })
+    })
+
+
   }
 
   get mainStore() { return this.props.mainStore }
@@ -80,7 +100,7 @@ export class EditPermissions extends Component {
               <TableHeader title="Write" />
             </TableRow>
         }>
-          {this.entityPermissions()
+          {this.state.entityPermissions
             .map(permission => 
               <PermissionRow
                 key={permission.entity}
@@ -90,7 +110,7 @@ export class EditPermissions extends Component {
               </PermissionRow>
           )}
 
-          {this.groupPermissions()
+          {this.state.groupPermissions
             .map((permission, i) => 
               <PermissionRow
                 key={i}

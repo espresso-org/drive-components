@@ -47,6 +47,6 @@ setTimeout(async () => {
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
   <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>
-    <EditPermissions file={file} mainStore={mainStore}></EditPermissions>
+    <EditPermissions file={file}></EditPermissions>
   </Provider>
 ))
