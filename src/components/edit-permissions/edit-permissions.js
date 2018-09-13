@@ -30,14 +30,24 @@ export class EditPermissions extends Component {
   async initialize() {
 
     observe(mainStore, 'selectedFile', async () => {
-      this.originalEntityPermissions = await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id)
-      this.originalGroupPermissions = await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id)
+      this.originalEntityPermissions = (await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id))
+        .map(permission => ({ 
+          permissionType: PermissionType.Entity, 
+          ...permission
+      }))
+      this.originalGroupPermissions = (await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id))
+        .map(permission => ({ 
+          permissionType: PermissionType.Group, 
+          ...permission
+      }))
 
       this.setState({
         entityPermissions: [...this.originalEntityPermissions],
         groupPermissions: [...this.originalGroupPermissions],
       })
     })
+
+    window.myState = this.state
   }
 
   get mainStore() { return this.props.mainStore }
@@ -77,14 +87,22 @@ export class EditPermissions extends Component {
     }
   }
 
-
-  selectAddressRead(entity) {
-    this.setState({ newAddressRead: entity })
+  removePermission = async () => {
+    const permission = this.state.selectedPermission
+    if (permission.permissionType === PermissionType.Entity)
+      await this.props.datastore.removeEntityFromFile(this.props.mainStore.selectedFile.id, permission.entity)
+    else
+      await this.props.datastore.removeGroupFromFile(this.props.mainStore.selectedFile.id, permission.groupId)
   }
 
-  selectAddressWrite(entity) {
-    this.setState({ newAddressWrite: entity })
+  selectPermissionRow = permission => {
+    if (permission !== this.state.selectedPermission)
+      this.setState({ selectedPermission: permission })
+    else
+      this.setState({ selectedPermission: null })
   }
+
+  isPermissionSelected = permission => permission === this.state.selectedPermission
 
   onGroupPermissionChange = permission => {
     const newPermissions = this.state.groupPermissions.map(perm => 
@@ -125,7 +143,7 @@ export class EditPermissions extends Component {
       <s.Main>
         <s.TopButtons>
           <s.AddButton onClick={() => this.setState({ sidePanel: true })}>Add</s.AddButton>
-          <s.RemoveButton onClick={this.removeWritePermission}>Remove</s.RemoveButton>
+          <s.RemoveButton onClick={this.removePermission}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
           header={
@@ -141,9 +159,9 @@ export class EditPermissions extends Component {
                 key={permission.entity}
                 permission={permission} 
                 onChange={this.onEntityPermissionChange}
-                onClick={() => this.selectAddressWrite(permission.entity)}>
-                {permission.entity}
-              </PermissionRow>
+                selected={this.isPermissionSelected(permission)}
+                onClick={() => this.selectPermissionRow(permission)}
+              />
           )}
 
           {this.state.groupPermissions
@@ -152,10 +170,9 @@ export class EditPermissions extends Component {
                 key={i}
                 permission={permission} 
                 onChange={this.onGroupPermissionChange}
-                selected={true}
-                onClick={() => this.selectAddressWrite(permission.entity)}>
-                {permission.entity}
-              </PermissionRow>
+                selected={this.isPermissionSelected(permission)}
+                onClick={() => this.selectPermissionRow(permission)}
+              />
           )}          
         </s.AddressList>
 
@@ -180,8 +197,8 @@ export class EditPermissions extends Component {
 
 
 
-const PermissionRow = ({ permission, onChange, selected }) => 
-  <s.SelectableRow selected={selected}>
+const PermissionRow = ({ permission, onChange, selected, ...props }) => 
+  <s.SelectableRow selected={selected} {...props}>
     <TableCell>{permission.entity || permission.groupName}</TableCell>
     <TableCell>
       <CheckButton 
