@@ -105,7 +105,19 @@ export class EditPermissions extends Component {
       entityPermissions: newPermissions
     })
 
-  }   
+  }  
+  
+  getPermissionChanges = () => {
+    return this.state.groupPermissions.filter((perm, i) => {
+      return this.originalGroupPermissions[i].write !== perm.write
+          || this.originalGroupPermissions[i].read !== perm.read
+    })
+    .concat(this.state.entityPermissions.filter((perm, i) => {
+      return this.originalEntityPermissions[i].write !== perm.write
+          || this.originalEntityPermissions[i].read !== perm.read
+    }))
+  }
+
 
   render() {
     return (
