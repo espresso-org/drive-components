@@ -88,7 +88,7 @@ observer(({ mainStore, configStore }) =>
         {mainStore.isGroupsSectionOpen && (
             <span>
               <AppBar endContent={<Button mode="strong" onClick={() => mainStore.setEditMode(EditMode.GroupCreate)}>New Group</Button>}>
-                <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; }}>
+                <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; mainStore.selectedGroup = null; }}>
                   <LeftIcon />
                 </BackButton>
                 <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Group management</h1>
