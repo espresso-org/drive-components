@@ -127,9 +127,10 @@ export class MainStore {
           case 'NewFile':
           case 'NewWritePermission':
           case 'NewReadPermission':
-          case 'NewEntityPermissions':
           case 'DeleteFile':
+          case 'NewEntityPermissions':
           case 'NewGroupPermissions':
+          case 'NewPermissions':
           case 'GroupPermissionsRemoved':
           case 'EntityPermissionsRemoved':
           this._refreshFiles()

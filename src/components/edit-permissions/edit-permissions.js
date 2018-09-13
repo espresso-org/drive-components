@@ -126,6 +126,18 @@ export class EditPermissions extends Component {
     })
 
   }  
+
+  saveChanges = async () => {
+    const permissionChanges = this.getPermissionChanges()
+
+    await this.props.datastore.setPermissions(
+      this.props.mainStore.selectedFile.id,
+      permissionChanges.filter(perm => perm.permissionType === PermissionType.Entity),
+      permissionChanges.filter(perm => perm.permissionType === PermissionType.Group)
+    )
+
+    this.mainStore.setEditMode(EditMode.None)
+  }
   
   getPermissionChanges = () => {
     return this.state.groupPermissions.filter((perm, i) => {
@@ -178,7 +190,7 @@ export class EditPermissions extends Component {
         </s.AddressList>
 
         <s.Actions>            
-          <s.SaveButton onClick={() => this.mainStore.setEditMode(EditMode.None)}>Save</s.SaveButton>
+          <s.SaveButton onClick={this.saveChanges}>Save</s.SaveButton>
         </s.Actions>        
 
         <SidePanel 
