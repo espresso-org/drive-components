@@ -9,7 +9,7 @@ import { EditMode } from '../../stores/edit-mode'
 import { AddPermissions, PermissionType } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
-
+// TODO: Extract logic to a store
 @inject("mainStore", "datastore")
 @observer
 export class EditPermissions extends Component {
@@ -96,6 +96,17 @@ export class EditPermissions extends Component {
 
   } 
 
+  onEntityPermissionChange = permission => {
+    const newPermissions = this.state.entityPermissions.map(perm => 
+      perm.entity === permission.entity ? permission : perm      
+    )
+
+    this.setState({
+      entityPermissions: newPermissions
+    })
+
+  }   
+
   render() {
     return (
       <s.Main>
@@ -116,7 +127,7 @@ export class EditPermissions extends Component {
               <PermissionRow
                 key={permission.entity}
                 permission={permission} 
-                onChange={this.onGroupPermissionChange}
+                onChange={this.onEntityPermissionChange}
                 onClick={() => this.selectAddressWrite(permission.entity)}>
                 {permission.entity}
               </PermissionRow>
