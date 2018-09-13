@@ -82,8 +82,9 @@ const Separator = styled.div`
 `
 const EntityTableCell = styled(TableCell)`
   padding: 8px;
-  display: inline-block;
-  text-align: center;
+  align-items:center;
+  justify-content:center;
+  display: flex;
 `
 const SelectableRow = styled(TableRow)`
   cursor: pointer;

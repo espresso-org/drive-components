@@ -8,7 +8,7 @@ export const GroupRow = ({ group, onClick, selected }) =>
       <InCell>{group.name}</InCell>
     </Cell>  
     <Cell>
-      <InCell></InCell>
+      <InCell>{group.entities.length}</InCell>
     </Cell>         
   </Container>
 

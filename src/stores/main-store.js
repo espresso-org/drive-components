@@ -128,13 +128,11 @@ export class MainStore {
 
   @action async addEntityToGroup(groupId, entity) {
     await this._datastore.addEntityToGroup(groupId, entity)
-    this._refreshAvailableGroups()
     this.setEditMode(EditMode.None)
   }
 
   @action async removeEntityFromGroup(groupId, entity) {
     await this._datastore.removeEntityFromGroup(groupId, entity)
-    this._refreshAvailableGroups()
     this.selectedGroupEntity = null
   }
 
@@ -212,6 +210,10 @@ export class MainStore {
   }
 
   async _refreshAvailableGroups() {
-    this.groups = await this._datastore.getGroups() 
+    this.groups = await this._datastore.getGroups()
+
+    // Update selected file
+    if (this.selectedGroup) 
+      this.selectedGroup = this.groups.find(group => group && group.id === this.selectedGroup.id)
   }
 }
