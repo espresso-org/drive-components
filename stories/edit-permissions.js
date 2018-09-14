@@ -21,8 +21,8 @@ const file = {
 
 const datastore = new MockedDatastore({})
 const configStore = new ConfigStore(datastore)
-const permissionsStore = new PermissionsStore(datastore)
 const mainStore = new MainStore(datastore)
+const permissionsStore = new PermissionsStore(datastore, mainStore)
 
 setTimeout(async () => {
   datastore.createGroup("Group #1")

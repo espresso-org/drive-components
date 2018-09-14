@@ -32,26 +32,11 @@ export class EditPermissions extends Component {
 
   async initialize() {
 
-    observe(mainStore, 'selectedFile', async () => {
-      this.originalEntityPermissions = (await this.props.datastore.getFilePermissions(this.props.mainStore.selectedFile.id))
-        .map(permission => ({ 
-          permissionType: PermissionType.Entity, 
-          ...permission
-      }))
-      this.originalGroupPermissions = (await this.props.datastore.getFileGroupPermissions(this.props.mainStore.selectedFile.id))
-        .map(permission => ({ 
-          permissionType: PermissionType.Group, 
-          ...permission
-      }))
 
-      this.setState({
-        entityPermissions: [...this.originalEntityPermissions],
-        groupPermissions: [...this.originalGroupPermissions],
-      })
-    })
 
   }
 
+  get permissionsStore() { return this.props.permissionsStore }
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
@@ -65,50 +50,6 @@ export class EditPermissions extends Component {
 
   isPermissionSelected = permission => permission === this.state.selectedPermission
 
-  onGroupPermissionChange = permission => {
-    const newPermissions = this.state.groupPermissions.map(perm => 
-      perm.groupId === permission.groupId ? permission : perm      
-    )
-
-    this.setState({
-      groupPermissions: newPermissions
-    })
-
-  } 
-
-  onEntityPermissionChange = permission => {
-    const newPermissions = this.state.entityPermissions.map(perm => 
-      perm.entity === permission.entity ? permission : perm      
-    )
-
-    this.setState({
-      entityPermissions: newPermissions
-    })
-
-  }  
-
-  saveChanges = async () => {
-    const permissionChanges = this.getPermissionChanges()
-
-    await this.props.datastore.setPermissions(
-      this.props.mainStore.selectedFile.id,
-      permissionChanges.filter(perm => perm.permissionType === PermissionType.Entity),
-      permissionChanges.filter(perm => perm.permissionType === PermissionType.Group)
-    )
-
-    this.mainStore.setEditMode(EditMode.None)
-  }
-  
-  getPermissionChanges = () => {
-    return this.state.groupPermissions.filter((perm, i) => {
-      return this.originalGroupPermissions[i].write !== perm.write
-          || this.originalGroupPermissions[i].read !== perm.read
-    })
-    .concat(this.state.entityPermissions.filter((perm, i) => {
-      return this.originalEntityPermissions[i].write !== perm.write
-          || this.originalEntityPermissions[i].read !== perm.read
-    }))
-  }
 
 
   render() {
@@ -116,7 +57,7 @@ export class EditPermissions extends Component {
       <s.Main>
         <s.TopButtons>
           <s.AddButton onClick={() => this.setState({ sidePanel: true })}>Add</s.AddButton>
-          <s.RemoveButton onClick={() => this.permissionStore.removePermission(this.permissionStore.selectedPermission)}>Remove</s.RemoveButton>
+          <s.RemoveButton onClick={() => this.permissionsStore.removePermission(this.permissionsStore.selectedPermission)}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
           header={
@@ -126,18 +67,18 @@ export class EditPermissions extends Component {
               <TableHeader title="Write" />
             </TableRow>
         }>
-          {this.state.entityPermissions && this.state.entityPermissions
+          {this.permissionsStore.selectedFilePermissions
             .map(permission => 
               <PermissionRow
-                key={permission.entity}
+                key={permission.entity || permission.groupId}
                 permission={permission} 
-                onChange={this.onEntityPermissionChange}
+                onChange={permission => this.permissionsStore.updateSelectedFilePermissions(permission)}
                 selected={this.isPermissionSelected(permission)}
                 onClick={() => this.selectPermissionRow(permission)}
               />
           )}
 
-          {this.state.groupPermissions
+          {/*this.permissionsStore.groupPermissions
             .map((permission, i) => 
               <PermissionRow
                 key={i}
@@ -146,11 +87,11 @@ export class EditPermissions extends Component {
                 selected={this.isPermissionSelected(permission)}
                 onClick={() => this.selectPermissionRow(permission)}
               />
-          )}          
+          )*/}          
         </s.AddressList>
 
         <s.Actions>            
-          <s.SaveButton onClick={this.saveChanges}>Save</s.SaveButton>
+          <s.SaveButton onClick={() => this.permissionsStore.saveChanges() }>Save</s.SaveButton>
         </s.Actions>        
 
         <SidePanel 
@@ -158,9 +99,7 @@ export class EditPermissions extends Component {
           opened={this.state.sidePanel} 
           onClose={() => this.setState({ sidePanel: false })}
         >
-            <AddPermissions 
-              groups={this.mainStore.availableGroups} 
-            />
+            <AddPermissions />
         </SidePanel>
       </s.Main>
     )

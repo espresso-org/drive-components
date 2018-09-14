@@ -11,10 +11,6 @@ import { PermissionType } from '../../../stores/permissions-store'
 @inject("mainStore", "permissionsStore")
 @observer
 export class AddPermissions extends Component {
-    
-    static defaultProps = {
-        groups: []
-    }
 
     state = {
         entityAddress: '',
