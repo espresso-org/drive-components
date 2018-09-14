@@ -47,14 +47,14 @@ export class PermissionsStore {
         
       })
     }    
+    
 
-
-    async addPermission(fileId, permission) {
-
+    async addPermission(permission) {
+      
       if (permission.permissionType === PermissionType.Entity) {
         
         await this._datastore.setEntityPermissions(
-          fileId, 
+          this._mainStore.selectedFile.id, 
           permission.entity, 
           permission.read, 
           permission.write
@@ -63,20 +63,31 @@ export class PermissionsStore {
       }
       else if (permission.permissionType === PermissionType.Group) {
         await this._datastore.setGroupPermissions(
-          fileId, 
+          this._mainStore.selectedFile.id, 
           permission.group.id, 
           permission.read, 
           permission.write
         )  
       }
+      this._mainStore.isAddPermissionPanelOpen = false
     } 
     
 
-    async removePermission(permission) {
-      if (permission.permissionType === PermissionType.Entity)
-        await this.props.datastore.removeEntityFromFile(this.props.mainStore.selectedFile.id, permission.entity)
-      else
-        await this.props.datastore.removeGroupFromFile(this.props.mainStore.selectedFile.id, permission.groupId)
+    isPermissionSelected = permission => permission === this.selectedPermission    
+
+    async removeSelectedPermission() {
+      if (this.selectedPermission.permissionType === PermissionType.Entity) {
+        await this.props.datastore.removeEntityFromFile(
+          this.props.mainStore.selectedFile.id, 
+          this.selectedPermission.entity
+        )
+      }
+      else {
+        await this.props.datastore.removeGroupFromFile(
+          this.props.mainStore.selectedFile.id, 
+          this.selectedPermission.groupId
+        )
+      }
     }  
     
     async updateSelectedFilePermissions(updatedPermission) {
@@ -101,12 +112,11 @@ export class PermissionsStore {
       this._mainStore.setEditMode(EditMode.None)
     }
 
-    selectPermission = permission => {
+    selectPermission(permission) {
         this.selectedPermission = permission !== this.selectedPermission 
           ? permission : null
     }
   
-    isPermissionSelected = permission => permission === this.selectedPermission    
     
 
 

@@ -23,7 +23,7 @@ export class AddPermissions extends Component {
     get groups() { return this.props.mainStore.availableGroups }
 
     onSaveClick = () => {
-        this.props.permissionsStore.addPermission(this.props.mainStore.selectedFile.id, {
+        this.props.permissionsStore.addPermission({
             permissionType: this.state.permissionType,
             read: this.state.isRead,
             write: this.state.isWrite,

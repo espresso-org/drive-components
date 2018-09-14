@@ -13,8 +13,8 @@ import { PermissionsStore } from '../src/stores/permissions-store'
 
 const datastore = new MockedDatastore({})
 const configStore = new ConfigStore(datastore)
-const permissionsStore = new PermissionsStore(datastore)
 const mainStore = new MainStore(datastore)
+const permissionsStore = new PermissionsStore(datastore, mainStore)
 
 
 aragonStoriesOf("Main App", module).add("Basic", () => (

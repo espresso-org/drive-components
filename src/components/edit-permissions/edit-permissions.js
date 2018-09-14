@@ -26,7 +26,7 @@ export class EditPermissions extends Component {
       <s.Main>
         <s.TopButtons>
           <s.AddButton onClick={() => this.mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
-          <s.RemoveButton onClick={() => this.permissionsStore.removePermission(this.permissionsStore.selectedPermission)}>Remove</s.RemoveButton>
+          <s.RemoveButton onClick={() => this.permissionsStore.removeSelectedPermission()}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
           header={
@@ -53,13 +53,6 @@ export class EditPermissions extends Component {
           <s.SaveButton onClick={() => this.permissionsStore.savePermissionChanges() }>Save</s.SaveButton>
         </s.Actions>        
 
-        <SidePanel 
-          title="Add a permission"
-          opened={this.mainStore.isAddPermissionPanelOpen} 
-          onClose={() => this.mainStore.isAddPermissionPanelOpen = false }
-        >
-            <AddPermissions />
-        </SidePanel>
       </s.Main>
     )
   }
