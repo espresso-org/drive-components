@@ -160,7 +160,6 @@ export class EditPermissions extends Component {
         >
             <AddPermissions 
               groups={this.mainStore.availableGroups} 
-              onChange={perm => this.mainStore.addPermission(this.mainStore.selectedFile.id, perm)}
             />
         </SidePanel>
       </s.Main>

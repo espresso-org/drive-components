@@ -13,6 +13,7 @@ export class PermissionsStore {
 
 
     async addPermission(fileId, permission) {
+      console.log('addPermission ', fileId, permission)
 
       if (permission.permissionType === PermissionType.Entity) {
         

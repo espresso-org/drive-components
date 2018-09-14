@@ -8,12 +8,12 @@ import { PermissionType } from '../../../stores/permissions-store'
 
 
 
+@inject("mainStore", "permissionsStore")
 @observer
 export class AddPermissions extends Component {
     
     static defaultProps = {
-        groups: [],
-        onChange: e => null
+        groups: []
     }
 
     state = {
@@ -24,13 +24,15 @@ export class AddPermissions extends Component {
         selectedGroupIndex: 0
     }
 
+    get groups() { return this.props.mainStore.availableGroups }
+
     onSaveClick = () => {
-        this.props.onChange({
+        this.props.permissionsStore.addPermission(this.props.mainStore.selectedFile.id, {
             permissionType: this.state.permissionType,
             read: this.state.isRead,
             write: this.state.isWrite,
             entity: this.state.entityAddress,
-            group: this.props.groups[this.state.selectedGroupIndex]
+            group: this.groups[this.state.selectedGroupIndex]
         })
     }
     
@@ -59,7 +61,7 @@ export class AddPermissions extends Component {
                     :
                     <PermissionField label="Group:">                   
                         <DropDown
-                            items={this.props.groups.map(group => group.name)}
+                            items={this.groups.map(group => group.name)}
                             active={this.state.selectedGroupIndex}
                             onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
                         />
