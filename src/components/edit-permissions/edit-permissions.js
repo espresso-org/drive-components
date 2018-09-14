@@ -50,45 +50,11 @@ export class EditPermissions extends Component {
       })
     })
 
-    window.myState = this.state
   }
 
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
-
-  addPermission = async permission => {
-    //console.log('add-permission ', permission)
-    if (permission.permissionType === PermissionType.Entity) {
-      
-      await this.props.datastore.setEntityPermissions(
-        this.file.id, 
-        permission.entity, 
-        permission.read, 
-        permission.write
-      )
-      
-      this.setState( { sidePanel: false })
-    }
-    else if (permission.permissionType === PermissionType.Group) {
-      await this.props.datastore.setGroupPermissions(
-        this.file.id, 
-        permission.group.id, 
-        permission.read, 
-        permission.write
-      )
-
-      this.setState( { sidePanel: false })
-    }
-  }
-
-  removePermission = async () => {
-    const permission = this.state.selectedPermission
-    if (permission.permissionType === PermissionType.Entity)
-      await this.props.datastore.removeEntityFromFile(this.props.mainStore.selectedFile.id, permission.entity)
-    else
-      await this.props.datastore.removeGroupFromFile(this.props.mainStore.selectedFile.id, permission.groupId)
-  }
 
   selectPermissionRow = permission => {
     if (permission !== this.state.selectedPermission)
@@ -150,7 +116,7 @@ export class EditPermissions extends Component {
       <s.Main>
         <s.TopButtons>
           <s.AddButton onClick={() => this.setState({ sidePanel: true })}>Add</s.AddButton>
-          <s.RemoveButton onClick={this.removePermission}>Remove</s.RemoveButton>
+          <s.RemoveButton onClick={() => this.permissionStore.removePermission(this.permissionStore.selectedPermission)}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
           header={
@@ -194,7 +160,7 @@ export class EditPermissions extends Component {
         >
             <AddPermissions 
               groups={this.mainStore.availableGroups} 
-              onChange={e => this.addPermission(e)}
+              onChange={perm => this.mainStore.addPermission(this.mainStore.selectedFile.id, perm)}
             />
         </SidePanel>
       </s.Main>
