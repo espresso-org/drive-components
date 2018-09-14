@@ -12,7 +12,7 @@ import { SideBar } from './side-bar'
 import { ConfigurationScreen } from './configuration-screen/configuration-screen'
 import Screen from './screen'
 import LeftIcon from './left-icon'
-import { AddPermissions } from './edit-permissions/components/add-permissions'
+import { AddPermissions } from './add-permissions'
 
 
 export const App = 

@@ -1,4 +1,5 @@
 import { observable, configure, observe } from 'mobx'
+import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
 
@@ -77,14 +78,14 @@ export class PermissionsStore {
 
     async removeSelectedPermission() {
       if (this.selectedPermission.permissionType === PermissionType.Entity) {
-        await this.props.datastore.removeEntityFromFile(
-          this.props.mainStore.selectedFile.id, 
+        await this._datastore.removeEntityFromFile(
+          this._mainStore.selectedFile.id, 
           this.selectedPermission.entity
         )
       }
       else {
-        await this.props.datastore.removeGroupFromFile(
-          this.props.mainStore.selectedFile.id, 
+        await this._datastore.removeGroupFromFile(
+          this._mainStore.selectedFile.id, 
           this.selectedPermission.groupId
         )
       }

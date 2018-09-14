@@ -9,7 +9,6 @@ import { EditMode } from '../../stores/edit-mode'
 import { PermissionType } from '../../stores/permissions-store'
 
 import { EthAddress } from '../eth-address'
-import { AddPermissions } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 @inject("mainStore", "datastore", "permissionsStore")
