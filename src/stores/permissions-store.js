@@ -89,8 +89,8 @@ export class PermissionsStore {
     }
 
 
-    saveChanges = async () => {
-      const permissionChanges = this.getPermissionChanges()
+    async savePermissionChanges() {
+      const permissionChanges = this._getPermissionChanges()
   
       await this._datastore.setPermissions(
         this._mainStore.selectedFile.id,
@@ -100,17 +100,21 @@ export class PermissionsStore {
   
       this._mainStore.setEditMode(EditMode.None)
     }
+
+    selectPermission = permission => {
+        this.selectedPermission = permission !== this.selectedPermission 
+          ? permission : null
+    }
+  
+    isPermissionSelected = permission => permission === this.selectedPermission    
     
-    getPermissionChanges = () => {
+
+
+    _getPermissionChanges() {
       return this.selectedFilePermissions.filter((perm, i) => {
         return this.initialSelectedFilePermissions[i].write !== perm.write
             || this.initialSelectedFilePermissions[i].read !== perm.read
       })
-      /*
-      .concat(this.state.entityPermissions.filter((perm, i) => {
-        return this.originalEntityPermissions[i].write !== perm.write
-            || this.originalEntityPermissions[i].read !== perm.read
-      }))*/
     }
 
 

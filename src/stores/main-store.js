@@ -18,6 +18,7 @@ export class MainStore {
   @observable files = []
   @observable selectedFile
   @observable editMode = EditMode.None
+  @observable isAddPermissionPanelOpen = false
 
   @observable host
   @observable port

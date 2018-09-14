@@ -12,51 +12,20 @@ import { EthAddress } from '../eth-address'
 import { AddPermissions } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
-// TODO: Extract logic to a store
 @inject("mainStore", "datastore", "permissionsStore")
 @observer
 export class EditPermissions extends Component {
-
-  state = { 
-    newAddressWrite: '',
-    newAddressRead: '',
-    sidePanel: false,
-    groupPermissions: []
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.initialize()
-  }
-
-  async initialize() {
-
-
-
-  }
 
   get permissionsStore() { return this.props.permissionsStore }
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
 
-  selectPermissionRow = permission => {
-    if (permission !== this.state.selectedPermission)
-      this.setState({ selectedPermission: permission })
-    else
-      this.setState({ selectedPermission: null })
-  }
-
-  isPermissionSelected = permission => permission === this.state.selectedPermission
-
-
-
   render() {
     return (
       <s.Main>
         <s.TopButtons>
-          <s.AddButton onClick={() => this.setState({ sidePanel: true })}>Add</s.AddButton>
+          <s.AddButton onClick={() => this.mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
           <s.RemoveButton onClick={() => this.permissionsStore.removePermission(this.permissionsStore.selectedPermission)}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
@@ -73,31 +42,21 @@ export class EditPermissions extends Component {
                 key={permission.entity || permission.groupId}
                 permission={permission} 
                 onChange={permission => this.permissionsStore.updateSelectedFilePermissions(permission)}
-                selected={this.isPermissionSelected(permission)}
-                onClick={() => this.selectPermissionRow(permission)}
+                selected={this.permissionsStore.isPermissionSelected(permission)}
+                onClick={() => this.permissionsStore.selectPermission(permission)}
               />
           )}
-
-          {/*this.permissionsStore.groupPermissions
-            .map((permission, i) => 
-              <PermissionRow
-                key={i}
-                permission={permission} 
-                onChange={this.onGroupPermissionChange}
-                selected={this.isPermissionSelected(permission)}
-                onClick={() => this.selectPermissionRow(permission)}
-              />
-          )*/}          
+      
         </s.AddressList>
 
         <s.Actions>            
-          <s.SaveButton onClick={() => this.permissionsStore.saveChanges() }>Save</s.SaveButton>
+          <s.SaveButton onClick={() => this.permissionsStore.savePermissionChanges() }>Save</s.SaveButton>
         </s.Actions>        
 
         <SidePanel 
           title="Add a permission"
-          opened={this.state.sidePanel} 
-          onClose={() => this.setState({ sidePanel: false })}
+          opened={this.mainStore.isAddPermissionPanelOpen} 
+          onClose={() => this.mainStore.isAddPermissionPanelOpen = false }
         >
             <AddPermissions />
         </SidePanel>
