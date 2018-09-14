@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import { observe } from 'mobx'
 
-import { Field, TextInput, TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
+import { TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
 import { CheckButton } from '../check-button'
 
 import { EditMode } from '../../stores/edit-mode'
+import { PermissionType } from '../../stores/permissions-store'
+
 import { EthAddress } from '../eth-address'
-import { AddPermissions, PermissionType } from './components/add-permissions'
+import { AddPermissions } from './components/add-permissions'
 import { s } from './edit-permissions.styles'
 
 // TODO: Extract logic to a store
@@ -54,14 +56,6 @@ export class EditPermissions extends Component {
   get mainStore() { return this.props.mainStore }
   get file() { return this.mainStore.selectedFile }
 
-  //entityPermissions = () => this.mainStore.selectedFilePermissions.get()
-
-  groupPermissions = () => this.mainStore.selectedFileGroupPermissions.get()
-
-  addReadPermission = async () => {
-    await this.mainStore.addReadPermission(this.file.id, this.state.newAddressRead)
-    this.setState({ newAddressRead: '' })
-  }
 
   addPermission = async permission => {
     //console.log('add-permission ', permission)
