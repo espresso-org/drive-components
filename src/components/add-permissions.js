@@ -28,7 +28,7 @@ export class AddPermissions extends Component {
             read: this.state.isRead,
             write: this.state.isWrite,
             entity: this.state.entityAddress,
-            group: this.groups[this.state.selectedGroupIndex]
+            group: this.props.mainStore.groups[this.state.selectedGroupIndex]
         })
     }
     
@@ -57,7 +57,7 @@ export class AddPermissions extends Component {
                     :
                     <PermissionField label="Group:">                   
                         <DropDown
-                            items={this.groups.map(group => group.name)}
+                            items={this.props.mainStore.groups.map(group => group.name)}
                             active={this.state.selectedGroupIndex}
                             onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
                         />
