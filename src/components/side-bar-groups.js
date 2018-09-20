@@ -19,11 +19,13 @@ export const SideBarGroups =
 
             <Table>
               {group.entities.toJS().map(entity => 
-                entity && <GroupMemberRow key={entity} 
-                                          entity={entity} 
-                                          selected={mainStore.isGroupEntitySelected(entity)}
-                                          onClick={() => mainStore.selectGroupEntity(entity)} 
-                                          />
+                entity && entity !== '0x0000000000000000000000000000000000000000' && 
+                <GroupMemberRow 
+                    key={entity} 
+                    entity={entity} 
+                    selected={mainStore.isGroupEntitySelected(entity)}
+                    onClick={() => mainStore.selectGroupEntity(entity)} 
+                />
               )}
             </Table>
           </Info>

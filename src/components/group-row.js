@@ -8,9 +8,19 @@ export const GroupRow = ({ group, onClick, selected }) =>
       <InCell>{group.name}</InCell>
     </Cell>  
     <Cell>
-      <InCell>{group.entities.length}</InCell>
+      <InCell>{getEntitiesLength(group.entities)}</InCell>
     </Cell>         
   </Container>
+
+
+function getEntitiesLength(entities) {
+  var counter = 0;
+  for(var i = 0; i < entities.length; i++ ) {
+    if(entities[i] != '0x0000000000000000000000000000000000000000')
+      counter++
+  }
+  return counter
+}
 
 const Container = styled(TableRow)`
     cursor: pointer;
