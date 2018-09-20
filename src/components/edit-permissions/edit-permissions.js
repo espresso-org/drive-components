@@ -45,8 +45,6 @@ observer(({ mainStore, permissionsStore }) =>
       </s.Main>
 ))
 
-
-
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
   <s.SelectableRow selected={selected} {...props}>
     <TableCell>

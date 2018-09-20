@@ -5,6 +5,7 @@ export * from './components/edit-permissions/edit-permissions'
 export * from './components/edit-panel'
 export * from './components/side-bar'
 export * from './components/configuration-screen/configuration-screen'
+export * from './components/groups-screen'
 
 export * from './components/app'
 
