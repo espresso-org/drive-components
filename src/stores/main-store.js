@@ -15,6 +15,7 @@ export class MainStore {
   @observable selectedFile
   @observable editMode = EditMode.None
   @observable isAddPermissionPanelOpen = false
+  @observable newPublicStatus
 
   @observable host
   @observable port
@@ -105,8 +106,10 @@ export class MainStore {
 
     const selectedFile = this.files.find(file => file && file.id === fileId)
     
-    if (selectedFile)
+    if (selectedFile) {
       this.selectedFile = selectedFile
+      this.newPublicStatus = selectedFile.isPublic
+    }
   }
 
   @action async createGroup(name) {

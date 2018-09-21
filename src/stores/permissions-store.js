@@ -9,8 +9,6 @@ export const PermissionType = {
 }
 
 export class PermissionsStore {
-    
-
     @observable entityPermissions = []
     @observable groupPermissions = []
     @observable selectedFilePermissions = []
@@ -19,15 +17,12 @@ export class PermissionsStore {
     _datastore
     _mainStore
 
-
-
-
     constructor(datastore, mainStore) {
       this._datastore = datastore
       this._mainStore = mainStore
 
       this.initialize()
-    }    
+    }
 
     async initialize() { 
       observe(this._mainStore, 'selectedFile', async () => {
@@ -45,13 +40,10 @@ export class PermissionsStore {
 
         
         this.selectedFilePermissions = [...this.initialSelectedFilePermissions]
-        
       })
     }    
     
-
     async addPermission(permission) {
-      
       if (permission.permissionType === PermissionType.Entity) {
         
         await this._datastore.setEntityPermissions(
@@ -72,7 +64,6 @@ export class PermissionsStore {
       }
       this._mainStore.isAddPermissionPanelOpen = false
     } 
-    
 
     isPermissionSelected = permission => permission === this.selectedPermission    
 
@@ -100,14 +91,14 @@ export class PermissionsStore {
       })
     }
 
-
     async savePermissionChanges() {
       const permissionChanges = this._getPermissionChanges()
   
       await this._datastore.setPermissions(
         this._mainStore.selectedFile.id,
         permissionChanges.filter(perm => perm.permissionType === PermissionType.Entity),
-        permissionChanges.filter(perm => perm.permissionType === PermissionType.Group)
+        permissionChanges.filter(perm => perm.permissionType === PermissionType.Group),
+        this._mainStore.newPublicStatus
       )
   
       this._mainStore.setEditMode(EditMode.None)
@@ -118,19 +109,11 @@ export class PermissionsStore {
           ? permission : null
     }
   
-    
-
-
     _getPermissionChanges() {
       return this.selectedFilePermissions.filter((perm, i) => {
         return this.initialSelectedFilePermissions[i].write !== perm.write
             || this.initialSelectedFilePermissions[i].read !== perm.read
       })
     }
-
-
-
-
-
 }
 

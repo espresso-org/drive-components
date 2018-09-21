@@ -24,7 +24,7 @@ export class Datastore {
             name,
             storageRef: '',
             fileSize: new BigNumber(file.byteLength),
-            isPublic: true,
+            isPublic: false,
             isDeleted: false,
             owner: '',
             isOwner: true,
@@ -140,8 +140,7 @@ export class Datastore {
         this._events.emit('NewEntityPermissions')
     }
 
-    async setPermissions(fileId, entityPermissions, groupPermissions) {
-        
+    async setPermissions(fileId, entityPermissions, groupPermissions, isPublic) {
         for (let permission of entityPermissions) {
             await this.setEntityPermissions(
                 fileId, 
@@ -159,7 +158,8 @@ export class Datastore {
                 permission.write
             )
         }  
-        
+
+        this.fileContent[fileId - 1].isPublic = isPublic
         this._events.emit('NewPermissions')
     }
 
