@@ -7,6 +7,7 @@ import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
 import { Provider } from 'mobx-react'
 import { MainStore } from '../src/stores/main-store'
 import { ConfigStore } from '../src/stores/config-store'
+import { PermissionsStore } from '../src/stores/permissions-store'
 
 const file = {
   name: 'file-name.jpg',
@@ -21,6 +22,7 @@ const file = {
 const datastore = new MockedDatastore({})
 const configStore = new ConfigStore(datastore)
 const mainStore = new MainStore(datastore)
+const permissionsStore = new PermissionsStore(datastore, mainStore)
 
 setTimeout(async () => {
   datastore.createGroup("Group #1")
@@ -46,7 +48,7 @@ setTimeout(async () => {
 
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
-  <Provider datastore={datastore} mainStore={mainStore} configStore={configStore}>
+  <Provider permissionsStore={permissionsStore} datastore={datastore} mainStore={mainStore} configStore={configStore}>
     <EditPermissions file={file}></EditPermissions>
   </Provider>
 ))

@@ -14,6 +14,7 @@ export class MainStore {
   @observable files = []
   @observable selectedFile
   @observable editMode = EditMode.None
+  @observable isAddPermissionPanelOpen = false
 
   @observable host
   @observable port
@@ -183,10 +184,12 @@ export class MainStore {
           case 'NewFile':
           case 'NewWritePermission':
           case 'NewReadPermission':
-          case 'NewEntityPermissions':
           case 'DeleteFile':
+          case 'NewEntityPermissions':
           case 'NewGroupPermissions':
+          case 'NewPermissions':
           case 'GroupPermissionsRemoved':
+          case 'EntityPermissionsRemoved':
           this._refreshFiles()
           break
           

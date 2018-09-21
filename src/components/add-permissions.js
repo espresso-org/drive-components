@@ -3,21 +3,14 @@ import { observer, inject } from 'mobx-react'
 import styled from 'styled-components'
 
 import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
-import { CheckButton } from '../../check-button'
+import { CheckButton } from './check-button'
+import { PermissionType } from '../stores/permissions-store'
 
 
-export const PermissionType = {
-    Entity: 'Entity',
-    Group: 'Group'
-}
 
+@inject("mainStore", "permissionsStore")
 @observer
 export class AddPermissions extends Component {
-    
-    static defaultProps = {
-        groups: [],
-        onChange: e => null
-    }
 
     state = {
         entityAddress: '',
@@ -27,13 +20,15 @@ export class AddPermissions extends Component {
         selectedGroupIndex: 0
     }
 
+    get groups() { return this.props.mainStore.availableGroups }
+
     onSaveClick = () => {
-        this.props.onChange({
+        this.props.permissionsStore.addPermission({
             permissionType: this.state.permissionType,
             read: this.state.isRead,
             write: this.state.isWrite,
             entity: this.state.entityAddress,
-            group: this.props.groups[this.state.selectedGroupIndex]
+            group: this.props.mainStore.groups[this.state.selectedGroupIndex]
         })
     }
     
@@ -62,7 +57,7 @@ export class AddPermissions extends Component {
                     :
                     <PermissionField label="Group:">                   
                         <DropDown
-                            items={this.props.groups.map(group => group.name)}
+                            items={this.props.mainStore.groups.map(group => group.name)}
                             active={this.state.selectedGroupIndex}
                             onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
                         />

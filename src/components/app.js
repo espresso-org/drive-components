@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
-import { AragonApp, AppBar, Button, Table, TableHeader, TableRow, IconSettings, IconGroups } from '@aragon/ui'
+import { AragonApp, AppBar, Button, Table, TableHeader, TableRow, IconSettings, IconGroups, SidePanel } from '@aragon/ui'
 
 import { AppLayout } from './app-layout'
 import { FileInput } from './file-input'
@@ -14,6 +14,7 @@ import { ConfigurationScreen } from './configuration-screen/configuration-screen
 import { GroupsScreen } from './groups-screen'
 import Screen from './screen'
 import LeftIcon from './left-icon'
+import { AddPermissions } from './add-permissions'
 
 export const App = 
 inject("mainStore", "configStore")(
@@ -61,6 +62,15 @@ observer(({ mainStore, configStore }) =>
                     )}
                   </Table>
                 </Main>
+                <AddPermissionsPanel>
+                  <SidePanel 
+                    title="Add a permission"
+                    opened={mainStore.isAddPermissionPanelOpen} 
+                    onClose={() => mainStore.isAddPermissionPanelOpen = false }
+                  >
+                    <AddPermissions />
+                  </SidePanel>
+                </AddPermissionsPanel>                
                 <SideBar file={mainStore.selectedFile} />
               </TwoPanels>
             </AppLayout.Content>
@@ -138,5 +148,11 @@ const BackButton = styled.span`
   }
   :active svg path {
     stroke: hsl(179, 76%, 63%);
+  }
+`
+
+const AddPermissionsPanel = styled.div`
+  > * {
+    z-index: 4 !important;
   }
 `
