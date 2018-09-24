@@ -19,8 +19,8 @@ observer(({ mainStore, permissionsStore }) =>
             Public :
           </s.Label>
           <CheckButton 
-            checked={mainStore.newPublicStatus}
-            onClick={() => {mainStore.newPublicStatus = !mainStore.newPublicStatus}}
+            checked={permissionsStore.isSelectedFilePublic}
+            onClick={() => {permissionsStore.isSelectedFilePublic = !permissionsStore.isSelectedFilePublic}}
           />  
         </s.Info>   
         <SidePanelSeparator />   

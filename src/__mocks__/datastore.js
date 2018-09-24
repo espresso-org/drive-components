@@ -24,7 +24,7 @@ export class Datastore {
             name,
             storageRef: '',
             fileSize: new BigNumber(file.byteLength),
-            isPublic: false,
+            isPublic: true,
             isDeleted: false,
             owner: '',
             isOwner: true,

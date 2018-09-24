@@ -13,6 +13,7 @@ export class PermissionsStore {
     @observable groupPermissions = []
     @observable selectedFilePermissions = []
     @observable selectedPermission = {}
+    @observable isSelectedFilePublic = false
 
     _datastore
     _mainStore
@@ -38,8 +39,10 @@ export class PermissionsStore {
             ...permission
           }))
 
-        
+        console.log('selectedFile ', this._mainStore.selectedFile)
         this.selectedFilePermissions = [...this.initialSelectedFilePermissions]
+
+        this.isSelectedFilePublic = this._mainStore.selectedFile.isPublic
       })
 
     }    
@@ -99,7 +102,7 @@ export class PermissionsStore {
         this._mainStore.selectedFile.id,
         permissionChanges.filter(perm => perm.permissionType === PermissionType.Entity),
         permissionChanges.filter(perm => perm.permissionType === PermissionType.Group),
-        this._mainStore.newPublicStatus
+        this.isSelectedFilePublic
       )
   
       this._mainStore.setEditMode(EditMode.None)
