@@ -10,7 +10,7 @@ import { SideBarGroups } from './side-bar-groups'
 
 export const GroupsScreen = inject("mainStore")(observer(({ mainStore }) => 
     <Main>
-        <Title>Groups</Title>
+        <Title>Group List</Title>
 
         <AppLayout.ScrollWrapper>
             <AppLayout.Content>

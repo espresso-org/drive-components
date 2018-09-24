@@ -43,11 +43,11 @@ export const EditPanel =
 function title(editMode) {
   switch (editMode) {
     case EditMode.None: return ''
-    case EditMode.Name: return 'Change file name'
-    case EditMode.Content: return 'Change file content'
-    case EditMode.Permissions: return 'Manage permissions'
-    case EditMode.GroupCreate: return 'Create group'
-    case EditMode.GroupName: return 'Rename group'
-    case EditMode.GroupMember: return 'Add a member'
+    case EditMode.Name: return 'Rename File'
+    case EditMode.Content: return 'Change File Content'
+    case EditMode.Permissions: return 'Permissions'
+    case EditMode.GroupCreate: return 'Create Group'
+    case EditMode.GroupName: return 'Rename Group'
+    case EditMode.GroupMember: return 'Add a Member'
   }
 }

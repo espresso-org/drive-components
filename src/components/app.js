@@ -64,7 +64,7 @@ observer(({ mainStore, configStore }) =>
                 </Main>
                 <AddPermissionsPanel>
                   <SidePanel 
-                    title="Add a permission"
+                    title="Add a Permission"
                     opened={mainStore.isAddPermissionPanelOpen} 
                     onClose={() => mainStore.isAddPermissionPanelOpen = false }
                   >
@@ -101,7 +101,7 @@ observer(({ mainStore, configStore }) =>
                 <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; mainStore.selectedGroup = null; }}>
                   <LeftIcon />
                 </BackButton>
-                <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Group management</h1>
+                <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Groups</h1>
               </AppBar>
               <GroupsScreen />
               <EditPanel/>

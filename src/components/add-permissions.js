@@ -112,8 +112,7 @@ const StyledTextInput = styled(TextInput)`
 
 const SaveButton = styled(Button)
     .attrs({ mode: 'strong', wide: true })`
-    margin-top: 40px;    
-    text-transform: uppercase;
+    margin-top: 40px;
 `
 
 
