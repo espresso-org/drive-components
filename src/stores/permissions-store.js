@@ -1,4 +1,4 @@
-import { observable, configure, observe } from 'mobx'
+import { observable, configure, observe, action } from 'mobx'
 import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
@@ -41,6 +41,7 @@ export class PermissionsStore {
         
         this.selectedFilePermissions = [...this.initialSelectedFilePermissions]
       })
+
     }    
     
     async addPermission(permission) {

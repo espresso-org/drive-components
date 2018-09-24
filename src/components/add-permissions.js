@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { observe } from 'mobx'
 import styled from 'styled-components'
 
 import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
@@ -20,6 +21,24 @@ export class AddPermissions extends Component {
         selectedGroupIndex: 0
     }
 
+    constructor(props) {
+        super(props)
+
+        observe(props.mainStore, 'isAddPermissionPanelOpen', () => {
+            if (props.mainStore.isAddPermissionPanelOpen)
+                this.clear()
+        })
+    }
+
+    clear() {
+        this.setState({
+            entityAddress: '',
+            isRead: false,
+            isWrite: false,
+            permissionType: PermissionType.Entity,
+            selectedGroupIndex: 0
+        })
+    }
     get groups() { return this.props.mainStore.availableGroups }
 
     onSaveClick = () => {
