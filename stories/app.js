@@ -9,9 +9,6 @@ import { MainStore } from '../src/stores/main-store'
 import { ConfigStore } from '../src/stores/config-store'
 import { PermissionsStore } from '../src/stores/permissions-store'
 
-
-
-
 aragonStoriesOf("Main App", module).add("Basic", () => {
   const datastore = new MockedDatastore({})
   const configStore = new ConfigStore(datastore)

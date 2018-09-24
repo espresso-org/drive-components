@@ -35,7 +35,6 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
         <div className='swarmAdvancedOptions' style={{display: configStore.radioGrpSelectedValue == "swarm" ? 'block' : 'none'}}>Coming soon</div>
       </AdvancedOptionsContainer>
 
-
       <Title style={{ marginTop: '50px' }}>Encryption</Title>
 
       <ComingSoon>
@@ -53,17 +52,14 @@ const Main = styled.div`
   padding-top: 30px;
   padding-left: 50px;
 `
-
 const ButtonContainer = styled.div`
   margin-top: 35px;
   margin-left: 8px;
 `
-
 const Title = styled(Text).attrs({ size: 'xlarge' })`
   margin-left: 16px;
   display: block;
 `
-
 const ActionButton = styled(Button)`
   display: inline-block;
   margin: 8px 10px;
@@ -72,7 +68,6 @@ const AdvancedOptionsContainer = styled.div`
   display: ${ ({open}) => open ? 'block' : 'none' };
   margin-left: 50px;
 `
-
 const ComingSoon = styled.div`
   width: 552px;
   text-align: center;
@@ -81,7 +76,6 @@ const ComingSoon = styled.div`
   padding: 20px 0;
   margin-left: 30px;
 `
-
 const ConfigurationSectionAdvancedBtn = styled.a`
     font-size: small;
     &:hover ${ConfigurationSectionAdvancedBtn} {

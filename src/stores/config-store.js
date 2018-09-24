@@ -52,6 +52,5 @@ export class ConfigStore {
         }
       }, 1000)
     }
-
 }
 

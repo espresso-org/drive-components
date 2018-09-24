@@ -20,7 +20,6 @@ export const App =
 inject("mainStore", "configStore")(
 observer(({ mainStore, configStore }) =>
     <AragonApp publicUrl="./aragon-ui/">
-
       <Screen position={0} animate={true}>
         {!configStore.isConfigSectionOpen && !mainStore.isGroupsSectionOpen && (
         <div>
@@ -113,8 +112,8 @@ observer(({ mainStore, configStore }) =>
 
 const Breadcrumb = styled.div`
   font-size: 21px;
-  color: #000;`
-
+  color: #000;
+`
 const Main = styled.div`
   width: 100%;
 `
@@ -150,7 +149,6 @@ const BackButton = styled.span`
     stroke: hsl(179, 76%, 63%);
   }
 `
-
 const AddPermissionsPanel = styled.div`
   > * {
     z-index: 4 !important;

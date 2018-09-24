@@ -48,8 +48,8 @@ export class MainStore {
     this.editMode = mode
   }
 
-  @action async setFilename(fileId, newName) {
-    await this._datastore.setFilename(fileId, newName)
+  @action async setFileName(fileId, newName) {
+    await this._datastore.setFileName(fileId, newName)
     this.setEditMode(EditMode.None)
   }
 
@@ -61,7 +61,7 @@ export class MainStore {
   }
 
   @action async setIpfsStorageSettings(host, port, protocol) {
-    if(host && port && protocol) 
+    if (host && port && protocol) 
       await this._datastore.setIpfsStorageSettings(host, port, protocol)
   }
 
@@ -118,7 +118,7 @@ export class MainStore {
   }
 
   @action async deleteGroup(groupId) {
-    if(this.selectedGroup != null) {
+    if (this.selectedGroup != null) {
       await this._datastore.deleteGroup(groupId)
       this.setEditMode(EditMode.None)
       this.selectedGroup = null
@@ -163,7 +163,7 @@ export class MainStore {
   }
 
   selectGroupEntity = async entity => {
-    if(entity !== this.selectedGroupEntity)
+    if (entity !== this.selectedGroupEntity)
       this.selectedGroupEntity = entity
     else  
       this.selectedGroupEntity = null;
@@ -179,7 +179,6 @@ export class MainStore {
 
   async initialize() {
     return new Promise(async (res, rej) => {
-       
       (await this._datastore.events()).subscribe(event => {  
         switch (event.event) {
           case 'FileRename':

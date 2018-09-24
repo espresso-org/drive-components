@@ -39,4 +39,3 @@ export const CheckButton = styled.input.attrs({ type: 'radio' })`
     top: -7px;
   }
 `
-

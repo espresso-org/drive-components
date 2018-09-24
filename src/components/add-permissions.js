@@ -6,12 +6,9 @@ import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
 import { CheckButton } from './check-button'
 import { PermissionType } from '../stores/permissions-store'
 
-
-
 @inject("mainStore", "permissionsStore")
 @observer
 export class AddPermissions extends Component {
-
     state = {
         entityAddress: '',
         isRead: false,
@@ -31,12 +28,10 @@ export class AddPermissions extends Component {
             group: this.props.mainStore.groups[this.state.selectedGroupIndex]
         })
     }
-    
 
     render() {
         return (
-            <Main>
-                
+            <Main> 
                 <RadioButton 
                     checked={this.state.permissionType === PermissionType.Entity} 
                     onClick={e => this.setState({ permissionType: PermissionType.Entity })}
@@ -78,23 +73,17 @@ export class AddPermissions extends Component {
     }
 }
 
-
 const Main = styled.div`
     
 `
-
 const PermissionField = styled(Field)`
     margin-top: 10px;
 `
-
 const StyledTextInput = styled(TextInput)`
     width: 100%;
 `
-
 const SaveButton = styled(Button)
     .attrs({ mode: 'strong', wide: true })`
     margin-top: 40px;    
     text-transform: uppercase;
 `
-
-

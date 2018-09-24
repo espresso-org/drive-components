@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import { TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
+import { TableRow, TableHeader, TableCell } from '@aragon/ui'
 import { CheckButton } from '../check-button'
-
 import { PermissionType } from '../../stores/permissions-store'
-
 import { EthAddress } from '../eth-address'
 import { s } from './edit-permissions.styles'
 
