@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Button, Text, Table, TableRow } from '@aragon/ui'
 
 export const s = {
-
     Main: styled.div`
         
     `,
@@ -69,9 +68,5 @@ export const s = {
             background: ${({ selected }) => selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
         }
     `
-
-
 }
-
-
  

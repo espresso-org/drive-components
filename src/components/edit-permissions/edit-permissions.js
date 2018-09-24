@@ -16,6 +16,10 @@ observer(({ mainStore, permissionsStore }) =>
         <s.TopButtons>
           <s.AddButton onClick={() => mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
           <s.RemoveButton onClick={() => permissionsStore.removeSelectedPermission()}>Remove</s.RemoveButton>
+          <CheckButton 
+            checked={mainStore.newPublicStatus}
+            onClick={() => {mainStore.newPublicStatus = !mainStore.newPublicStatus}}
+          />
         </s.TopButtons>
         <s.AddressList 
           header={
@@ -35,20 +39,17 @@ observer(({ mainStore, permissionsStore }) =>
                 onClick={() => permissionsStore.selectPermission(permission)}
               />
           )}
-      
         </s.AddressList>
 
         <s.Actions>            
           <s.SaveButton onClick={() => permissionsStore.savePermissionChanges() }>Save</s.SaveButton>
         </s.Actions>        
-
       </s.Main>
 ))
 
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
   <s.SelectableRow selected={selected} {...props}>
     <TableCell>
-      {console.log(permission)}
       { permission.permissionType === PermissionType.Entity ?
         <EthAddress ethAddress={permission.entity} />
         :
@@ -65,6 +66,6 @@ const PermissionRow = ({ permission, onChange, selected, ...props }) =>
       <CheckButton 
         checked={permission.write}
         onClick={() => onChange({ ...permission, write: !permission.write })}
-    />
+      />
     </TableCell>
   </s.SelectableRow>
