@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Text, Table, TableRow } from '@aragon/ui'
+import { Button, Text, Table, TableRow, theme } from '@aragon/ui'
 
 export const s = {
     Main: styled.div`
@@ -13,6 +13,7 @@ export const s = {
 
     TopButtons: styled.div`
         margin: 10px;
+        margin-top: 20px;
     `,
 
     AddButton: styled(Button).attrs({ 
@@ -67,6 +68,19 @@ export const s = {
         > * {
             background: ${({ selected }) => selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
         }
+    `,
+
+    Info: styled.div`
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        vertical-align: middle;
+    `,
+
+    Label: styled.span`
+        display: inline-block;
+        color: #707070;
+        margin-right: 16px;
     `
 }
  

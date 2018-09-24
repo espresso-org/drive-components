@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import { TableRow, TableHeader, TableCell, SidePanel } from '@aragon/ui'
+import { TableRow, TableHeader, TableCell, SidePanelSeparator } from '@aragon/ui'
 import { CheckButton } from '../check-button'
 
 import { PermissionType } from '../../stores/permissions-store'
@@ -13,13 +13,20 @@ export const EditPermissions =
 inject("mainStore", "permissionsStore")(
 observer(({ mainStore, permissionsStore }) =>
       <s.Main>
-        <s.TopButtons>
-          <s.AddButton onClick={() => mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
-          <s.RemoveButton onClick={() => permissionsStore.removeSelectedPermission()}>Remove</s.RemoveButton>
+        
+        <s.Info>
+          <s.Label>
+            Public :
+          </s.Label>
           <CheckButton 
             checked={mainStore.newPublicStatus}
             onClick={() => {mainStore.newPublicStatus = !mainStore.newPublicStatus}}
-          />
+          />  
+        </s.Info>   
+        <SidePanelSeparator />   
+        <s.TopButtons>
+          <s.AddButton onClick={() => mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
+          <s.RemoveButton onClick={() => permissionsStore.removeSelectedPermission()}>Remove</s.RemoveButton>
         </s.TopButtons>
         <s.AddressList 
           header={
