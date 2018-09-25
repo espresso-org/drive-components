@@ -4,7 +4,7 @@ import { observe } from 'mobx'
 import styled from 'styled-components'
 
 import { Field, TextInput, Button, RadioButton } from '@aragon/ui'
-import { LargeDropDown } from './large-input'
+import { LargeDropDown } from './large-inputs'
 import { CheckButton } from './check-button'
 import { PermissionType } from '../stores/permissions-store'
 

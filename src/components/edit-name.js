@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
 import { Field, Button, TextInput } from '@aragon/ui'
-import { LargeTextInput, SaveButton } from './large-input'
+import { LargeTextInput, SaveButton } from './large-inputs'
 
 import { EditMode } from '../stores/edit-mode'
 

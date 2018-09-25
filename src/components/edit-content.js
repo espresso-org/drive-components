@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 
 import { Field, Button, TextInput } from '@aragon/ui'
 import { FileInput } from './file-input'
-import { LargeTextInput, SaveButton } from './large-input'
+import { LargeTextInput, SaveButton } from './large-inputs'
 
 import { convertFileToArrayBuffer } from '../utils/files'
 import { EditMode } from '../stores/edit-mode'
