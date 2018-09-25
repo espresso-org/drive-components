@@ -39,7 +39,6 @@ export class PermissionsStore {
             ...permission
           }))
 
-        console.log('selectedFile ', this._mainStore.selectedFile)
         this.selectedFilePermissions = [...this.initialSelectedFilePermissions]
 
         this.isSelectedFilePublic = this._mainStore.selectedFile.isPublic
@@ -49,14 +48,12 @@ export class PermissionsStore {
     
     async addPermission(permission) {
       if (permission.permissionType === PermissionType.Entity) {
-        
         await this._datastore.setEntityPermissions(
           this._mainStore.selectedFile.id, 
           permission.entity, 
           permission.read, 
           permission.write
         )
-        
       }
       else if (permission.permissionType === PermissionType.Group) {
         await this._datastore.setGroupPermissions(
@@ -120,4 +117,3 @@ export class PermissionsStore {
       })
     }
 }
-

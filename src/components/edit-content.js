@@ -9,9 +9,6 @@ import { LargeTextInput, SaveButton } from './large-input'
 import { convertFileToArrayBuffer } from '../utils/files'
 import { EditMode } from '../stores/edit-mode'
 
-const Main = styled.div`
-    
-`
 @inject("mainStore")
 @observer
 export class EditContent extends Component {
@@ -48,11 +45,12 @@ export class EditContent extends Component {
   }
 }
 
+const Main = styled.div` 
+`
 const Actions = styled.div`
   margin-top: 40px;
   margin-bottom: 20px;
 `
-
 const ActionButton = styled(Button)`
   display: inline-block;
   margin: 8px 10px;

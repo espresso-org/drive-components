@@ -3,9 +3,7 @@ import { observer, inject } from 'mobx-react'
 
 import { TableRow, TableHeader, TableCell, SidePanelSeparator } from '@aragon/ui'
 import { CheckButton } from '../check-button'
-
 import { PermissionType } from '../../stores/permissions-store'
-
 import { EthAddress } from '../eth-address'
 import { SelectableRow } from '../selectable-row'
 import { s } from './edit-permissions.styles'

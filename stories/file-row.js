@@ -6,7 +6,6 @@ import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
 import { FileRow } from "../src/components/file-row"
 import { BigNumber } from 'bignumber.js'
 
-
 aragonStoriesOf("FileRow", module).add("Read Write Jpg", () => {
   const file = {
     name: 'file-name.jpg',

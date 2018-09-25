@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
-
 import { Table, TableHeader, TableRow, Text } from '@aragon/ui'
 
 import { AppLayout } from './app-layout'

@@ -12,7 +12,6 @@ export const EthAddress = ({ ethAddress, ...props }) =>
 const IdentifierWrapper = styled.div`
   max-width: 100%;
 `
-
 const Identifier = styled(Badge.App)`
   overflow: hidden;
   text-overflow: ellipsis;

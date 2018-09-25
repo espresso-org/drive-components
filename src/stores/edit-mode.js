@@ -6,4 +6,4 @@ export const EditMode = {
     GroupCreate: "Create group",
     GroupName: "Group name",
     GroupMember: "Group member"
-  }
+}

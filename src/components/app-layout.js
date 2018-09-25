@@ -7,11 +7,9 @@ export const AppLayout = styled.div`
   align-items: stretch;
   justify-content: stretch;
 `
-
 AppLayout.Header = styled.div`
   flex-shrink: 0;
 `
-
 AppLayout.ScrollWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,12 +18,9 @@ AppLayout.ScrollWrapper = styled.div`
   overflow-x: hidden;
   flex-grow: 1;
 `
-
 AppLayout.Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
   flex-grow: 1;
 `
-
-

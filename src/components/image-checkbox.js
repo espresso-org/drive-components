@@ -70,7 +70,6 @@ const Main = styled.button`
     border-color: ${theme.contentBorderActive};
   }
 `
-
 const Content = styled.div`
   position: absolute;
   top: 0;
@@ -95,7 +94,6 @@ const Content = styled.div`
     height: auto;
   }
 `
-
 const CheckContainer = styled.div`
   position: absolute;
   top: 20px;
@@ -103,4 +101,3 @@ const CheckContainer = styled.div`
   transform: scale(${({ active }) => (active ? '1, 1' : '0, 0')});
   transition: transform 150ms ease-in-out;
 `
-

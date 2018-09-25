@@ -3,7 +3,6 @@ import solid from '@fortawesome/fontawesome-free-solid'
 
 import * as fileDesc from './file-descriptions'
 
-
 export function downloadFile(file, filename) {
     var blob = new Blob([file], { type: "application/pdf" })
 
@@ -24,9 +23,7 @@ export function downloadFile(file, filename) {
 
     // For Firefox it is necessary to delay revoking the ObjectURL
     setTimeout(() => window.URL.revokeObjectURL(data), 100)
-
 }
-
 
 export function convertFileToArrayBuffer(file) {
     return new Promise((res, rej) => {
@@ -40,8 +37,6 @@ export function convertFileToArrayBuffer(file) {
         reader.readAsArrayBuffer(file)
     })
 }
-
-
 
 /**
  * @param {string} extension

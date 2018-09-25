@@ -56,29 +56,22 @@ export class Datastore {
         return this._fileInfo.length
     }
 
-
     async getFile(fileId) {
         const fileInfo = this.getFileInfo(fileId)
         const fileContent = this._fileContent[fileId - 1]
-
         return { ...fileInfo, content: fileContent }
     }
 
-
     async getFileInfo(fileId) {
-
         const fileInfo = this._fileInfo[fileId - 1]
-
         return { id: fileId, ...fileInfo }
     }
-
 
     async deleteFile(fileId) {
         let fileInfo = this.getFileInfo(fileId)
         fileInfo.isDeleted = true
         this._events.emit('DeleteFile')
     }
-
 
     async getFilePermissions(fileId) {
         return (await this.getFileInfo(fileId))._permissionList
@@ -87,7 +80,6 @@ export class Datastore {
     async getSettings() {
         return this._settings
     }
-
 
     async setIpfsStorageSettings(host, port, protocol) {
         this._settings.storageProvider = 1
@@ -111,15 +103,6 @@ export class Datastore {
         this._events.emit('FileContentUpdate')
     }
 
-    /**
-     * Add/Remove permissions to an entity for
-     * a specific file
-     * 
-     * @param {number} fileId File Id
-     * @param {string} entity Entity address
-     * @param {boolean} read read permission
-     * @param {boolean} write write permission
-     */
     async setEntityPermissions(fileId, entity, read, write) {
         const fileInfo = this._fileInfo[fileId - 1]
         const filePermissions = fileInfo._permissionList
@@ -169,14 +152,6 @@ export class Datastore {
         this._events.emit('EntityPermissionsRemoved')
     }
 
-    /**
-     * Add/Remove read permission to an entity for
-     * a specific file
-     * 
-     * @param {number} fileId File Id
-     * @param {string} entity Entity address
-     * @param {boolean} hasPermission Write permission
-     */
     async setReadPermission(fileId, entity, hasPermission) {
         const fileInfo = this._fileInfo[fileId - 1]
         const filePermissions = fileInfo._permissionList
@@ -195,14 +170,6 @@ export class Datastore {
         this._events.emit('NewReadPermission')
     }
 
-    /**
-     * Add/Remove write permission to an entity for
-     * a specific file
-     * 
-     * @param {number} fileId File Id
-     * @param {string} entity Entity address
-     * @param {boolean} hasPermission Write permission
-     */
     async setWritePermission(fileId, entity, hasPermission) {
         const fileInfo = this._fileInfo[fileId - 1]
         const entityPermissions = fileInfo._permissionList.find(permission => permission.entity === entity)
@@ -220,22 +187,12 @@ export class Datastore {
         this._events.emit('NewWritePermission')
     }
 
-    /**
-     * Changes name of a file for `newName`
-     * @param {number} fileId File Id
-     * @param {string} newName New file name
-     */
-    async setFilename(fileId, newName) {
+    async setFileName(fileId, newName) {
         const fileInfo = this.getFileInfo(fileId)
-
         fileInfo.name = newName
-
         this._events.emit('FileRename')
     }
 
-    /**
-     * Groups related methods
-     */
     async createGroup(groupName) {
         this._groups.push({
             id: this._groups.length + 1,
@@ -310,14 +267,12 @@ export class Datastore {
     }
 
     /**
-     * Datastore events
-     * 
+     * Datastore events 
      */
     async events(...args) {
         return this._events.events
     }
 }
-
 
 class EventEmitter {
     events

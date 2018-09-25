@@ -10,13 +10,7 @@ import { EditPermissions } from './edit-permissions/edit-permissions'
 import { EditGroupCreate } from './edit-group-create'
 import { EditGroupName } from './edit-group-name'
 import { EditGroupMember } from './edit-group-member'
-
-
 import { EditMode } from '../stores/edit-mode'
-
-const Content = styled.div`
-    margin-top: 20px;
-`
 
 export const EditPanel = 
   inject("mainStore")(
@@ -51,3 +45,7 @@ function title(editMode) {
     case EditMode.GroupMember: return 'Add a Member'
   }
 }
+
+const Content = styled.div`
+    margin-top: 20px;
+`

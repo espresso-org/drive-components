@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-
+export const FileInput = ({ children, onChange }) => 
+  <Container>
+    <HiddenInput {...{onChange}} /> 
+    {children} 
+  </Container>
 
 const HiddenInput = styled.input.attrs({ type: 'file' })`
   width: 0;
@@ -10,7 +14,6 @@ const HiddenInput = styled.input.attrs({ type: 'file' })`
   overflow: hidden;
   position: absolute;
 `
-
 const Container = styled.label`
     display: inline-block;
     position: relative;

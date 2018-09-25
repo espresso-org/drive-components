@@ -9,7 +9,6 @@ export * from './components/groups-screen'
 
 export * from './components/app'
 
-
 export * from './stores'
 
 export * from './utils'

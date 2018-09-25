@@ -47,4 +47,3 @@ export const CheckButton = styled.input.attrs({ type: 'radio' })`
     left: 0px;
   }
 `
-
