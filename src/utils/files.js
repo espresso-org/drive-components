@@ -4,7 +4,7 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import * as fileDesc from './file-descriptions'
 
 export function downloadFile(file, filename) {
-  let blob = new Blob([file], { type: "application/pdf" })
+  const blob = new Blob([file], { type: "application/pdf" })
 
   // IE doesn't allow using a blob object directly as link href
   // instead it is necessary to use msSaveOrOpenBlob
@@ -16,7 +16,7 @@ export function downloadFile(file, filename) {
   // For other browsers:
   // Create a link pointing to the ObjectURL containing the blob.
   const data = window.URL.createObjectURL(blob)
-  let link = document.createElement('a')
+  const link = document.createElement('a')
   link.href = data
   link.download = filename
   link.click()

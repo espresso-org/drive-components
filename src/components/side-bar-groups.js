@@ -7,44 +7,43 @@ import { ActionButton } from './action-button'
 import { SelectableRow } from './selectable-row'
 import { EditMode } from '../stores/edit-mode'
 
-export const SideBarGroups = 
-  inject("mainStore")( 
-  observer(({ group, mainStore }) =>
-    <Main visible={ group ? true : false }>
-      <Tabs>Details</Tabs>
-        
-      {group &&
+export const SideBarGroups =
+  inject("mainStore")(
+    observer(({ group, mainStore }) =>
+      <Main visible={group ? true : false}>
+        <Tabs>Details</Tabs>
+
+        {group &&
         <Details>
           <Text size="large">{group.name}</Text>
           <Info>
             <Label>Members</Label>
 
             <Table>
-              {group.entities.toJS().map(entity => 
-                entity && 
-                <GroupMemberRow 
-                    key={entity} 
-                    entity={entity} 
-                    selected={mainStore.isGroupEntitySelected(entity)}
-                    onClick={() => mainStore.selectGroupEntity(entity)} 
-                />
-              )}
+              {group.entities.toJS().map(entity =>
+                entity &&
+                <GroupMemberRow
+                  key={entity}
+                  entity={entity}
+                  selected={mainStore.isGroupEntitySelected(entity)}
+                  onClick={() => mainStore.selectGroupEntity(entity)}
+                />)}
             </Table>
           </Info>
           <Separator />
 
           <Actions>
-            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupMember)}}>Add Member</ActionButton>
-            <ActionButton disabled={mainStore.selectedGroupEntity == null} onClick={() => {mainStore.removeEntityFromGroup(group.id, mainStore.selectedGroupEntity)}}>Remove Member</ActionButton>
-            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupName)}}>Rename Group</ActionButton>
-            <ActionButton emphasis="negative" mode="outline" onClick={() => {mainStore.deleteGroup(group.id)}}>Delete Group</ActionButton>
+            <ActionButton onClick={() => { mainStore.setEditMode(EditMode.GroupMember) }}>Add Member</ActionButton>
+            <ActionButton disabled={mainStore.selectedGroupEntity == null} onClick={() => { mainStore.removeEntityFromGroup(group.id, mainStore.selectedGroupEntity) }}>Remove Member</ActionButton>
+            <ActionButton onClick={() => { mainStore.setEditMode(EditMode.GroupName) }}>Rename Group</ActionButton>
+            <ActionButton emphasis="negative" mode="outline" onClick={() => { mainStore.deleteGroup(group.id) }}>Delete Group</ActionButton>
           </Actions>
         </Details>
       }
-    </Main>
-))
+      </Main>)
+  )
 
-const GroupMemberRow = ({ entity, onClick, selected }) => 
+const GroupMemberRow = ({ entity, onClick, selected }) =>
   <SelectableRow size="small" {...{ onClick, selected }}>
     <EntityTableCell>{entity}</EntityTableCell>
   </SelectableRow>
@@ -55,7 +54,7 @@ const Main = styled.aside`
   width: 300px;
   margin-left: 30px;
   min-height: 100%;
-  margin-right: ${({ visible }) => visible ? 0 : '-340px' };
+  margin-right: ${({ visible }) => visible ? 0 : '-340px'};
   transition: margin-right 300ms cubic-bezier(0.4,0.0,0.2,1);  
 `
 const Tabs = styled.div`

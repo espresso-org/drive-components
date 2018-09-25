@@ -16,20 +16,20 @@ import Screen from './screen'
 import LeftIcon from './left-icon'
 import { AddPermissions } from './add-permissions'
 
-export const App = 
+export const App =
 inject("mainStore", "configStore")(
-observer(({ mainStore, configStore }) =>
+  observer(({ mainStore, configStore }) =>
     <AragonApp publicUrl="./aragon-ui/">
-      <Screen position={0} animate={true}>
+      <Screen position={0} animate>
         {!configStore.isConfigSectionOpen && !mainStore.isGroupsSectionOpen && (
         <div>
           <AppBar
             title="Drive"
             endContent={
               <div>
-                <span style={{cursor: 'pointer'}} onClick={() => mainStore.isGroupsSectionOpen = true}><GroupsSectionBtn /></span>
-                <span style={{cursor: 'pointer'}} onClick={() => configStore.isConfigSectionOpen = true}><ConfigurationSectionBtn /></span>
-                <FileInput onChange={e => { mainStore.uploadFiles(e.target.files);e.target.value = '' }}>New File</FileInput>
+                <span style={{ cursor: 'pointer' }} onClick={() => mainStore.isGroupsSectionOpen = true}><GroupsSectionBtn /></span>
+                <span style={{ cursor: 'pointer' }} onClick={() => configStore.isConfigSectionOpen = true}><ConfigurationSectionBtn /></span>
+                <FileInput onChange={(e) => { mainStore.uploadFiles(e.target.files); e.target.value = '' }}>New File</FileInput>
               </div>
             }
           />
@@ -50,65 +50,65 @@ observer(({ mainStore, configStore }) =>
                       </TableRow>
                     }
                   >
-                    {mainStore.files.toJS().map(file => 
+                    {mainStore.files.toJS().map(file =>
                       file && !file.isDeleted && <FileRow
-                                key={file.id}
-                                file={file}
-                                selected={mainStore.isFileSelected(file)}
-                                onClick={() => mainStore.selectFile(file.id)}
-                                onDownloadClick={() => mainStore.downloadFile(file.id)}
-                              />
+                        key={file.id}
+                        file={file}
+                        selected={mainStore.isFileSelected(file)}
+                        onClick={() => mainStore.selectFile(file.id)}
+                        onDownloadClick={() => mainStore.downloadFile(file.id)}
+                      />
                     )}
                   </Table>
                 </Main>
                 <AddPermissionsPanel>
-                  <SidePanel 
+                  <SidePanel
                     title="Add a Permission"
-                    opened={mainStore.isAddPermissionPanelOpen} 
-                    onClose={() => mainStore.isAddPermissionPanelOpen = false }
+                    opened={mainStore.isAddPermissionPanelOpen}
+                    onClose={() => mainStore.isAddPermissionPanelOpen = false}
                   >
                     <AddPermissions />
                   </SidePanel>
-                </AddPermissionsPanel>                
+                </AddPermissionsPanel>
                 <SideBar file={mainStore.selectedFile} />
               </TwoPanels>
             </AppLayout.Content>
           </AppLayout.ScrollWrapper>
-          <EditPanel/>
+          <EditPanel />
         </div>
         )}
       </Screen>
 
-      <Screen position={1} animate={true}>
+      <Screen position={1} animate>
         {configStore.isConfigSectionOpen && (
-          <span>
-            <AppBar>
-              <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false }} style={{"display": configStore.configSelected ? 'flex' : 'none'}}>
-                <LeftIcon />
-              </BackButton>        
-              <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Settings</h1>
-            </AppBar>
-            <ConfigurationScreen />
-          </span>
+        <span>
+          <AppBar>
+            <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false }} style={{ display: configStore.configSelected ? 'flex' : 'none' }}>
+              <LeftIcon />
+            </BackButton>
+            <h1 style={{ lineHeight: 1.5, fontSize: "22px" }}>Settings</h1>
+          </AppBar>
+          <ConfigurationScreen />
+        </span>
         )}
       </Screen>
 
-      <Screen position={1} animate={true}>
+      <Screen position={1} animate>
         {mainStore.isGroupsSectionOpen && (
-            <span>
-              <AppBar endContent={<Button mode="strong" onClick={() => mainStore.setEditMode(EditMode.GroupCreate)}>New Group</Button>}>
-                <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; mainStore.selectedGroup = null; }}>
-                  <LeftIcon />
-                </BackButton>
-                <h1 style={{"lineHeight": 1.5, "fontSize": "22px"}}>Groups</h1>
-              </AppBar>
-              <GroupsScreen />
-              <EditPanel/>
-            </span>
+        <span>
+          <AppBar endContent={<Button mode="strong" onClick={() => mainStore.setEditMode(EditMode.GroupCreate)}>New Group</Button>}>
+            <BackButton onClick={() => { mainStore.isGroupsSectionOpen = false; mainStore.selectedGroup = null; }}>
+              <LeftIcon />
+            </BackButton>
+            <h1 style={{ lineHeight: 1.5, fontSize: "22px" }}>Groups</h1>
+          </AppBar>
+          <GroupsScreen />
+          <EditPanel />
+        </span>
         )}
       </Screen>
-    </AragonApp>
-))
+    </AragonApp>)
+)
 
 const Breadcrumb = styled.div`
   font-size: 21px;

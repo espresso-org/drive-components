@@ -4,19 +4,19 @@ import { AragonApp } from '@aragon/ui'
 
 /**
  * Same as storiesOf but wraps the story inside an AragonApp component
- * @param {string} componentName 
- * @param {*} moduleRef 
+ * @param {string} componentName
+ * @param {*} moduleRef
  */
 export function aragonStoriesOf(componentName, moduleRef) {
-    let aragonStories = storiesOf(componentName, moduleRef)
+  const aragonStories = storiesOf(componentName, moduleRef)
 
-    aragonStories._add = aragonStories.add
-    aragonStories.add = function(storyName, fn) {
-        return aragonStories._add(storyName, () => (
-            <AragonApp>
-                {fn()}
-            </AragonApp>
-        ))
-    }
-    return aragonStories
+  aragonStories._add = aragonStories.add
+  aragonStories.add = function (storyName, fn) {
+    return aragonStories._add(storyName, () => (
+      <AragonApp>
+        {fn()}
+      </AragonApp>
+    ))
+  }
+  return aragonStories
 }

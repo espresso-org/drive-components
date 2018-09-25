@@ -7,35 +7,34 @@ import { AppLayout } from './app-layout'
 import { GroupRow } from './group-row'
 import { SideBarGroups } from './side-bar-groups'
 
-export const GroupsScreen = inject("mainStore")(observer(({ mainStore }) => 
-    <Main>
-        <Title>Group List</Title>
+export const GroupsScreen = inject("mainStore")(observer(({ mainStore }) =>
+  <Main>
+    <Title>Group List</Title>
 
-        <AppLayout.ScrollWrapper>
-            <AppLayout.Content>
-                <TwoPanels>
-                    <Table
-                    header={
-                        <TableRow>
-                            <TableHeader title="Name" />
-                            <TableHeader title="Members" />
-                        </TableRow>
+    <AppLayout.ScrollWrapper>
+      <AppLayout.Content>
+        <TwoPanels>
+          <Table
+            header={
+              <TableRow>
+                <TableHeader title="Name" />
+                <TableHeader title="Members" />
+              </TableRow>
                     }
-                    >
-                    {mainStore.groups.toJS().map(group => 
-                        group && <GroupRow
-                                key={group.id}
-                                group={group}
-                                selected={mainStore.isGroupSelected(group)}
-                                onClick={() => mainStore.selectGroup(group.id)}
-                                />
-                    )}
-                    </Table>
-                    <SideBarGroups group={mainStore.selectedGroup} />
-                </TwoPanels>
-            </AppLayout.Content>
-          </AppLayout.ScrollWrapper>
-    </Main>
+          >
+            {mainStore.groups.toJS().map(group =>
+              group && <GroupRow
+                key={group.id}
+                group={group}
+                selected={mainStore.isGroupSelected(group)}
+                onClick={() => mainStore.selectGroup(group.id)}
+              />)}
+          </Table>
+          <SideBarGroups group={mainStore.selectedGroup} />
+        </TwoPanels>
+      </AppLayout.Content>
+    </AppLayout.ScrollWrapper>
+  </Main>
 ))
 
 const Main = styled.div`
