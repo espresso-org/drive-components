@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 
 import { Field, Button, TextInput } from '@aragon/ui'
 import { FileInput } from './file-input'
+import { LargeTextInput, SaveButton } from './large-input'
 
 import { convertFileToArrayBuffer } from '../utils/files'
 import { EditMode } from '../stores/edit-mode'
@@ -30,16 +31,18 @@ export class EditContent extends Component {
     for (let file of files) {
       this.newFileContent = await convertFileToArrayBuffer(file) 
     }
+
+    this.mainStore.setFileContent(this.props.file.id, this.newFileContent)
   }  
 
   render() {
     return (
       <Main>
-          <FileInput onChange={this.uploadFiles}>Upload new content</FileInput>
-          <Actions>
-            <ActionButton mode="outline" onClick={() => this.mainStore.setFileContent(this.props.file.id, this.newFileContent)} emphasis="positive">OK</ActionButton>
-            <ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</ActionButton>
-          </Actions>
+          <FileInput 
+            style={{ width: '100%', textAlign: 'center' }} 
+            onChange={this.uploadFiles}>
+              Upload New Content
+          </FileInput>
       </Main>
     )
   }
