@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 import { Field, Button, TextInput } from '@aragon/ui'
+import { SaveButton } from './large-inputs'
 
 @inject("mainStore")
 @observer
@@ -17,7 +18,7 @@ export class EditGroupCreate extends Component {
             <TextInput value={this.state.groupName} onChange={e => this.setState({ groupName: e.target.value })} />
         </Field>
         <Actions>
-            <ActionButton mode="strong" onClick={() => this.mainStore.createGroup(this.state.groupName)}>Create</ActionButton>
+            <SaveButton mode="strong" onClick={() => this.mainStore.createGroup(this.state.groupName)}>Create</SaveButton>
         </Actions>
       </Main>
     )

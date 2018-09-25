@@ -20,7 +20,7 @@ observer(({ mainStore, permissionsStore }) =>
         <s.AddressList 
           header={
             <TableRow>
-              <TableHeader title="Entity / Group" />
+              <TableHeader title="Member / Group" />
               <TableHeader title="Read" />
               <TableHeader title="Write" />
             </TableRow>

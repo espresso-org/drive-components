@@ -55,7 +55,7 @@ export class AddPermissions extends Component {
                 <RadioButton 
                     checked={this.state.permissionType === PermissionType.Entity} 
                     onClick={e => this.setState({ permissionType: PermissionType.Entity })}
-                /> Add an entity
+                /> Add a member
                 <RadioButton 
                     style={{ marginLeft: '16px'}}
                     checked={this.state.permissionType === PermissionType.Group} 
