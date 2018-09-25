@@ -7,6 +7,7 @@ import { CheckButton } from '../check-button'
 import { PermissionType } from '../../stores/permissions-store'
 
 import { EthAddress } from '../eth-address'
+import { SelectableRow } from '../selectable-row'
 import { s } from './edit-permissions.styles'
 
 export const EditPermissions = 
@@ -55,7 +56,7 @@ observer(({ mainStore, permissionsStore }) =>
 ))
 
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
-  <s.SelectableRow selected={selected} {...props}>
+  <SelectableRow size="small" selected={selected} {...props}>
     <TableCell>
       { permission.permissionType === PermissionType.Entity ?
         <EthAddress ethAddress={permission.entity} />
@@ -75,4 +76,4 @@ const PermissionRow = ({ permission, onChange, selected, ...props }) =>
         onClick={() => onChange({ ...permission, write: !permission.write })}
       />
     </TableCell>
-  </s.SelectableRow>
+  </SelectableRow>
