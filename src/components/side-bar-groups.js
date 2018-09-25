@@ -10,7 +10,7 @@ import { EditMode } from '../stores/edit-mode'
 export const SideBarGroups = 
   inject("mainStore")( 
   observer(({ group, mainStore }) =>
-    <Main>
+    <Main visible={ group ? true : false }>
       <Tabs>Details</Tabs>
         
       {group &&
@@ -55,6 +55,8 @@ const Main = styled.aside`
   width: 300px;
   margin-left: 30px;
   min-height: 100%;
+  margin-right: ${({ visible }) => visible ? 0 : '-340px' };
+  transition: margin-right 300ms cubic-bezier(0.4,0.0,0.2,1);  
 `
 const Tabs = styled.div`
   border-bottom: 1px solid ${theme.contentBorder};
