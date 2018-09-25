@@ -1,7 +1,7 @@
 import React from "react"
 import { action } from "@storybook/addon-actions"
 import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
-import { EditPermissions } from '../src/components/edit-permissions/edit-permissions'
+import { EditFilePermissions } from '../src/components/edit-file-permissions/edit-file-permissions'
 import { BigNumber } from 'bignumber.js'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
 import { Provider } from 'mobx-react'
@@ -49,6 +49,6 @@ setTimeout(async () => {
 
 aragonStoriesOf("EditPermissions", module).add("Basic", () => (
   <Provider permissionsStore={permissionsStore} datastore={datastore} mainStore={mainStore} configStore={configStore}>
-    <EditPermissions file={file}></EditPermissions>
+    <EditFilePermissions file={file} />
   </Provider>
 ))

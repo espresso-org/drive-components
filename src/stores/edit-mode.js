@@ -3,7 +3,7 @@ export const EditMode = {
     Name: "Name",
     Content: "Content",
     Permissions: "Permissions",
-    GroupCreate: "Create group",
-    GroupName: "Group name",
-    GroupMember: "Group member"
+    GroupCreate: "Create Group",
+    GroupName: "Group Name",
+    GroupMember: "Group Nember"
 }

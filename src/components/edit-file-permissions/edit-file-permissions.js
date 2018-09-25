@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
 import { TableRow, TableHeader, TableCell, SidePanelSeparator } from '@aragon/ui'
@@ -6,9 +7,9 @@ import { CheckButton } from '../check-button'
 import { PermissionType } from '../../stores/permissions-store'
 import { EthAddress } from '../eth-address'
 import { SelectableRow } from '../selectable-row'
-import { s } from './edit-permissions.styles'
+import { s } from './edit-file-permissions.styles'
 
-export const EditPermissions = 
+export const EditFilePermissions = 
 inject("mainStore", "permissionsStore")(
 observer(({ mainStore, permissionsStore }) =>
       <s.Main>
@@ -57,23 +58,33 @@ observer(({ mainStore, permissionsStore }) =>
 
 const PermissionRow = ({ permission, onChange, selected, ...props }) => 
   <SelectableRow size="small" selected={selected} {...props}>
-    <TableCell>
+    <TableCell style={{ fontSize: '15px' }}>
       { permission.permissionType === PermissionType.Entity ?
-        <EthAddress ethAddress={permission.entity} />
+        <StyledEthAddress ethAddress={permission.entity} />
         :
         permission.groupName
       }
     </TableCell>
     <TableCell>
-      <CheckButton 
+      <Checbox 
         onClick={() => onChange({ ...permission, read: !permission.read })}
         checked={permission.read}
       />
     </TableCell>
     <TableCell>
-      <CheckButton 
+      <Checbox 
         checked={permission.write}
         onClick={() => onChange({ ...permission, write: !permission.write })}
       />
     </TableCell>
   </SelectableRow>
+
+
+const Checbox = styled(CheckButton)`
+      margin-top: 3px;
+`
+
+const StyledEthAddress = styled(EthAddress)`
+      margin-top: -1px;
+      margin-bottom: 1px;
+`
