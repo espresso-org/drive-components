@@ -1,0 +1,20 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true
+     },
+
+    "rules": {
+        "comma-dangle": 0,
+        "curly": 0,
+        "eol-last": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/prefer-default-export": 0,
+        "no-else-return": 0,
+        "nonblock-statement-body-position": 0,
+        "no-restricted-syntax": 0,
+        "quotes": 0,
+        "semi": 0
+    }
+}
