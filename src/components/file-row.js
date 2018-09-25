@@ -10,8 +10,6 @@ import moment from 'moment'
 
 fontawesome.library.add(solid.faDownload)
 
-const Container = styled(SelectableRow)`
-`
 
 export const FileRow = ({ file, onClick, onDownloadClick, selected }) => 
   <Container {...{ onClick, selected }}>
@@ -38,10 +36,6 @@ export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
 
 
 const Container = styled(TableRow)`
-  cursor: pointer;
-  > * {
-    background: ${ props => props.selected ? '#e3f7f5' : '#FFF' };
-  } 
 `
 const Name = styled.div`
   min-width: 240px;

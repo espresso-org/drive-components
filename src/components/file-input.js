@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-export const FileInput = ({ children, onChange }) => 
-  <Container>
+
+export const FileInput = ({ children, onChange, ...props }) => 
+  <Container {...props}>
     <HiddenInput {...{onChange}} /> 
     {children} 
   </Container>
@@ -41,8 +42,3 @@ const Container = styled.label`
     }
 `
 
-export const FileInput = ({ children, onChange, ...props }) => 
-  <Container {...props}>
-    <HiddenInput {...{onChange}} /> 
-    {children} 
-  </Container>
