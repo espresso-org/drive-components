@@ -15,16 +15,6 @@ inject("mainStore", "permissionsStore")(
 observer(({ mainStore, permissionsStore }) =>
       <s.Main>
         
-        <s.Info>
-          <s.Label>
-            Public :
-          </s.Label>
-          <CheckButton 
-            checked={permissionsStore.isSelectedFilePublic}
-            onClick={() => {permissionsStore.isSelectedFilePublic = !permissionsStore.isSelectedFilePublic}}
-          />  
-        </s.Info>   
-        <SidePanelSeparator />   
         <s.TopButtons>
           <s.AddButton onClick={() => mainStore.isAddPermissionPanelOpen = true }>Add</s.AddButton>
           <s.RemoveButton onClick={() => permissionsStore.removeSelectedPermission()}>Remove</s.RemoveButton>
@@ -48,6 +38,18 @@ observer(({ mainStore, permissionsStore }) =>
               />
           )}
         </s.AddressList>
+
+        <SidePanelSeparator style={{ marginTop: '32px' }} />          
+        <s.Info>
+          <s.Label>
+            Public :
+          </s.Label>
+          <CheckButton 
+            checked={permissionsStore.isSelectedFilePublic}
+            onClick={() => {permissionsStore.isSelectedFilePublic = !permissionsStore.isSelectedFilePublic}}
+          />  
+        </s.Info>   
+        {/*<SidePanelSeparator />*/}
 
         <s.Actions>            
           <s.SaveButton onClick={() => permissionsStore.savePermissionChanges() }>Save</s.SaveButton>

@@ -13,7 +13,7 @@ export const s = {
 
     TopButtons: styled.div`
         margin: 10px;
-        margin-top: 20px;
+        margin-top: 0px;
     `,
 
     AddButton: styled(Button).attrs({ 
@@ -48,7 +48,7 @@ export const s = {
     `,
 
     Actions: styled.div`
-        margin-top: 40px;
+        margin-top: 0px;
         margin-bottom: 20px;
     `,
 
@@ -59,8 +59,7 @@ export const s = {
 
     SaveButton: styled(Button)
         .attrs({ mode: 'strong', wide: true })`
-        margin-top: 40px;    
-        text-transform: uppercase;
+        margin-top: 20px;    
     `,
     
     SelectableRow: styled(TableRow)`
@@ -71,7 +70,7 @@ export const s = {
     `,
 
     Info: styled.div`
-        margin-top: 20px;
+        margin-top: 26px;
         margin-bottom: 20px;
         margin-left: 20px;
         vertical-align: middle;

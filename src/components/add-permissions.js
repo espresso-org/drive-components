@@ -87,6 +87,7 @@ export class AddPermissions extends Component {
                     onClick={() => this.setState({ isRead: !this.state.isRead })} 
                 /> Read
                 <CheckButton 
+                    style={{ marginLeft: '68px' }}
                     checked={this.state.isWrite} 
                     onClick={() => this.setState({ isWrite: !this.state.isWrite })} 
                 /> Write
