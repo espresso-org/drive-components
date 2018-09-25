@@ -34,10 +34,10 @@ export const SideBarGroups =
           <Separator />
 
           <Actions>
-            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupMember)}}>Add member</ActionButton>
-            <ActionButton disabled={mainStore.selectedGroupEntity == null} onClick={() => {mainStore.removeEntityFromGroup(group.id, mainStore.selectedGroupEntity)}}>Remove member</ActionButton>
-            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupName)}}>Rename group</ActionButton>
-            <ActionButton emphasis="negative" mode="outline" onClick={() => {mainStore.deleteGroup(group.id)}}>Delete group</ActionButton>
+            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupMember)}}>Add Member</ActionButton>
+            <ActionButton disabled={mainStore.selectedGroupEntity == null} onClick={() => {mainStore.removeEntityFromGroup(group.id, mainStore.selectedGroupEntity)}}>Remove Member</ActionButton>
+            <ActionButton onClick={() => {mainStore.setEditMode(EditMode.GroupName)}}>Rename Group</ActionButton>
+            <ActionButton emphasis="negative" mode="outline" onClick={() => {mainStore.deleteGroup(group.id)}}>Delete Group</ActionButton>
           </Actions>
         </Details>
       }

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
 import { Field, Button, TextInput } from '@aragon/ui'
+import { LargeTextInput, SaveButton } from './large-input'
 
 import { EditMode } from '../stores/edit-mode'
 
@@ -26,12 +27,15 @@ export class EditName extends Component {
     return (
       <Main>
           <Field label="New file name:">
-            <TextInput value={this.state.newFilename} onChange={e => this.setState({ newFilename: e.target.value })} />
+            <LargeTextInput value={this.state.newFilename} onChange={e => this.setState({ newFilename: e.target.value })} />
           </Field>
-          <Actions>
-            <ActionButton mode="outline" onClick={() => this.mainStore.setFilename(this.props.file.id, this.state.newFilename)} emphasis="positive">OK</ActionButton>
-            <ActionButton mode="outline" onClick={() => this.mainStore.setEditMode(EditMode.None)} emphasis="negative">Cancel</ActionButton>
-          </Actions>
+          
+          <SaveButton 
+            onClick={() => this.mainStore.setFilename(this.props.file.id, this.state.newFilename)} 
+          >
+            Save
+          </SaveButton>
+
       </Main>
     )
   }
