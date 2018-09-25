@@ -12,8 +12,8 @@ import { Text, Button, theme } from '@aragon/ui'
 import { ActionButton } from './action-button'
 import { EditMode } from '../stores/edit-mode'
 
-export const SideBar = 
-  inject("mainStore")( 
+export const SideBar =
+  inject("mainStore")(
   ({ file, mainStore }) =>
     <Main visible={ file ? true : false }>
       <Tabs>Details</Tabs>
