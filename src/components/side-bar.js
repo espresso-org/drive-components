@@ -10,6 +10,7 @@ import { getDescriptionForFilename, getClassNameForFilename } from '../utils/fil
 
 import { Text, Button, theme } from '@aragon/ui'
 
+import { ActionButton } from './action-button'
 import { EditMode } from '../stores/edit-mode'
 
 const Main = styled.aside`
@@ -55,7 +56,7 @@ export const SideBar =
             }
             {file.isOwner &&
               <div>
-                <ActionButton onClick={() => {mainStore.setEditMode(EditMode.Permissions);mainStore.newPublicStatus = mainStore.selectedFile.isPublic;}}>Manage permissions</ActionButton>
+                <ActionButton onClick={() => {mainStore.setEditMode(EditMode.Permissions);mainStore.newPublicStatus = mainStore.selectedFile.isPublic;}}>Permissions</ActionButton>
                 <ActionButton mode="outline" onClick={() => mainStore.deleteFile()} emphasis="negative">Delete</ActionButton>
               </div>
             }
@@ -88,12 +89,6 @@ const Label = styled.span`
 const Actions = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
-`
-
-const ActionButton = styled(Button).attrs({ mode: 'secondary'})`
-  display: block;
-  width: 180px;
-  margin: 8px 0;
 `
 
 const EthAddressDetails = styled.span`
