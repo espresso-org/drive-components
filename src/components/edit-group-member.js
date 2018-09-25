@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 import { Field, Button, TextInput } from '@aragon/ui'
+import { SaveButton, LargeTextInput } from './large-input'
 
 @inject("mainStore")
 @observer
@@ -18,10 +19,10 @@ export class EditGroupMember extends Component {
     return (
       <Main>
         <Field label="Member address:">
-            <TextInput value={this.state.newMember} onChange={e => this.setState({ newMember: e.target.value })} />
+            <LargeTextInput value={this.state.newMember} onChange={e => this.setState({ newMember: e.target.value })} />
         </Field>
         <Actions>
-            <ActionButton mode="strong" onClick={() => this.mainStore.addEntityToGroup(this.props.group.id, this.state.newMember)}>Add member</ActionButton>
+            <SaveButton onClick={() => this.mainStore.addEntityToGroup(this.props.group.id, this.state.newMember)}>Add Member</SaveButton>
         </Actions>
       </Main>
     )

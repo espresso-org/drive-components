@@ -41,7 +41,7 @@ export const SideBar =
             {file.permissions.write &&
               <div>
                 <ActionButton onClick={() => mainStore.setEditMode(EditMode.Name)}>Rename</ActionButton>
-                <ActionButton onClick={() => mainStore.setEditMode(EditMode.Content)}>Modify</ActionButton>
+                <ActionButton onClick={() => mainStore.setEditMode(EditMode.Content)}>Change File Content</ActionButton>
               </div>
             }
             {file.isOwner &&

@@ -42,7 +42,7 @@ function title(editMode) {
     case EditMode.Permissions: return 'Permissions'
     case EditMode.GroupCreate: return 'Create Group'
     case EditMode.GroupName: return 'Rename Group'
-    case EditMode.GroupMember: return 'Add a Member'
+    case EditMode.GroupMember: return 'Add Member'
   }
 }
 
