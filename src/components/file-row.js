@@ -35,7 +35,7 @@ export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
   </Container>
 
 
-const Container = styled(TableRow)`
+const Container = styled(SelectableRow)`
 `
 const Name = styled.div`
   min-width: 240px;
