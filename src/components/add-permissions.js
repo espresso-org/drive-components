@@ -3,7 +3,8 @@ import { observer, inject } from 'mobx-react'
 import { observe } from 'mobx'
 import styled from 'styled-components'
 
-import { Field, TextInput, Button, RadioButton, DropDown } from '@aragon/ui'
+import { Field, TextInput, Button, RadioButton } from '@aragon/ui'
+import { LargeDropDown } from './large-input'
 import { CheckButton } from './check-button'
 import { PermissionType } from '../stores/permissions-store'
 
@@ -70,7 +71,7 @@ export class AddPermissions extends Component {
                     </PermissionField>
                     :
                     <PermissionField label="Group:">                   
-                        <DropDown
+                        <LargeDropDown
                             items={this.props.mainStore.groups.map(group => group.name)}
                             active={this.state.selectedGroupIndex}
                             onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
