@@ -6,9 +6,9 @@ import { CheckButton } from '../check-button'
 import { PermissionType } from '../../stores/permissions-store'
 import { EthAddress } from '../eth-address'
 import { SelectableRow } from '../selectable-row'
-import { s } from './edit-permissions.styles'
+import { s } from './edit-file-permissions.styles'
 
-export const EditPermissions = 
+export const EditFilePermissions = 
 inject("mainStore", "permissionsStore")(
 observer(({ mainStore, permissionsStore }) =>
       <s.Main>

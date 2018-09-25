@@ -11,7 +11,7 @@ import { EditMode } from '../stores/edit-mode'
 
 @inject("mainStore")
 @observer
-export class EditContent extends Component {
+export class EditFileContent extends Component {
   state = { newFilename: '' }
 
   get mainStore() { return this.props.mainStore }

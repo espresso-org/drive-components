@@ -9,7 +9,7 @@ import { EditMode } from '../stores/edit-mode'
 
 @inject("mainStore")
 @observer
-export class EditName extends Component {
+export class EditFileName extends Component {
   state = { newFilename: '' }
 
   get mainStore() { return this.props.mainStore }

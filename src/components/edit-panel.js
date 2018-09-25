@@ -4,9 +4,9 @@ import { observer, inject } from 'mobx-react'
 import Switch from 'literal-switch'
 
 import { SidePanel } from '@aragon/ui'
-import { EditName } from './edit-name'
-import { EditContent } from './edit-content'
-import { EditPermissions } from './edit-permissions/edit-permissions'
+import { EditFileName } from './edit-file-name'
+import { EditFileContent } from './edit-file-content'
+import { EditFilePermissions } from './edit-file-permissions/edit-file-permissions'
 import { EditGroupCreate } from './edit-group-create'
 import { EditGroupName } from './edit-group-name'
 import { EditGroupMember } from './edit-group-member'
@@ -23,9 +23,9 @@ export const EditPanel =
         {(mainStore.selectedFile  || mainStore.isGroupsSectionOpen) && 
         Switch({
           [EditMode.None]: null,
-          [EditMode.Name]: () => <EditName file={mainStore.selectedFile}/>,
-          [EditMode.Content]: () => <EditContent file={mainStore.selectedFile}/>,
-          [EditMode.Permissions]: () => <EditPermissions file={mainStore.selectedFile}/>,
+          [EditMode.Name]: () => <EditFileName file={mainStore.selectedFile}/>,
+          [EditMode.Content]: () => <EditFileContent file={mainStore.selectedFile}/>,
+          [EditMode.Permissions]: () => <EditFilePermissions file={mainStore.selectedFile}/>,
           [EditMode.GroupCreate]: () => <EditGroupCreate/>,
           [EditMode.GroupName]: () => <EditGroupName group={mainStore.selectedGroup}/>,
           [EditMode.GroupMember]: () => <EditGroupMember group={mainStore.selectedGroup}/>
