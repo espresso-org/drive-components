@@ -26,7 +26,7 @@ export class Datastore {
             fileSize: new BigNumber(file.byteLength),
             isPublic: true,
             isDeleted: false,
-            owner: '',
+            owner: '0x2284dd7330abade7fa8951414fcf7d17be35f69b',
             isOwner: true,
             lastModification: new BigNumber(Math.round((new Date()).getTime() / 1000)),
             permissionAddresses: [],
