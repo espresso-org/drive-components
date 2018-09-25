@@ -21,7 +21,7 @@ export const SideBarGroups =
 
             <Table>
               {group.entities.toJS().map(entity => 
-                entity && entity !== '0x0000000000000000000000000000000000000000' && 
+                entity && 
                 <GroupMemberRow 
                     key={entity} 
                     entity={entity} 
