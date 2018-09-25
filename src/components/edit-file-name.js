@@ -27,7 +27,7 @@ export class EditFileName extends Component {
           </Field>
           
           <SaveButton 
-            onClick={() => this.mainStore.setFilename(this.props.file.id, this.state.newFilename)} 
+            onClick={() => this.mainStore.setFileName(this.props.file.id, this.state.newFilename)} 
           >
             Rename
           </SaveButton>

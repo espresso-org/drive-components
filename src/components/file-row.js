@@ -5,6 +5,7 @@ import { EthAddress } from './eth-address'
 import { SelectableRow } from './selectable-row'
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { getClassNameForFilename } from '../utils/files'
 import moment from 'moment'
 
@@ -15,7 +16,7 @@ export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
   <Container {...{ onClick, selected }}>
     <NameCell>
       <Name>
-        <i className={`fa ${getClassNameForFilename(file.name)}`} /> {file.name}
+        <FontAwesomeIcon icon={getClassNameForFilename(file.name)} /> {file.name}
       </Name>
     </NameCell>
     <OwnerCell>

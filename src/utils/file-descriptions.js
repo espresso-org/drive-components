@@ -1,15 +1,15 @@
 export const classNames = {
-    image: 'fa-file-image',
-    pdf: 'fa-file-pdf',
-    word: 'fa-file-word',
-    powerpoint: 'fa-file-powerpoint',
-    excel: 'fa-file-excel',
-    audio: 'fa-file-audio',
-    video: 'fa-file-video',
-    zip: 'fa-file-archive',
-    code: 'fa-file-code',
-    text: 'fa-file-alt',
-    file: 'fa-file'
+    image: 'file-image',
+    pdf: 'file-pdf',
+    word: 'file-word',
+    powerpoint: 'file-powerpoint',
+    excel: 'file-excel',
+    audio: 'file-audio',
+    video: 'file-video',
+    zip: 'file-archive',
+    code: 'file-code',
+    text: 'file-alt',
+    file: 'file'
 }
 
 export const extensions = {

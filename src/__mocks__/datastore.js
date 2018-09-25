@@ -188,7 +188,7 @@ export class Datastore {
     }
 
     async setFileName(fileId, newName) {
-        const fileInfo = this.getFileInfo(fileId)
+        const fileInfo = this._fileInfo[fileId - 1]
         fileInfo.name = newName
         this._events.emit('FileRename')
     }
