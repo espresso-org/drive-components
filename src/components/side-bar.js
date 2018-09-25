@@ -6,6 +6,7 @@ import { inject } from 'mobx-react'
 
 import { EthAddress } from './eth-address'
 import { getDescriptionForFilename, getClassNameForFilename } from '../utils/files'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { Text, Button, theme } from '@aragon/ui'
 
 import { ActionButton } from './action-button'
@@ -21,7 +22,7 @@ export const SideBar =
         <Details>
           <Text size="large">{file.name}</Text>
           <Info>
-            <Label>Type</Label><i className={`fa ${getClassNameForFilename(file.name)}`} /> {getDescriptionForFilename(file.name)}<br />
+            <Label>Type</Label><FontAwesomeIcon icon={getClassNameForFilename(file.name)} /> {getDescriptionForFilename(file.name)}<br />
             <Label>Location</Label>/<br />
 
             <Label>Owner</Label>
