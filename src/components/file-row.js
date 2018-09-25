@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TableRow, TableCell } from '@aragon/ui'
 import { EthAddress } from './eth-address'
+import { SelectableRow } from './selectable-row'
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
 import { getClassNameForFilename } from '../utils/files'
@@ -10,11 +11,8 @@ import moment from 'moment'
 
 fontawesome.library.add(solid.faDownload)
 
-const Container = styled(TableRow)`
-  cursor: pointer;
-  > * {
-    background: ${ props => props.selected ? '#e3f7f5' : '#FFF' };
-  } 
+const Container = styled(SelectableRow)`
+
 `
 
 const Name = styled.div`

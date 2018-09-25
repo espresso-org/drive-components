@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 import { Table, TableCell, Text, Button, TableRow, theme } from '@aragon/ui'
 
+import { ActionButton } from './action-button'
+import { SelectableRow } from './selectable-row'
 import { EditMode } from '../stores/edit-mode'
 
 export const SideBarGroups = 
@@ -43,7 +45,7 @@ export const SideBarGroups =
 ))
 
 const GroupMemberRow = ({ entity, onClick, selected }) => 
-  <SelectableRow {...{ onClick, selected }}>
+  <SelectableRow size="small" {...{ onClick, selected }}>
     <EntityTableCell>{entity}</EntityTableCell>
   </SelectableRow>
 
@@ -74,11 +76,6 @@ const Actions = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
 `
-const ActionButton = styled(Button).attrs({ mode: 'secondary'})`
-  display: block;
-  width: 180px;
-  margin: 8px 0;
-`
 const Separator = styled.div`  
   border-bottom: 1px solid ${theme.contentBorder};
 `
@@ -87,11 +84,4 @@ const EntityTableCell = styled(TableCell)`
   align-items:center;
   justify-content:center;
   display: flex;
-`
-const SelectableRow = styled(TableRow)`
-  cursor: pointer;
-  > * {
-    background: ${ props => props.selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
-  }
-  font-size: 12px;
 `

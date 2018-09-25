@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TableRow, TableCell } from '@aragon/ui'
+import { SelectableRow } from './selectable-row'
+import { TableCell } from '@aragon/ui'
 
 export const GroupRow = ({ group, onClick, selected }) => 
   <Container {...{ onClick, selected }}>
@@ -22,11 +23,7 @@ function getEntitiesLength(entities) {
   return counter
 }
 
-const Container = styled(TableRow)`
-    cursor: pointer;
-    > * {
-    background: ${ props => props.selected ? '#e3f7f5' : '#FFF' };
-    } 
+const Container = styled(SelectableRow)`
 `
 const InCell = styled.div`
     min-width: 240px;
