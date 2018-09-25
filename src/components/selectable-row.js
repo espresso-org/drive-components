@@ -9,7 +9,7 @@ export const SelectableRow = styled(TableRow)`
             case 'small': return `
                 > td {
                  padding: 8px 0 4px 20px;
-                 font-size: 13px;
+                 font-size: 12px;
                 }
             ` 
             break;

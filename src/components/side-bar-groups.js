@@ -82,7 +82,7 @@ const Separator = styled.div`
   border-bottom: 1px solid ${theme.contentBorder};
 `
 const EntityTableCell = styled(TableCell)`
-  padding: 8px;
+  padding: 8px !important;
   align-items:center;
   justify-content:center;
   display: flex;
