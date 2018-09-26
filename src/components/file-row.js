@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TableRow, TableCell } from '@aragon/ui'
+import { TableCell } from '@aragon/ui'
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,6 @@ import { SelectableRow } from './selectable-row'
 import { EthAddress } from './eth-address'
 
 fontawesome.library.add(solid.faDownload)
-
 
 export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
   <Container {...{ onClick, selected }}>
@@ -40,7 +39,6 @@ const Container = styled(SelectableRow)`
 `
 const Name = styled.div`
   min-width: 240px;
-  
 `
 const NameCell = styled(TableCell)`
   min-width: 180px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Text, Table, TableRow, theme } from '@aragon/ui'
+import { Button, Text, Table, TableRow } from '@aragon/ui'
 
 export const s = {
   Main: styled.div`

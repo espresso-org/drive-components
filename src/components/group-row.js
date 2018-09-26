@@ -3,6 +3,15 @@ import styled from 'styled-components'
 import { TableCell } from '@aragon/ui'
 import { SelectableRow } from './selectable-row'
 
+function getEntitiesLength(entities) {
+  let counter = 0;
+  for (let i = 0; i < entities.length; i++) {
+    if (entities[i] !== '0x0000000000000000000000000000000000000000')
+      counter++
+  }
+  return counter
+}
+
 export const GroupRow = ({ group, onClick, selected }) =>
   <Container {...{ onClick, selected }}>
     <Cell>
@@ -12,16 +21,6 @@ export const GroupRow = ({ group, onClick, selected }) =>
       <InCell>{getEntitiesLength(group.entities)}</InCell>
     </Cell>
   </Container>
-
-
-function getEntitiesLength(entities) {
-  let counter = 0;
-  for (let i = 0; i < entities.length; i++) {
-    if (entities[i] != '0x0000000000000000000000000000000000000000')
-      counter++
-  }
-  return counter
-}
 
 const Container = styled(SelectableRow)`
 `

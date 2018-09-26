@@ -17,8 +17,6 @@ export const SelectableRow = styled(TableRow)`
     }
   }}
 
-    
-
     > * {
         background: ${({ selected }) => selected ? 'rgba(220, 234, 239, 0.3)' : 'white'};
     }

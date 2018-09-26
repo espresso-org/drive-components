@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-
 
 export const FileInput = ({ children, onChange, ...props }) =>
   <Container {...props}>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { Component } from 'react'
+import React from 'react'
 import { TextInput, Button, DropDown } from '@aragon/ui'
 
 export const LargeTextInput = styled(TextInput)`

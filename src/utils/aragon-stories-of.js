@@ -11,12 +11,10 @@ export function aragonStoriesOf(componentName, moduleRef) {
   const aragonStories = storiesOf(componentName, moduleRef)
 
   aragonStories._add = aragonStories.add
-  aragonStories.add = function (storyName, fn) {
-    return aragonStories._add(storyName, () => (
-      <AragonApp>
-        {fn()}
-      </AragonApp>
-    ))
-  }
+  aragonStories.add = (storyName, fn) => aragonStories._add(storyName, () => (
+    <AragonApp>
+      {fn()}
+    </AragonApp>
+  ))
   return aragonStories
 }

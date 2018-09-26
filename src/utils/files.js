@@ -26,10 +26,10 @@ export function downloadFile(file, filename) {
 }
 
 export function convertFileToArrayBuffer(file) {
-  return new Promise((res, rej) => {
+  return new Promise((res) => {
     const reader = new FileReader()
 
-    reader.onload = function (e) {
+    reader.onload = () => {
       res(reader.result)
     }
 

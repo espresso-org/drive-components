@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
-import { Table, TableCell, Text, Button, TableRow, theme } from '@aragon/ui'
+import { Table, TableCell, Text, theme } from '@aragon/ui'
 
 import { ActionButton } from './action-button'
 import { SelectableRow } from './selectable-row'

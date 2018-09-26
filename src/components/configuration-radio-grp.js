@@ -16,7 +16,7 @@ export const ConfigurationRadioGrp = observer(({ options, store, ...props }) =>
 
       <ImageCheckbox
         key={i}
-        active={store.radioGrpSelectedIndex == i}
+        active={store.radioGrpSelectedIndex === i}
         template={option}
         icon={logos[option]}
         label={option}

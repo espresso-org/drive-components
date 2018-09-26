@@ -1,6 +1,20 @@
 import { Subject } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
 
+class EventEmitter {
+  events
+
+  constructor() {
+    this.events = new Subject()
+  }
+
+  emit(event) {
+    this.events.next({
+      event
+    })
+  }
+}
+
 export class Datastore {
     _settings = {
       storageProvider: 0,
@@ -17,7 +31,7 @@ export class Datastore {
 
     _events
 
-    constructor(opts) {
+    constructor() {
       this._events = new EventEmitter()
     }
 
@@ -270,21 +284,7 @@ export class Datastore {
     /**
      * Datastore events
      */
-    async events(...args) {
+    async events() {
       return this._events.events
-    }
-}
-
-class EventEmitter {
-    events
-
-    constructor() {
-      this.events = new Subject()
-    }
-
-    emit(event) {
-      this.events.next({
-        event
-      })
     }
 }

@@ -12,6 +12,19 @@ import { EditGroupName } from './edit-group-name'
 import { EditGroupMember } from './edit-group-member'
 import { EditMode } from '../stores/edit-mode'
 
+function title(editMode) {
+  switch (editMode) {
+    case EditMode.None: return ''
+    case EditMode.Name: return 'Rename File'
+    case EditMode.Content: return 'Change File Content'
+    case EditMode.Permissions: return 'Permissions'
+    case EditMode.GroupCreate: return 'Create Group'
+    case EditMode.GroupName: return 'Rename Group'
+    case EditMode.GroupMember: return 'Add Member'
+  }
+  return ''
+}
+
 export const EditPanel =
   inject("mainStore")(
     observer(({ mainStore }) =>
@@ -34,18 +47,6 @@ export const EditPanel =
         </Content>
       </SidePanel>)
   )
-
-function title(editMode) {
-  switch (editMode) {
-    case EditMode.None: return ''
-    case EditMode.Name: return 'Rename File'
-    case EditMode.Content: return 'Change File Content'
-    case EditMode.Permissions: return 'Permissions'
-    case EditMode.GroupCreate: return 'Create Group'
-    case EditMode.GroupName: return 'Rename Group'
-    case EditMode.GroupMember: return 'Add Member'
-  }
-}
 
 const Content = styled.div`
     margin-top: 20px;

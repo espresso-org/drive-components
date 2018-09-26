@@ -5,7 +5,7 @@ import filesize from 'filesize/lib/filesize'
 import { inject } from 'mobx-react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Text, Button, theme } from '@aragon/ui'
+import { Text, theme } from '@aragon/ui'
 import { EthAddress } from './eth-address'
 import { getDescriptionForFilename, getClassNameForFilename } from '../utils/files'
 

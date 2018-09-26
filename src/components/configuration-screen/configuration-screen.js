@@ -20,7 +20,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
     </ConfigurationSectionAdvancedBtn>
 
     <AdvancedOptionsContainer open={configStore.isAdvancedConfigOpen}>
-      <div className="ipfsAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue == "ipfs" ? 'block' : 'none' }}>
+      <div className="ipfsAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue === "ipfs" ? 'block' : 'none' }}>
         <Field label="IPFS host:">
           <TextInput value={configStore.host} onChange={e => configStore.host = e.target.value} />
         </Field>
@@ -31,8 +31,8 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
           <DropDown items={['HTTP', 'HTTPS']} active={configStore.protocolIndex} onChange={e => configStore.protocolIndex = e} />
         </Field>
       </div>
-      <div className="filecoinAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue == "filecoin" ? 'block' : 'none' }}>Coming soon</div>
-      <div className="swarmAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue == "swarm" ? 'block' : 'none' }}>Coming soon</div>
+      <div className="filecoinAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue === "filecoin" ? 'block' : 'none' }}>Coming soon</div>
+      <div className="swarmAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue === "swarm" ? 'block' : 'none' }}>Coming soon</div>
     </AdvancedOptionsContainer>
 
     <Title style={{ marginTop: '50px' }}>Encryption</Title>
@@ -42,7 +42,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
     </ComingSoon>
 
     <ButtonContainer>
-      <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue == "filecoin" || configStore.radioGrpSelectedValue == "swarm"} onClick={() => { mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]); }}>OK</ActionButton>
+      <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]); }}>OK</ActionButton>
       <ActionButton mode="outline" disabled={!configStore.configSelected} onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false; }} emphasis="negative">Cancel</ActionButton>
     </ButtonContainer>
   </Main>))

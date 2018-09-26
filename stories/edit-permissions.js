@@ -1,10 +1,9 @@
 import React from "react"
-import { action } from "@storybook/addon-actions"
+import { Provider } from 'mobx-react'
+import { BigNumber } from 'bignumber.js'
 import { aragonStoriesOf } from '../src/utils/aragon-stories-of'
 import { EditFilePermissions } from '../src/components/edit-file-permissions/edit-file-permissions'
-import { BigNumber } from 'bignumber.js'
 import { Datastore as MockedDatastore } from '../src/__mocks__/datastore'
-import { Provider } from 'mobx-react'
 import { MainStore } from '../src/stores/main-store'
 import { ConfigStore } from '../src/stores/config-store'
 import { PermissionsStore } from '../src/stores/permissions-store'
@@ -30,16 +29,16 @@ setTimeout(async () => {
   datastore.createGroup("Group #32")
   await datastore.addFile('test.jpeg', new ArrayBuffer(60))
   await datastore.setEntityPermissions(
-    1, 
-    '0x8401eb5ff34cc943f096a32ef3d5113febe8d4fb', 
-    true, 
+    1,
+    '0x8401eb5ff34cc943f096a32ef3d5113febe8d4fb',
+    true,
     false
   )
 
   await datastore.setGroupPermissions(
-    1, 
-    1, 
-    true, 
+    1,
+    1,
+    true,
     true
   )
   await mainStore._refreshFiles()

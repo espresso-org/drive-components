@@ -1,10 +1,9 @@
-import { observable, computed, action, decorate, configure } from 'mobx'
+import { observable, action, configure } from 'mobx'
 // import Aragon, { providers as aragonProviders } from '@aragon/client'
 import { asyncComputed } from 'computed-async-mobx'
 
 import { downloadFile, convertFileToArrayBuffer } from '../utils/files'
 // import { Datastore, providers } from 'aragon-datastore'
-import { Datastore } from '../__mocks__/datastore'
 // import { configStore } from './config-store'
 import { EditMode } from './edit-mode'
 
@@ -110,8 +109,10 @@ export class MainStore {
   }
 
   selectFile = async (fileId) => {
-    if (this.selectedFile && this.selectedFile.id === fileId)
-      return this.selectedFile = null
+    if (this.selectedFile && this.selectedFile.id === fileId) {
+      this.selectedFile = null
+      return this.selectedFile
+    }
 
     const selectedFile = this.files.find(file => file && file.id === fileId)
 
@@ -119,6 +120,7 @@ export class MainStore {
       this.selectedFile = selectedFile
       this.newPublicStatus = selectedFile.isPublic
     }
+    return null
   }
 
   @action async createGroup(name) {
@@ -156,7 +158,8 @@ export class MainStore {
   selectGroup = async (groupId) => {
     if (this.selectedGroup && this.selectedGroup.id === groupId) {
       this.selectedGroupEntity = null
-      return this.selectedGroup = null
+      this.selectedGroup = null
+      return this.selectedGroup
     }
 
     const selectedGroup = this.groups.find(group => group && group.id === groupId)
@@ -165,6 +168,7 @@ export class MainStore {
       this.selectedGroupEntity = null
       this.selectedGroup = selectedGroup
     }
+    return null
   }
 
   isGroupEntitySelected(entity) {
@@ -187,7 +191,7 @@ export class MainStore {
   }
 
   async initialize() {
-    return new Promise(async (res, rej) => {
+    return new Promise(async (res) => {
       (await this._datastore.events()).subscribe((event) => {
         switch (event.event) {
           case 'FileRename':
