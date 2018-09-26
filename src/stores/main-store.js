@@ -1,44 +1,53 @@
 import { observable, computed, action, decorate, configure } from 'mobx'
-//import Aragon, { providers as aragonProviders } from '@aragon/client'
+// import Aragon, { providers as aragonProviders } from '@aragon/client'
 import { asyncComputed } from 'computed-async-mobx'
 
 import { downloadFile, convertFileToArrayBuffer } from '../utils/files'
-//import { Datastore, providers } from 'aragon-datastore'
+// import { Datastore, providers } from 'aragon-datastore'
 import { Datastore } from '../__mocks__/datastore'
-//import { configStore } from './config-store'
+// import { configStore } from './config-store'
 import { EditMode } from './edit-mode'
 
 configure({ isolateGlobalState: true })
 
 export class MainStore {
   @observable files = []
+
   @observable selectedFile
+
   @observable editMode = EditMode.None
+
   @observable isAddPermissionPanelOpen = false
+
   @observable newPublicStatus
 
   @observable host
+
   @observable port
+
   @observable protocol
 
   @observable isGroupsSectionOpen = false
+
   @observable groups = []
+
   @observable selectedGroup
+
   @observable selectedGroupEntity
-  
-  selectedFilePermissions = asyncComputed([], 100, async () => 
+
+  selectedFilePermissions = asyncComputed([], 100, async () =>
     this.selectedFile ?
       this._datastore.getFilePermissions(this.selectedFile.id)
       :
       []
   )
 
-  selectedFileGroupPermissions = asyncComputed([], 100, async () => 
+  selectedFileGroupPermissions = asyncComputed([], 100, async () =>
     this.selectedFile ?
       this._datastore.getFileGroupPermissions(this.selectedFile.id)
       :
       []
-)
+  )
 
   isFileSelected(file) {
     return this.selectedFile && this.selectedFile.id === file.id
@@ -54,21 +63,21 @@ export class MainStore {
   }
 
   @action async deleteFile() {
-    if(this.selectedFile != null) {
+    if (this.selectedFile != null) {
       await this._datastore.deleteFile(this.selectedFile.id)
       this.selectedFile = null
     }
   }
 
   @action async setIpfsStorageSettings(host, port, protocol) {
-    if (host && port && protocol) 
+    if (host && port && protocol)
       await this._datastore.setIpfsStorageSettings(host, port, protocol)
   }
 
   async uploadFiles(files) {
     // TODO: Add warning when there are multiple files
 
-    for (let file of files) {
+    for (const file of files) {
       const result = await convertFileToArrayBuffer(file)
       await this._datastore.addFile(file.name, result)
     }
@@ -91,21 +100,21 @@ export class MainStore {
   }
 
   async setFileContent(fileId, fileContent) {
-    await this._datastore.setFileContent(fileId, fileContent) 
+    await this._datastore.setFileContent(fileId, fileContent)
     this.setEditMode(EditMode.None)
   }
 
-  downloadFile = async fileId => {
+  downloadFile = async (fileId) => {
     const file = await this._datastore.getFile(fileId)
     downloadFile(file.content, file.name)
   }
 
-  selectFile = async fileId => {
-    if (this.selectedFile && this.selectedFile.id === fileId) 
-      return this.selectedFile = null    
+  selectFile = async (fileId) => {
+    if (this.selectedFile && this.selectedFile.id === fileId)
+      return this.selectedFile = null
 
     const selectedFile = this.files.find(file => file && file.id === fileId)
-    
+
     if (selectedFile) {
       this.selectedFile = selectedFile
       this.newPublicStatus = selectedFile.isPublic
@@ -144,14 +153,14 @@ export class MainStore {
     return this.selectedGroup && this.selectedGroup.id === group.id
   }
 
-  selectGroup = async groupId => {
+  selectGroup = async (groupId) => {
     if (this.selectedGroup && this.selectedGroup.id === groupId) {
       this.selectedGroupEntity = null
-      return this.selectedGroup = null    
+      return this.selectedGroup = null
     }
 
     const selectedGroup = this.groups.find(group => group && group.id === groupId)
-    
+
     if (selectedGroup) {
       this.selectedGroupEntity = null
       this.selectedGroup = selectedGroup
@@ -162,10 +171,10 @@ export class MainStore {
     return this.selectedGroupEntity && this.selectedGroupEntity === entity
   }
 
-  selectGroupEntity = async entity => {
+  selectGroupEntity = async (entity) => {
     if (entity !== this.selectedGroupEntity)
       this.selectedGroupEntity = entity
-    else  
+    else
       this.selectedGroupEntity = null;
   }
 
@@ -179,7 +188,7 @@ export class MainStore {
 
   async initialize() {
     return new Promise(async (res, rej) => {
-      (await this._datastore.events()).subscribe(event => {  
+      (await this._datastore.events()).subscribe((event) => {
         switch (event.event) {
           case 'FileRename':
           case 'FileContentUpdate':
@@ -192,14 +201,14 @@ export class MainStore {
           case 'NewPermissions':
           case 'GroupPermissionsRemoved':
           case 'EntityPermissionsRemoved':
-          this._refreshFiles()
-          break
-          
+            this._refreshFiles()
+            break
+
           case 'GroupChange':
-          this._refreshAvailableGroups()
+            this._refreshAvailableGroups()
         }
       });
-    
+
       this._refreshFiles()
       this._refreshAvailableGroups()
       res()
@@ -207,10 +216,10 @@ export class MainStore {
   }
 
   async _refreshFiles() {
-    this.files = await this._datastore.listFiles() 
-    
+    this.files = await this._datastore.listFiles()
+
     // Update selected file
-    if (this.selectedFile) 
+    if (this.selectedFile)
       this.selectedFile = this.files.find(file => file && file.id === this.selectedFile.id)
   }
 
@@ -218,7 +227,7 @@ export class MainStore {
     this.groups = await this._datastore.getGroups()
 
     // Update selected file
-    if (this.selectedGroup) 
+    if (this.selectedGroup)
       this.selectedGroup = this.groups.find(group => group && group.id === this.selectedGroup.id)
   }
 }

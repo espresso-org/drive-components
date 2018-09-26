@@ -4,21 +4,21 @@ import moment from 'moment'
 import filesize from 'filesize/lib/filesize'
 import { inject } from 'mobx-react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Text, Button, theme } from '@aragon/ui'
 import { EthAddress } from './eth-address'
 import { getDescriptionForFilename, getClassNameForFilename } from '../utils/files'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { Text, Button, theme } from '@aragon/ui'
 
 import { ActionButton } from './action-button'
 import { EditMode } from '../stores/edit-mode'
 
-export const SideBar = 
-  inject("mainStore")( 
-  ({ file, mainStore }) =>
-    <Main visible={ file ? true : false }>
-      <Tabs>Details</Tabs>
-        
-      {file &&
+export const SideBar =
+  inject("mainStore")(
+    ({ file, mainStore }) =>
+      <Main visible={file ? true : false}>
+        <Tabs>Details</Tabs>
+
+        {file &&
         <Details>
           <Text size="large">{file.name}</Text>
           <Info>
@@ -47,15 +47,15 @@ export const SideBar =
             }
             {file.isOwner &&
               <div>
-                <ActionButton onClick={() => {mainStore.setEditMode(EditMode.Permissions);mainStore.newPublicStatus = mainStore.selectedFile.isPublic;}}>Permissions</ActionButton>
+                <ActionButton onClick={() => { mainStore.setEditMode(EditMode.Permissions); mainStore.newPublicStatus = mainStore.selectedFile.isPublic; }}>Permissions</ActionButton>
                 <ActionButton mode="outline" onClick={() => mainStore.deleteFile()} emphasis="negative">Delete</ActionButton>
               </div>
             }
           </Actions>
         </Details>
       }
-    </Main>
-)
+      </Main>
+  )
 
 const Main = styled.aside`
   flex-shrink: 0;
@@ -63,7 +63,7 @@ const Main = styled.aside`
   width: 300px;
   margin-left: 30px;
   min-height: 100%;
-  margin-right: ${({ visible }) => visible ? 0 : '-340px' };
+  margin-right: ${({ visible }) => visible ? 0 : '-340px'};
   transition: margin-right 300ms cubic-bezier(0.4,0.0,0.2,1);
 `
 const Tabs = styled.div`

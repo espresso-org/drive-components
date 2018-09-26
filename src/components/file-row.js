@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TableRow, TableCell } from '@aragon/ui'
-import { EthAddress } from './eth-address'
-import { SelectableRow } from './selectable-row'
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { getClassNameForFilename } from '../utils/files'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import moment from 'moment'
+import { getClassNameForFilename } from '../utils/files'
+import { SelectableRow } from './selectable-row'
+import { EthAddress } from './eth-address'
 
 fontawesome.library.add(solid.faDownload)
 
 
-export const FileRow = ({ file, onClick, onDownloadClick, selected }) => 
+export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
   <Container {...{ onClick, selected }}>
     <NameCell>
       <Name>
@@ -26,12 +26,12 @@ export const FileRow = ({ file, onClick, onDownloadClick, selected }) =>
       {file.permissions.read && 'Read'}
       {file.permissions.read && file.permissions.write && ', '}
       {file.permissions.write && 'Write'}
-    </PermissionsCell>            
+    </PermissionsCell>
     <LastModifCell>
       {moment.unix(file.lastModification.toNumber()).format('YYYY-MM-DD')}
-    </LastModifCell> 
+    </LastModifCell>
     <TableCell onClick={onDownloadClick}>
-      <DownloadIco className="fa fa-download" />    
+      <DownloadIco className="fa fa-download" />
     </TableCell>
   </Container>
 

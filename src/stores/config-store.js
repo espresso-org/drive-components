@@ -4,14 +4,21 @@ configure({ isolateGlobalState: true })
 
 export class ConfigStore {
     @observable isConfigSectionOpen = false
+
     @observable isAdvancedConfigOpen = false
+
     @observable radioGrpSelectedIndex = 0
+
     @observable radioGrpSelectedValue = 'ipfs'
+
     @observable configSelected = true
-    
+
     @observable host = 'localhost'
+
     @observable port = '5001'
+
     @observable protocolArray = ['HTTP', 'HTTPS']
+
     @observable protocolIndex = 0
 
     _datastore
@@ -23,27 +30,26 @@ export class ConfigStore {
       this.initialize()
     }
 
-    async initialize() { 
+    async initialize() {
       setTimeout(async () => {
-        (await this._datastore.events()).subscribe(event => {  
+        (await this._datastore.events()).subscribe((event) => {
           console.log('New event: ', event)
           switch (event.event) {
             case 'SettingsChanged': {
               this.isConfigSectionOpen = false
-              this.configSelected= true
+              this.configSelected = true
               this.isAdvancedConfigOpen = false
             }
-            break
+              break
           }
         });
 
         const datastoreSettings = await this._datastore.getSettings()
-        
-        if(datastoreSettings.storageProvider === 0) {
+
+        if (datastoreSettings.storageProvider === 0) {
           this.isConfigSectionOpen = true
           this.configSelected = false
-        }
-        else {
+        } else {
           // TODO: Handle every possible storage providers
           this.radioGrpSelectedValue = 'ipfs'
           this.host = datastoreSettings.ipfs.host
@@ -53,4 +59,3 @@ export class ConfigStore {
       }, 1000)
     }
 }
-

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 
-export const FileInput = ({ children, onChange, ...props }) => 
+export const FileInput = ({ children, onChange, ...props }) =>
   <Container {...props}>
-    <HiddenInput {...{onChange}} /> 
-    {children} 
+    <HiddenInput {...{ onChange }} />
+    {children}
   </Container>
 
 const HiddenInput = styled.input.attrs({ type: 'file' })`
@@ -41,4 +41,3 @@ const Container = styled.label`
       box-shadow: 0 1px 1px rgba(0,0,0,0.2);
     }
 `
-

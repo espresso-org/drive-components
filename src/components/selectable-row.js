@@ -5,18 +5,17 @@ export const SelectableRow = styled(TableRow)`
     cursor: pointer;
 
     ${({ size }) => {
-        switch (size) {
-            case 'small': return `
+    switch (size) {
+      case 'small': return `
                 > td {
                  padding: 8px 0 4px 20px;
                  font-size: 12px;
                 }
-            ` 
-            break;
-            case `normal`:
-            default: return ``
-        }    
-    }}
+            `
+      case `normal`:
+      default: return ``
+    }
+  }}
 
     
 

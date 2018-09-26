@@ -1,23 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SelectableRow } from './selectable-row'
 import { TableCell } from '@aragon/ui'
+import { SelectableRow } from './selectable-row'
 
-export const GroupRow = ({ group, onClick, selected }) => 
+export const GroupRow = ({ group, onClick, selected }) =>
   <Container {...{ onClick, selected }}>
     <Cell>
       <InCell>{group.name}</InCell>
-    </Cell>  
+    </Cell>
     <Cell>
       <InCell>{getEntitiesLength(group.entities)}</InCell>
-    </Cell>         
+    </Cell>
   </Container>
 
 
 function getEntitiesLength(entities) {
-  var counter = 0;
-  for(var i = 0; i < entities.length; i++ ) {
-    if(entities[i] != '0x0000000000000000000000000000000000000000')
+  let counter = 0;
+  for (let i = 0; i < entities.length; i++) {
+    if (entities[i] != '0x0000000000000000000000000000000000000000')
       counter++
   }
   return counter

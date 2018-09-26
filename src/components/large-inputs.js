@@ -7,15 +7,14 @@ export const LargeTextInput = styled(TextInput)`
 `
 
 export const SaveButton = styled(Button)
-    .attrs({ mode: 'strong', wide: true })`
+  .attrs({ mode: 'strong', wide: true })`
     margin-top: 20px;    
 `
 
-export const LargeDropDown = props => 
-    <LargeDropDownContainer {...props}>
-        <DropDown {...props} />
-    </LargeDropDownContainer>
-
+export const LargeDropDown = props =>
+  <LargeDropDownContainer {...props}>
+    <DropDown {...props} />
+  </LargeDropDownContainer>
 
 
 const LargeDropDownContainer = styled.div`
@@ -30,4 +29,3 @@ const LargeDropDownContainer = styled.div`
         width: 100%;
     }
 `
-
