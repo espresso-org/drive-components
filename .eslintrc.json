@@ -1,5 +1,6 @@
 {
     "extends": "airbnb",
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "node": true
@@ -18,6 +19,7 @@
         "no-bitwise": 0,
         "no-restricted-syntax": 0,
         "no-unneeded-ternary": 0,
+        "no-underscore-dangle": 0,
         "vars-on-top": 0,
         "quotes": 0,
         "operator-linebreak": 0,
