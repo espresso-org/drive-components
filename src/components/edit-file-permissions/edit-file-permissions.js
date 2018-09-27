@@ -46,6 +46,7 @@ inject("mainStore", "permissionsStore")(
         <CheckButton
           checked={permissionsStore.isSelectedFilePublic}
           onClick={() => { permissionsStore.isSelectedFilePublic = !permissionsStore.isSelectedFilePublic }}
+          style={{ verticalAlign: 'middle' }}
         />
       </s.Info>
       {/* <SidePanelSeparator /> */}
@@ -62,7 +63,7 @@ const PermissionRow = ({ permission, onChange, selected, ...props }) =>
       { permission.permissionType === PermissionType.Entity ?
         <StyledEthAddress ethAddress={permission.entity} />
         :
-        permission.groupName
+        <span style={{ marginTop: '-3px' }}>{permission.groupName}</span>
       }
     </TableCell>
     <TableCell>
@@ -81,10 +82,8 @@ const PermissionRow = ({ permission, onChange, selected, ...props }) =>
 
 
 const Checbox = styled(CheckButton)`
-      margin-top: 3px;
+  margin-top: 2px;
 `
-
 const StyledEthAddress = styled(EthAddress)`
-      margin-top: -1px;
-      margin-bottom: 1px;
+  margin-top: -3px;
 `

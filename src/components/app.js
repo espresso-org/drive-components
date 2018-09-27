@@ -36,7 +36,7 @@ inject("mainStore", "configStore")(
 
           <AppLayout.ScrollWrapper>
             <AppLayout.Content>
-              <Breadcrumb>/</Breadcrumb>
+              <Breadcrumb>/ {mainStore.selectedFile && mainStore.selectedFile.name}</Breadcrumb>
               <TwoPanels>
                 <Main>
                   <Table

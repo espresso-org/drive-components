@@ -7,6 +7,7 @@ import { Field, TextInput, Button, RadioButton } from '@aragon/ui'
 import { LargeDropDown } from './large-inputs'
 import { CheckButton } from './check-button'
 import { PermissionType } from '../stores/permissions-store'
+import { EditMode } from '../stores/edit-mode'
 
 @inject("mainStore", "permissionsStore")
 @observer
@@ -72,19 +73,24 @@ export class AddPermissions extends Component {
             </PermissionField>
             :
             <PermissionField label="Group:">
-              <LargeDropDown
-                items={this.props.mainStore.groups.map(group => group.name)}
-                active={this.state.selectedGroupIndex}
-                onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
-              />
+              {this.props.mainStore.groups.length > 0 ?
+                (<LargeDropDown
+                  items={this.props.mainStore.groups.map(group => group.name)}
+                  active={this.state.selectedGroupIndex}
+                  onChange={selectedIndex => this.setState({ selectedGroupIndex: selectedIndex })}
+                />)
+                :
+                (<SaveButton style={{ "margin-top": "8px" }} onClick={() => { this.props.mainStore.setEditMode(EditMode.None);this.props.mainStore.isGroupsSectionOpen = true; } }>Create a Group</SaveButton>)
+              }
             </PermissionField>
-                }
+          }
           <CheckButton
+            style={{ "margin": "5px" }}
             checked={this.state.isRead}
             onClick={() => this.setState({ isRead: !this.state.isRead })}
           /> Read
           <CheckButton
-            style={{ marginLeft: '68px' }}
+            style={{ marginLeft: '80px' }}
             checked={this.state.isWrite}
             onClick={() => this.setState({ isWrite: !this.state.isWrite })}
           /> Write
@@ -96,15 +102,14 @@ export class AddPermissions extends Component {
 }
 
 const Main = styled.div`
-    
 `
 const PermissionField = styled(Field)`
-    margin-top: 10px;
+  margin-top: 10px;
 `
 const StyledTextInput = styled(TextInput)`
-    width: 100%;
+  width: 100%;
 `
 const SaveButton = styled(Button)
   .attrs({ mode: 'strong', wide: true })`
-    margin-top: 40px;
+  margin-top: 40px;
 `

@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 
 import { Field, TextInput, DropDown, Button, Text } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
+import { SaveButton } from '../large-inputs'
 
 export const ConfigurationScreen = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) =>
   <Main>
@@ -42,8 +43,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
     </ComingSoon>
 
     <ButtonContainer>
-      <ActionButton mode="outline" emphasis="positive" disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]); }}>OK</ActionButton>
-      <ActionButton mode="outline" disabled={!configStore.configSelected} onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false; }} emphasis="negative">Cancel</ActionButton>
+      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex])}>Save</SaveButton>
     </ButtonContainer>
   </Main>))
 
@@ -52,7 +52,7 @@ const Main = styled.div`
   padding-left: 50px;
 `
 const ButtonContainer = styled.div`
-  margin-top: 35px;
+  margin-top: 30px;
   margin-left: 8px;
 `
 const Title = styled(Text).attrs({ size: 'xlarge' })`
