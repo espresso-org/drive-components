@@ -1,4 +1,4 @@
-import { observable, configure } from 'mobx'
+import { action, observable, configure } from 'mobx'
 
 configure({ isolateGlobalState: true })
 
@@ -20,6 +20,14 @@ export class ConfigStore {
     @observable protocolArray = ['HTTP', 'HTTPS']
 
     @observable protocolIndex = 0
+
+    @observable selectedEncryptionAlgorithm = 0
+
+    @observable selectedEncryptionKeyLength = 0
+
+    @observable savedEncryptionAlgorithm = 0
+
+    @observable savedEncryptionKeyLength = 0
 
     _datastore
 
@@ -56,5 +64,18 @@ export class ConfigStore {
           this.protocolIndex = this.protocolArray.indexOf(datastoreSettings.ipfs.protocol)
         }
       }, 1000)
+    }
+
+    @action async setIpfsStorageSettings(host, port, protocol) {
+      if (host && port && protocol)
+        await this._datastore.setIpfsStorageSettings(host, port, protocol)
+    }
+
+    @action async setAesEncryptionSettings(name, length, savedAlgorithm, savedKeyLength) {
+      if (name && length) {
+        await this._datastore.setAesEncryptionSettings(name, length)
+        this.savedEncryptionAlgorithm = savedAlgorithm
+        this.savedEncryptionKeyLength = savedKeyLength
+      }
     }
 }

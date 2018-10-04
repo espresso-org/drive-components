@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 
-import { Field, TextInput, DropDown, Button, Text } from '@aragon/ui'
+import { Field, TextInput, DropDown, Text } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
 import { SaveButton } from '../large-inputs'
 
-export const ConfigurationScreen = inject("configStore", "mainStore")(observer(({ configStore, mainStore }) =>
+export const ConfigurationScreen = inject("configStore", "mainStore")(observer(({ configStore }) =>
   <Main>
     <Title>Storage</Title>
 
@@ -36,14 +36,30 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
       <div className="swarmAdvancedOptions" style={{ display: configStore.radioGrpSelectedValue === "swarm" ? 'block' : 'none' }}>Coming soon</div>
     </AdvancedOptionsContainer>
 
-    <Title style={{ marginTop: '50px' }}>Encryption</Title>
+    <div>
+      <Title style={{ marginTop: '50px' }}>Encryption</Title>
 
-    <ComingSoon>
-        Coming soon
-    </ComingSoon>
+      <EncryptionOptionsContainer>
+        <Field label="Encryption Algorithm">
+          <DropDown
+            items={['AES-CBC', 'AES-GCM']}
+            active={configStore.selectedEncryptionAlgorithm}
+            onChange={selectedIndex => configStore.selectedEncryptionAlgorithm = selectedIndex}
+          />
+        </Field>
+
+        <Field label="Encryption key length">
+          <DropDown
+            items={[128, 192, 256]}
+            active={configStore.selectedEncryptionKeyLength}
+            onChange={selectedIndex => configStore.selectedEncryptionKeyLength = selectedIndex}
+          />
+        </Field>
+      </EncryptionOptionsContainer>
+    </div>
 
     <ButtonContainer>
-      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => mainStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex])}>Save</SaveButton>
+      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { configStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]); configStore.setAesEncryptionSettings(configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength, configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength); }}>Save</SaveButton>
     </ButtonContainer>
   </Main>))
 
@@ -59,21 +75,13 @@ const Title = styled(Text).attrs({ size: 'xlarge' })`
   margin-left: 16px;
   display: block;
 `
-const ActionButton = styled(Button)`
-  display: inline-block;
-  margin: 8px 10px;
-`
 const AdvancedOptionsContainer = styled.div`
   display: ${({ open }) => open ? 'block' : 'none'};
   margin-left: 50px;
 `
-const ComingSoon = styled.div`
-  width: 552px;
-  text-align: center;
-  color: #bbb;
-  font-size: 20px;
-  padding: 20px 0;
-  margin-left: 30px;
+const EncryptionOptionsContainer = styled.div`
+  margin-left: 50px;
+  margin-top: 10px;
 `
 const ConfigurationSectionAdvancedBtn = styled.a`
     font-size: small;

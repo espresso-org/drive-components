@@ -68,11 +68,6 @@ export class MainStore {
     }
   }
 
-  @action async setIpfsStorageSettings(host, port, protocol) {
-    if (host && port && protocol)
-      await this._datastore.setIpfsStorageSettings(host, port, protocol)
-  }
-
   async uploadFiles(files) {
     // TODO: Add warning when there are multiple files
 

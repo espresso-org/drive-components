@@ -83,7 +83,7 @@ inject("mainStore", "configStore")(
         {configStore.isConfigSectionOpen && (
         <span>
           <AppBar>
-            <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false }} style={{ display: configStore.configSelected ? 'flex' : 'none' }}>
+            <BackButton onClick={() => { configStore.isConfigSectionOpen = false; configStore.isAdvancedConfigOpen = false; configStore.selectedEncryptionAlgorithm = configStore.savedEncryptionAlgorithm; configStore.selectedEncryptionKeyLength = configStore.savedEncryptionKeyLength }} style={{ display: configStore.configSelected ? 'flex' : 'none' }}>
               <LeftIcon />
             </BackButton>
             <h1 style={{ lineHeight: 1.5, fontSize: "22px" }}>Settings</h1>
