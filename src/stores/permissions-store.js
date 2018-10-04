@@ -32,6 +32,9 @@ export class PermissionsStore {
 
     async initialize() {
       observe(this._mainStore, 'selectedFile', async () => {
+        if (!this._mainStore.selectedFile)
+          return
+
         this.initialSelectedFilePermissions =
           (await this._datastore.getFilePermissions(this._mainStore.selectedFile.id))
             .map(permission => ({
