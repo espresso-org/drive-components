@@ -6,7 +6,7 @@ import { Field, TextInput, DropDown, Text } from '@aragon/ui'
 import { ConfigurationRadioGrp } from '../configuration-radio-grp'
 import { SaveButton } from '../large-inputs'
 
-export const ConfigurationScreen = inject("configStore", "mainStore")(observer(({ configStore }) =>
+export const ConfigurationScreen = inject("configStore")(observer(({ configStore }) =>
   <Main>
     <Title>Storage</Title>
 
@@ -42,7 +42,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
       <EncryptionOptionsContainer>
         <Field label="Encryption Algorithm">
           <DropDown
-            items={['AES-CBC', 'AES-GCM']}
+            items={configStore.encryptionAlgorithmArray}
             active={configStore.selectedEncryptionAlgorithm}
             onChange={selectedIndex => configStore.selectedEncryptionAlgorithm = selectedIndex}
           />
@@ -50,7 +50,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
 
         <Field label="Encryption key length">
           <DropDown
-            items={[128, 192, 256]}
+            items={configStore.encryptionKeyLengthArray}
             active={configStore.selectedEncryptionKeyLength}
             onChange={selectedIndex => configStore.selectedEncryptionKeyLength = selectedIndex}
           />
@@ -59,7 +59,7 @@ export const ConfigurationScreen = inject("configStore", "mainStore")(observer((
     </div>
 
     <ButtonContainer>
-      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { configStore.setIpfsStorageSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex]); configStore.setAesEncryptionSettings(configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength, configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength); }}>Save</SaveButton>
+      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { configStore.setSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex], configStore.encryptionAlgorithmArray[configStore.selectedEncryptionAlgorithm], configStore.encryptionKeyLengthArray[configStore.selectedEncryptionKeyLength], configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength); }}>Save</SaveButton>
     </ButtonContainer>
   </Main>))
 
