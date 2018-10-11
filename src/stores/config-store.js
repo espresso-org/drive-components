@@ -29,10 +29,6 @@ export class ConfigStore {
 
     @observable selectedEncryptionKeyLength = 0
 
-    @observable savedEncryptionAlgorithm = 0
-
-    @observable savedEncryptionKeyLength = 0
-
     _datastore
 
     constructor(datastore) {
@@ -70,24 +66,11 @@ export class ConfigStore {
       }, 1000)
     }
 
-    /* @action async setIpfsStorageSettings(host, port, protocol) {
-      if (host && port && protocol)
-        await this._datastore.setIpfsStorageSettings(host, port, protocol)
-    }
-
-    @action async setAesEncryptionSettings(name, length, savedAlgorithm, savedKeyLength) {
-      if (name && length) {
-        await this._datastore.setAesEncryptionSettings(name, length)
-        this.savedEncryptionAlgorithm = savedAlgorithm
-        this.savedEncryptionKeyLength = savedKeyLength
-      }
-    } */
-
     @action async setSettings(host, port, protocol, name, length, savedAlgorithm, savedKeyLength) {
-      if (host && port && protocol && name && length) {
+      console.log('name: ', name)
+      console.log('length: ', length)
+
+      if (host && port && protocol && name && length)
         await this._datastore.setSettings(host, port, protocol, name, length)
-        this.savedEncryptionAlgorithm = savedAlgorithm
-        this.savedEncryptionKeyLength = savedKeyLength
-      }
     }
 }

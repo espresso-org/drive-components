@@ -59,7 +59,12 @@ export const ConfigurationScreen = inject("configStore")(observer(({ configStore
     </div>
 
     <ButtonContainer>
-      <SaveButton style={{ width: "5%" }} disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"} onClick={() => { configStore.setSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex], configStore.encryptionAlgorithmArray[configStore.selectedEncryptionAlgorithm], configStore.encryptionKeyLengthArray[configStore.selectedEncryptionKeyLength], configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength); }}>Save</SaveButton>
+      <SaveButton
+        style={{ width: "5%" }}
+        disabled={configStore.radioGrpSelectedValue === "filecoin" || configStore.radioGrpSelectedValue === "swarm"}
+        onClick={() => configStore.setSettings(configStore.host, configStore.port, configStore.protocolArray[configStore.protocolIndex], configStore.encryptionAlgorithmArray[configStore.selectedEncryptionAlgorithm], configStore.encryptionKeyLengthArray[configStore.selectedEncryptionKeyLength], configStore.selectedEncryptionAlgorithm, configStore.selectedEncryptionKeyLength)}
+      >Save
+      </SaveButton>
     </ButtonContainer>
   </Main>))
 
@@ -69,6 +74,7 @@ const Main = styled.div`
 `
 const ButtonContainer = styled.div`
   margin-top: 30px;
+  margin-bottom: 15px;
   margin-left: 8px;
 `
 const Title = styled(Text).attrs({ size: 'xlarge' })`
