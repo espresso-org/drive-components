@@ -21,9 +21,13 @@ export class ConfigStore {
 
     @observable protocolIndex = 0
 
+    @observable encryptionName
+
+    @observable keyLength
+
     @observable encryptionAlgorithmArray = ['AES-CBC', 'AES-GCM']
 
-    @observable encryptionKeyLengthArray = [128, 192, 256]
+    @observable encryptionKeyLengthArray = [128, 256]
 
     @observable selectedEncryptionAlgorithm = 0
 
@@ -62,15 +66,18 @@ export class ConfigStore {
           this.host = datastoreSettings.ipfs.host
           this.port = datastoreSettings.ipfs.port
           this.protocolIndex = this.protocolArray.indexOf(datastoreSettings.ipfs.protocol)
+
+          this.encryptionName = datastoreSettings.aes.name
+          this.keyLength = datastoreSettings.aes.length
         }
       }, 1000)
     }
 
-    @action async setSettings(host, port, protocol, name, length, savedAlgorithm, savedKeyLength) {
-      console.log('name: ', name)
-      console.log('length: ', length)
-
-      if (host && port && protocol && name && length)
+    @action async setSettings(host, port, protocol, name, length) {
+      if (host && port && protocol && name && length) {
         await this._datastore.setSettings(host, port, protocol, name, length)
+        this.encryptionName = name
+        this.keyLength = length
+      }
     }
 }

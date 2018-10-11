@@ -41,19 +41,27 @@ export const ConfigurationScreen = inject("configStore")(observer(({ configStore
 
       <EncryptionOptionsContainer>
         <Field label="Encryption Algorithm">
-          <DropDown
-            items={configStore.encryptionAlgorithmArray}
-            active={configStore.selectedEncryptionAlgorithm}
-            onChange={selectedIndex => configStore.selectedEncryptionAlgorithm = selectedIndex}
-          />
+          {!configStore.configSelected ?
+            <DropDown
+              items={configStore.encryptionAlgorithmArray}
+              active={configStore.selectedEncryptionAlgorithm}
+              onChange={selectedIndex => configStore.selectedEncryptionAlgorithm = selectedIndex}
+            />
+            :
+            <TextInput value={configStore.encryptionName} disabled />
+          }
         </Field>
 
         <Field label="Encryption key length">
-          <DropDown
-            items={configStore.encryptionKeyLengthArray}
-            active={configStore.selectedEncryptionKeyLength}
-            onChange={selectedIndex => configStore.selectedEncryptionKeyLength = selectedIndex}
-          />
+          {!configStore.configSelected ?
+            <DropDown
+              items={configStore.encryptionKeyLengthArray}
+              active={configStore.selectedEncryptionKeyLength}
+              onChange={selectedIndex => configStore.selectedEncryptionKeyLength = selectedIndex}
+            />
+            :
+            <TextInput value={configStore.keyLength} disabled />
+          }
         </Field>
       </EncryptionOptionsContainer>
     </div>
@@ -73,7 +81,7 @@ const Main = styled.div`
   padding-left: 50px;
 `
 const ButtonContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 8px;
 `
